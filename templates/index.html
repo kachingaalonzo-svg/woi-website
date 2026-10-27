@@ -1,222 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Women of Influence (WOI) Official</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Women of Influence (WOI) Official - Raising a Blessed Generation</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
+:root{--wine:#3c0f32;--rose:#c93a8a;--cream:#fdf8f3;--beige:#fef6f1;--ink:#2a1a2a;}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Inter',sans-serif;background:#fdf8f3;color:#3c0f32;line-height:1.6}
-h1,h2,h3,h4{font-family:'Cormorant Garamond',serif}
-a{text-decoration:none}
+body{font-family:'Inter',sans-serif;background:var(--beige);color:var(--ink);line-height:1.6}
+header{position:sticky;top:0;z-index:100;background:rgba(254,246,241,0.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(60,15,50,0.08);padding:14px 24px;display:flex;justify-content:space-between;align-items:center}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-icon{width:36px;height:36px;border-radius:50%;background:var(--wine);color:white;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond';font-weight:700;font-size:14px}
+.logo-text{font-size:10px;font-weight:700;letter-spacing:0.08em;color:var(--wine);line-height:1.2} .logo-text span{color:#9a7a8a;font-weight:400}
+.nav-pills{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.pill{padding:8px 16px;border-radius:100px;font-size:11px;font-weight:600;text-decoration:none;cursor:pointer;border:1px solid transparent;transition:0.2s}
+.pill-light{background:white;border-color:#f0e0d8;color:var(--wine)}
+.pill-dark{background:var(--wine);color:white}
+.pill-green{background:#25D366;color:white}
+.hero{max-width:1220px;margin:0 auto;padding:50px 24px 30px;display:grid;grid-template-columns:1.1fr 0.9fr;gap:40px;align-items:center}
+.eyebrow{font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:var(--rose);font-weight:700;margin-bottom:10px;display:block}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,56px);line-height:0.95;color:var(--wine);font-weight:700}
+.hero-title em{font-style:italic;color:var(--rose);font-weight:600}
+.hero-desc{margin-top:14px;font-size:12.5px;color:#6b5a5a;max-width:540px;line-height:1.7}
+.from-book{margin-top:18px;background:white;border:1px solid #f3e0d6;border-radius:14px;padding:14px 16px;display:flex;gap:12px;align-items:flex-start;max-width:540px}
+.from-book-icon{width:32px;height:32px;border-radius:8px;background:#fdf0f7;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.from-book b{font-size:11px;color:var(--wine)} .from-book p{font-size:11px;color:#8a7a7a;margin-top:2px;line-height:1.5}
+.from-book a{font-size:10px;color:var(--rose);font-weight:700;text-decoration:none;margin-left:auto;white-space:nowrap}
+.hero-tags{margin-top:18px;display:flex;gap:8px;flex-wrap:wrap;max-width:540px}
+.tag{padding:7px 14px;border-radius:100px;font-size:10px;font-weight:700;letter-spacing:0.04em}
+.tag-wine{background:var(--wine);color:white}
+.tag-green{background:#00c853;color:white}
+.tag-light{background:white;border:1px solid #f0d8d0;color:var(--wine)}
+.tag-pink{background:#fde8f2;border:1px solid #f9d0e6;color:var(--wine)}
+.hero-right{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center}
+.founder-circle-wrap{position:relative;width:300px;height:300px}
+.founder-circle{width:100%;height:100%;border-radius:50%;object-fit:cover;border:6px solid white;box-shadow:0 10px 30px rgba(60,15,50,0.15);background:#e8e0e0}
+.est-badge{position:absolute;bottom:18px;right:-6px;background:white;border:1px solid #f0d8d0;border-radius:10px;padding:6px 10px;font-size:9px;font-weight:700;line-height:1.2;box-shadow:0 4px 12px rgba(0,0,0,0.08)}
+.founder-name{margin-top:14px;font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:700;color:var(--wine)}
+.founder-role{font-size:8px;letter-spacing:0.18em;text-transform:uppercase;color:var(--rose);font-weight:700;margin-top:2px}
+.founder-link{margin-top:8px;display:inline-flex;align-items:center;gap:4px;background:white;border:1px solid #f9d0e6;padding:6px 12px;border-radius:100px;font-size:10px;color:var(--wine);text-decoration:none;font-weight:600}
+#waFloat{position:fixed;bottom:20px;right:20px;background:#25D366;color:white;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;z-index:200;text-decoration:none;box-shadow:0 10px 20px rgba(0,0,0,0.15)}
+section{padding:60px 24px;max-width:1180px;margin:0 auto}
+.events-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin-top:20px}
+.event-card{background:white;border-radius:18px;padding:22px;border:1px solid rgba(201,168,106,0.15);position:relative;overflow:hidden}
+.event-card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--wine)}
+.event-date{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--rose);background:#fdf0f7;padding:4px 10px;border-radius:100px;display:inline-block}
+.books{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:24px}
+.book{background:white;border-radius:16px;overflow:hidden;border:1px solid rgba(201,168,106,0.15)}
+.book-cover{height:220px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:white;text-align:center;padding:16px}
+.book-info{padding:16px}
+.foundation{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin-top:24px}
+.f-card{background:white;border-radius:18px;padding:24px;border:1px solid rgba(201,168,106,0.15)}
+.momo-box{margin-top:10px;background:#fdf8f3;border:1px dashed #c9a86a55;border-radius:10px;padding:10px;font-size:11px}
+.modal-bg{position:fixed;inset:0;background:rgba(60,15,50,0.6);backdrop-filter:blur(8px);display:none;justify-content:center;align-items:center;z-index:400;padding:16px}
+.modal-box{background:var(--beige);padding:26px;border-radius:18px;max-width:440px;width:100%;position:relative}
+.close{position:absolute;top:12px;right:16px;font-size:22px;cursor:pointer}
+.input{width:100%;padding:11px 13px;border-radius:10px;border:1px solid #e8d0c8;margin-top:10px;font-size:12px}
+.btn-primary{background:var(--wine);color:white;padding:12px 22px;border-radius:100px;font-size:11px;font-weight:700;border:0;cursor:pointer}
+@media(max-width:900px){.hero{grid-template-columns:1fr;text-align:center}.hero-desc,.from-book,.hero-tags{margin-left:auto;margin-right:auto}.founder-circle-wrap{width:260px;height:260px;margin:auto}}
 </style>
 </head>
 <body>
 
-<header style="background:white;border-bottom:1px solid rgba(201,168,106,0.15);padding:14px 24px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100">
-<div style="display:flex;align-items:center;gap:10px">
-<div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#3c0f32,#c93a8a);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-family:'Cormorant Garamond'">W</div>
-<div><div style="font-family:'Cormorant Garamond';font-weight:700;font-size:16px">WOI</div><div style="font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:#9a8a8a">Est. 1997 • 4000 Women</div></div>
+<header>
+<div class="logo">
+<div class="logo-icon">W</div>
+<div class="logo-text">WOI<br><span>EST. 1997 • 4000 WOMEN</span></div>
 </div>
-<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-<a href="/history.html" style="background:#fdf0f7;color:#c93a8a;padding:8px 14px;border-radius:100px;font-size:10px;font-weight:700;border:1px solid rgba(201,58,138,0.15)">📖 Story From Book</a>
-<a href="#foundations" style="background:#f3eef3;color:#3c0f32;padding:8px 14px;border-radius:100px;font-size:10px;font-weight:700">Foundations</a>
-<a href="#admin" style="background:#3c0f32;color:white;padding:8px 14px;border-radius:100px;font-size:10px;font-weight:700">Admin</a>
-<a href="https://wa.me/260975826286" target="_blank" style="background:#25D366;color:white;padding:8px 14px;border-radius:100px;font-size:11px;font-weight:700">WhatsApp</a>
+<div class="nav-pills">
+<a class="pill pill-light" href="/history.html">📖 Story From Book</a>
+<a class="pill pill-light" href="#events">Upcoming Events</a>
+<a class="pill pill-light" href="#foundation">Foundations</a>
+<a class="pill pill-light" href="/transparency">Transparency</a>
+<a class="pill pill-dark" href="#" onclick="openModal('join')">Join Us</a>
+<a class="pill pill-green" href="https://wa.me/260975826286?text=Hello%20WOI" target="_blank">WhatsApp</a>
 </div>
 </header>
 
-<!-- HERO RESTORED -->
-<div style="display:flex;flex-wrap:wrap;align-items:center;gap:40px;max-width:1100px;justify-content:center;margin:0 auto;padding:50px 24px">
-<div style="flex:1;min-width:320px;text-align:left">
-<span style="font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:#c93a8a;font-weight:700;display:block;margin-bottom:12px">Women of Influence Official • Raising a Blessed Generation</span>
-<h1 style="font-size:clamp(38px,5.5vw,62px);line-height:0.9;color:#3c0f32">Raising a<br><em style="color:#c93a8a;font-style:italic">Blessed</em><br>Generation</h1>
-<p style="margin-top:16px;color:#6b5a5a;font-size:13px;max-width:520px;line-height:1.8">
-WOI is a movement of <b>3000-4000 women</b> built on the Word of God. Monthly First Saturday 13:00-18:00 with Prophetess Elfridah as main speaker — different powerful topic each month, free, no dress code.
+<div class="hero">
+<div class="hero-left">
+<span class="eyebrow">Women of Influence Official • Raising a Blessed Generation</span>
+<h1 class="hero-title">Raising a<br><em>Blessed</em><br>Generation</h1>
+<p class="hero-desc">
+WOI is a movement of 3000-4000 women built on the Word of God. Running for <b>29 years since 1997</b> with Prophetess Elfridah Mhusambazi as founder.<br><br>
+<b>Monthly Meeting:</b> We have a monthly meeting on the <b>first Saturday of the month from 13:00-18:00hrs</b> with Prophetess Elfridah as main speaker — different powerful topic each month, free, no dress code.
 </p>
-<div style="margin-top:16px;background:white;border-radius:12px;padding:12px 16px;border:1px solid rgba(201,168,106,0.2);display:flex;gap:12px;align-items:center;max-width:520px">
-<div style="width:36px;height:36px;border-radius:8px;background:#f3eef3;display:flex;align-items:center;justify-content:center">📖</div>
-<div style="flex:1"><div style="font-size:11px;font-weight:700;color:#3c0f32">From the Book</div><div style="font-size:10px;color:#6b5a5a"><em>"Her own life is a beautiful story of God's power. God healed her from a terrible sickness..."</em></div></div>
-<a href="/history.html" style="font-size:10px;font-weight:700;color:#c93a8a">Read →</a>
+
+<div class="from-book">
+<div class="from-book-icon">📖</div>
+<div>
+<b>From the Book</b>
+<p>"Her own life is a beautiful story of God's power. God healed her from a terrible sickness..." — Raising a Blessed Generation</p>
 </div>
-<div style="margin-top:20px;display:flex;gap:8px;flex-wrap:wrap">
-<span style="background:#3c0f32;color:white;padding:6px 12px;border-radius:20px;font-size:10px;font-weight:700">📅 First Saturday 13:00-18:00</span>
-<span style="background:#00a859;color:white;padding:6px 12px;border-radius:20px;font-size:10px;font-weight:700">✅ FREE • No Dress Code</span>
-</div>
-<div style="margin-top:24px;display:flex;gap:10px;flex-wrap:wrap">
-<a href="#books" style="background:#3c0f32;color:white;padding:14px 26px;border-radius:100px;font-size:11px;font-weight:700;text-transform:uppercase">Books K150 →</a>
-<a href="#foundations" style="background:white;color:#3c0f32;padding:14px 26px;border-radius:100px;font-size:11px;font-weight:700;border:1px solid rgba(60,15,50,0.15)">Our Foundations</a>
-<a href="/history.html" style="background:#fdf0f7;color:#c93a8a;padding:14px 26px;border-radius:100px;font-size:11px;font-weight:700;border:1px solid rgba(201,58,138,0.15)">Story From Book 📖</a>
-</div>
-</div>
-<div style="flex:0 0 310px;text-align:center">
-<div style="position:relative;display:inline-block">
-<img src="/static/founder.jpg?v=final4" onerror="this.src='https://via.placeholder.com/300?text=Elfridah+Mhusambazi'" alt="Elfridah" style="width:300px;height:300px;border-radius:50%;object-fit:cover;border:5px solid white;box-shadow:0 20px 40px rgba(60,15,50,0.25), 0 0 0 8px rgba(201,168,106,0.18);object-position:top center">
-<div style="position:absolute;bottom:10px;right:10px;background:white;border-radius:12px;padding:8px 12px;box-shadow:0 8px 20px rgba(0,0,0,0.15)"><div style="font-size:9px;color:#9a8a8a;font-weight:700">Est.</div><div style="font-size:18px;font-weight:700;color:#3c0f32;font-family:'Cormorant Garamond'">1997</div></div>
-</div>
-<div style="margin-top:16px;font-family:'Cormorant Garamond';font-size:22px;color:#3c0f32;font-weight:700">Prophetess Elfridah Mhusambazi</div>
-<div style="font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:#c93a8a;font-weight:700">Doctor • Founder • Mother to Many</div>
-<a href="/history.html" style="margin-top:10px;display:inline-block;font-size:10px;color:#c93a8a;font-weight:700;background:#fdf0f7;padding:6px 12px;border-radius:20px;border:1px solid rgba(201,58,138,0.15)">📖 Read Story From Book →</a>
-</div>
+<a href="/history.html">Read →</a>
 </div>
 
-<!-- STATS -->
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:rgba(201,168,106,0.2);border-radius:16px;overflow:hidden;margin:0 24px;max-width:1100px;margin-left:auto;margin-right:auto">
-<div style="background:white;padding:24px;text-align:center"><h3 style="font-size:32px;color:#3c0f32">4000+</h3><p style="font-size:10px;text-transform:uppercase;color:#9a8a8a;font-weight:700">Women</p></div>
-<div style="background:white;padding:24px;text-align:center"><h3 style="font-size:32px;color:#3c0f32">25+</h3><p style="font-size:10px;text-transform:uppercase;color:#9a8a8a;font-weight:700">Years — From Book</p></div>
-<div style="background:white;padding:24px;text-align:center"><h3 style="font-size:32px;color:#3c0f32">3</h3><p style="font-size:10px;text-transform:uppercase;color:#9a8a8a;font-weight:700">Dallas • London • Pretoria</p></div>
-<div style="background:white;padding:24px;text-align:center"><h3 style="font-size:32px;color:#3c0f32">4</h3><p style="font-size:10px;text-transform:uppercase;color:#9a8a8a;font-weight:700">Services 13-18hrs</p></div>
+<div class="hero-tags">
+<span class="tag tag-wine">First Saturday 13:00-18:00</span>
+<span class="tag tag-green">FREE • No Dress Code</span>
+<span class="tag tag-light">29 Years • Since 1997</span>
 </div>
 
-<!-- FOUNDATIONS SECTION - RESTORED -->
-<section id="foundations" style="background:white;padding:70px 24px;margin-top:30px;border-top:1px solid rgba(201,168,106,0.1)">
-<span style="font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:#00a859;font-weight:700;text-align:center;display:block;margin-bottom:8px">WOI Foundations • From the Book • Charity Projects</span>
-<h2 style="font-size:clamp(28px,4vw,42px);text-align:center;color:#3c0f32">Our Foundations — More Than a Meeting</h2>
-<p style="text-align:center;color:#8a7a7a;font-size:13px;margin-top:10px;max-width:700px;margin:0 auto;margin-top:10px">From the book: <em>"She also runs charity projects that pay for orphans to go to school and teach job skills to poor people."</em> — WOI builds, not just preaches.</p>
-
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin-top:30px;max-width:1100px;margin:0 auto;margin-top:30px">
-
-<div style="background:#fdf8f3;border-radius:18px;padding:24px;border:1px solid rgba(201,168,106,0.15);border-top:4px solid #3c0f32">
-<div style="width:44px;height:44px;border-radius:10px;background:#3c0f32;color:white;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:12px">🏫</div>
-<h4 style="font-size:20px;color:#3c0f32">Barak Ministries International Foundation</h4>
-<p style="font-size:12px;color:#6b5a5a;margin-top:8px;line-height:1.8">Started by Prophetess Doctor Elfridah Mhusambazi Faith. Mother ministry of WOI. For more than 25 years serving God. From Chalota Hall 1997 to international — foundation of Word, faith, healing.</p>
-<div style="margin-top:12px;display:flex;gap:6px;flex-wrap:wrap"><span style="background:#3c0f32;color:white;padding:4px 10px;border-radius:20px;font-size:9px;font-weight:700">Barak Ministries</span><span style="background:#fdf0f7;color:#c93a8a;padding:4px 10px;border-radius:20px;font-size:9px;font-weight:700">Since 1997</span></div>
-</div>
-
-<div style="background:#fdf8f3;border-radius:18px;padding:24px;border:1px solid rgba(201,168,106,0.15);border-top:4px solid #c93a8a">
-<div style="width:44px;height:44px;border-radius:10px;background:#c93a8a;color:white;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:12px">👩‍🎓</div>
-<h4 style="font-size:20px;color:#3c0f32">WOI Education Foundation</h4>
-<p style="font-size:12px;color:#6b5a5a;margin-top:8px;line-height:1.8">Charity projects that pay for orphans to go to school. Teaching job skills to poor people. This foundation is why WOI runs schools, empowerment programs, and skills training — Word + practical help.</p>
-<div style="margin-top:12px;display:flex;gap:6px;flex-wrap:wrap"><span style="background:#c93a8a;color:white;padding:4px 10px;border-radius:20px;font-size:9px;font-weight:700">Orphans Education</span><span style="background:#fef6e8;color:#c9a86a;padding:4px 10px;border-radius:20px;font-size:9px;font-weight:700">Job Skills</span></div>
-<div style="margin-top:12px;font-size:10px;color:#9a8a8a">Full private history (150 story) → <a href="/history.html" style="color:#c93a8a;text-decoration:underline">history.html</a> — kept private as requested</div>
-</div>
-
-<div style="background:#fdf8f3;border-radius:18px;padding:24px;border:1px solid rgba(201,168,106,0.15);border-top:4px solid #00a859">
-<div style="width:44px;height:44px;border-radius:10px;background:#00a859;color:white;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:12px">💼</div>
-<h4 style="font-size:20px;color:#3c0f32">WOI Business & Leadership Foundation</h4>
-<p style="font-size:12px;color:#6b5a5a;margin-top:8px;line-height:1.8">From the book: <em>"Doctor Faith also helps people use Christian values in the business world. She started the Women of Influence International Conference. This group teaches thousands how to become good leaders and run businesses."</em></p>
-<div style="margin-top:12px;display:flex;gap:6px;flex-wrap:wrap"><span style="background:#00a859;color:white;padding:4px 10px;border-radius:20px;font-size:9px;font-weight:700">Christian Business Values</span><span style="background:#f3eef3;color:#3c0f32;padding:4px 10px;border-radius:20px;font-size:9px;font-weight:700">Leadership Training</span></div>
+<div class="hero-tags">
+<button class="tag tag-wine" onclick="openModal('join')" style="border:0;cursor:pointer">Join Us — Free →</button>
+<a class="tag tag-light" href="#events" style="text-decoration:none">Upcoming Events</a>
+<a class="tag tag-light" href="#foundation" style="text-decoration:none">Our Foundations</a>
+<a class="tag tag-pink" href="/history.html" style="text-decoration:none">Story From Book 📖</a>
 </div>
 
 </div>
 
-<div style="margin-top:24px;background:#3c0f32;color:white;border-radius:16px;padding:20px;text-align:center;max-width:800px;margin:0 auto;margin-top:24px">
-<b style="font-size:14px">All Foundations support the same account:</b><br><span style="font-size:12px;opacity:0.9">ABSA: Women of Influence - 0000001011355 • Your donation pays for orphans education + job skills + conferences Dallas/London/Pretoria</span><br>
-<a href="https://wa.me/260975826286?text=Hi%20I%20want%20to%20support%20WOI%20Foundations%20ABSA%200000001011355" target="_blank" style="display:inline-block;margin-top:12px;background:white;color:#3c0f32;padding:10px 20px;border-radius:100px;font-size:11px;font-weight:700">Donate to Foundations →</a>
+<div class="hero-right">
+<div class="founder-circle-wrap">
+<img class="founder-circle" src="/static/founder.jpg" onerror="this.src='/static/founder.jpg'" alt="Prophetess Elfridah Mhusambazi">
+<div class="est-badge">Est.<br><b>1997</b></div>
+</div>
+<div class="founder-name">Prophetess Elfridah Mhusambazi</div>
+<div class="founder-role">Doctor • Founder • Mother to Many • 29 Years</div>
+<a class="founder-link" href="/history.html">📖 Read Story From Book →</a>
+</div>
+</div>
+
+<!-- UPCOMING EVENTS - MID SECTION -->
+<section id="events">
+<span style="font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--rose);font-weight:700;text-align:center;display:block">Don't Miss • First Saturday 13:00-18:00</span>
+<h2 style="font-family:'Cormorant Garamond';font-size:34px;color:var(--wine);text-align:center;margin-top:4px">Upcoming Events</h2>
+<p style="text-align:center;color:#8a7a7a;font-size:13px;margin-top:6px;max-width:600px;margin-left:auto;margin-right:auto">WOI has been running for 29 years since 1997 — monthly gatherings every first Saturday. No dress code, free entry.</p>
+
+<div class="events-grid">
+<div class="event-card">
+<span class="event-date">First Saturday • November 2025 • 13:00-18:00</span>
+<h4 style="margin-top:10px;color:var(--wine);font-family:'Cormorant Garamond';font-size:20px">Monthly WOI Gathering</h4>
+<p style="font-size:12px;color:#6b5a6a;margin-top:6px">Powerful teaching with Prophetess Elfridah Mhusambazi. Different topic each month, worship, prayer for women. Free, no dress code.</p>
+<div style="margin-top:12px;display:flex;gap:8px">
+<span class="tag tag-wine">13:00-18:00</span><span class="tag tag-green">FREE</span>
+</div>
+<button class="btn-primary" style="margin-top:12px;width:100%" onclick="openModal('join')">Reserve Seat — Join Us</button>
+</div>
+
+<div class="event-card" style="border-color:var(--rose)">
+<span class="event-date" style="background:#fde8f2">First Saturday • December 2025 • 13:00-18:00</span>
+<h4 style="margin-top:10px;color:var(--wine);font-family:'Cormorant Garamond';font-size:20px">Year-End Thanksgiving & Blessed Generation Celebration</h4>
+<p style="font-size:12px;color:#6b5a6a;margin-top:6px">29 years of WOI — celebrating mothers, testimonies from books, awarding women who raised blessed generations.</p>
+<div style="margin-top:12px;display:flex;gap:8px">
+<span class="tag tag-wine">Special Event</span><span class="tag tag-light">Lusaka</span>
+</div>
+<button class="btn-primary" style="margin-top:12px;width:100%;background:var(--rose)" onclick="openModal('join')">Join Celebration</button>
+</div>
+
+<div class="event-card">
+<span class="event-date">Every Week • Prayer Line</span>
+<h4 style="margin-top:10px;color:var(--wine);font-family:'Cormorant Garamond';font-size:20px">Prayer & Word — Online</h4>
+<p style="font-size:12px;color:#6b5a6a;margin-top:6px">Weekly encouragement from the founder's books. Join WhatsApp group after you Join Us.</p>
+<div style="margin-top:12px">
+<a href="https://wa.me/260975826286?text=Hello%20I%20want%20prayer" target="_blank" style="font-size:11px;background:#25D366;color:white;padding:8px 14px;border-radius:100px;text-decoration:none;font-weight:700">WhatsApp for Prayer</a>
+</div>
+</div>
 </div>
 </section>
 
-<!-- BOOKS -->
-<section id="books" style="background:#fdf8f3;padding:70px 24px;border-top:1px solid rgba(201,168,106,0.1)">
-<span style="font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:#c93a8a;font-weight:700;text-align:center;display:block;margin-bottom:8px">Books • K150 • Wisdom for Every Season</span>
-<h2 style="font-size:clamp(28px,4vw,42px);text-align:center;color:#3c0f32">Wisdom for Every Season</h2>
-<p style="text-align:center;color:#8a7a7a;font-size:13px;margin-top:10px;max-width:700px;margin:0 auto">Faith, motherhood, marriage, business, leadership — wide variety as you said. From the book: teaches thousands how to become good leaders and run businesses with Christian values.</p>
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:28px;max-width:1100px;margin:0 auto">
-<div style="background:white;border-radius:16px;padding:20px;text-align:center;border:1px solid rgba(201,168,106,0.15)"><div style="width:100%;height:160px;background:linear-gradient(135deg,#3c0f32,#c93a8a);border-radius:12px;display:flex;align-items:center;justify-content:center;color:white">📖 Raising Blessed Generation</div><h4 style="margin-top:12px">Raising a Blessed Generation</h4><div style="margin-top:6px;font-weight:700;color:#c93a8a">K150</div><a href="https://wa.me/260975826286?text=Buy%20Book%20Raising%20Blessed%20Generation" target="_blank" style="display:inline-block;margin-top:10px;background:#3c0f32;color:white;padding:8px 16px;border-radius:100px;font-size:10px;font-weight:700">Buy K150</a></div>
-<div style="background:white;border-radius:16px;padding:20px;text-align:center;border:1px solid rgba(201,168,106,0.15)"><div style="width:100%;height:160px;background:linear-gradient(135deg,#c93a8a,#c9a86a);border-radius:12px;display:flex;align-items:center;justify-content:center;color:white">📖 Woman of Influence</div><h4 style="margin-top:12px">Woman of Influence</h4><div style="margin-top:6px;font-weight:700;color:#c93a8a">K150</div><a href="https://wa.me/260975826286?text=Buy%20Book%20Woman%20of%20Influence" target="_blank" style="display:inline-block;margin-top:10px;background:#3c0f32;color:white;padding:8px 16px;border-radius:100px;font-size:10px;font-weight:700">Buy K150</a></div>
-<div style="background:white;border-radius:16px;padding:20px;text-align:center;border:1px solid rgba(201,168,106,0.15)"><div style="width:100%;height:160px;background:linear-gradient(135deg,#00a859,#3c0f32);border-radius:12px;display:flex;align-items:center;justify-content:center;color:white">📖 Wisdom for Life</div><h4 style="margin-top:12px">Wisdom for Life</h4><div style="margin-top:6px;font-weight:700;color:#c93a8a">K150</div><a href="https://wa.me/260975826286?text=Buy%20Book%20Wisdom%20for%20Life" target="_blank" style="display:inline-block;margin-top:10px;background:#3c0f32;color:white;padding:8px 16px;border-radius:100px;font-size:10px;font-weight:700">Buy K150</a></div>
+<section id="books" style="padding-top:20px">
+<h2 style="font-family:'Cormorant Garamond';font-size:28px;color:var(--wine);text-align:center">Books K150 — From the Founder</h2>
+<div class="books">
+<div class="book"><div class="book-cover" style="background:linear-gradient(135deg,#3c0f32,#c93a8a)"><h4>WOMAN OF<br>INFLUENCE</h4></div><div class="book-info"><div style="font-family:'Cormorant Garamond';font-size:18px;font-weight:700;color:var(--wine)">K150</div><div style="font-size:11px;color:#8a7a7a;margin-top:4px">Founder story inside — payment at checkout</div><button class="btn-primary" style="width:100%;margin-top:10px" onclick="openModal('book1')">Buy — Pay at End</button></div></div>
+<div class="book"><div class="book-cover" style="background:linear-gradient(135deg,#8a2a6e,#ff8ac6)"><h4>RAISING A<br>BLESSED GENERATION</h4></div><div class="book-info"><div style="font-family:'Cormorant Garamond';font-size:18px;font-weight:700;color:var(--wine)">K150</div><div style="font-size:11px;color:#8a7a7a;margin-top:4px">29 years journey — how WOI started 1997</div><button class="btn-primary" style="width:100%;margin-top:10px" onclick="openModal('book2')">Buy</button></div></div>
+<div class="book"><div class="book-cover" style="background:linear-gradient(135deg,#1a3a2a,#00a859)"><h4>EMPOWERED<br>TO INFLUENCE</h4></div><div class="book-info"><div style="font-family:'Cormorant Garamond';font-size:18px;font-weight:700;color:var(--wine)">K200</div><div style="font-size:11px;color:#8a7a7a">Official manual</div><button class="btn-primary" style="width:100%;margin-top:10px" onclick="openModal('book3')">Buy</button></div></div>
 </div>
 </section>
 
-<!-- VIDEOS -->
-<section id="videos" style="background:white;padding:70px 24px;border-top:1px solid rgba(201,168,106,0.1)">
-<span style="font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:#1877F2;font-weight:700;text-align:center;display:block;margin-bottom:8px">Facebook Live • First Saturday 13:00-18:00</span>
-<h2 style="font-size:clamp(28px,4vw,42px);text-align:center;color:#3c0f32">Watch WOI — Live & Recorded</h2>
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin-top:28px;max-width:1100px;margin:0 auto">
-<div style="background:#fdf8f3;border-radius:16px;overflow:hidden;border:1px solid rgba(201,168,106,0.15)"><div style="height:160px;background:#1877F2;display:flex;align-items:center;justify-content:center;color:white;flex-direction:column"><div style="font-size:28px">▶️</div><div style="font-weight:700;margin-top:6px">First Saturday Live 13:00-18:00</div></div><div style="padding:16px"><h4>First Saturday</h4><p style="font-size:11px;color:#6b5a5a">4 Services • Women first 3, men last (16:30-18:00) • Free • No dress code</p><a href="https://facebook.com" target="_blank" style="display:inline-block;margin-top:10px;background:#1877F2;color:white;padding:8px 16px;border-radius:100px;font-size:10px;font-weight:700">Watch on Facebook →</a></div></div>
-<div style="background:#fdf8f3;border-radius:16px;overflow:hidden;border:1px solid rgba(201,168,106,0.15)"><div style="height:160px;background:linear-gradient(135deg,#3c0f32,#c93a8a);display:flex;align-items:center;justify-content:center;color:white;flex-direction:column"><div style="font-size:28px">🎥</div><div style="font-weight:700;margin-top:6px">October 5-Day Conference</div></div><div style="padding:16px"><h4>5-Day October</h4><p style="font-size:11px;color:#6b5a5a">Speakers: Margret (BW), Rose Kajinga (BW), Catherine Kitchen (Atlanta), Dr Ukha (NG), Titi Goro (NA)</p><a href="https://facebook.com" target="_blank" style="display:inline-block;margin-top:10px;background:#3c0f32;color:white;padding:8px 16px;border-radius:100px;font-size:10px;font-weight:700">Watch →</a></div></div>
+<section id="foundation" style="padding-top:20px">
+<h2 style="font-family:'Cormorant Garamond';font-size:28px;color:var(--wine);text-align:center">Our Foundations</h2>
+<div class="foundation">
+<div class="f-card"><h4>🏫 Barak Foundation — School</h4><p style="font-size:12px;color:#6b5a6a">Provide desks, books for vulnerable children.</p><div class="momo-box">Payment only at confirmation: Airtel Money 0975826286 / ABSA 0000001011355</div><button class="btn-primary" style="width:100%;margin-top:10px" onclick="openModal('school')">Donate — See Payment Details</button></div>
+<div class="f-card"><h4>🎓 University Dreams</h4><p style="font-size:12px;color:#6b5a6a">Sponsor young women.</p><div class="momo-box">Payment at checkout</div><button class="btn-primary" style="width:100%;margin-top:10px" onclick="openModal('university')">Donate</button></div>
+<div class="f-card"><h4>🏥 Rural Clinic</h4><p style="font-size:12px;color:#6b5a6a">Maternal health outreach.</p><div class="momo-box">Payment at checkout</div><button class="btn-primary" style="width:100%;margin-top:10px" onclick="openModal('clinic')">Donate</button></div>
 </div>
 </section>
 
-<!-- FIRST SATURDAY + OUR STORY -->
-<section style="background:#fdf8f3;padding:60px 24px">
-<h2 style="text-align:center;font-size:32px;color:#3c0f32">First Saturday WOI Meeting • 13:00-18:00</h2>
-<div style="max-width:800px;margin:0 auto;margin-top:20px;background:white;border-radius:18px;padding:24px;border:1px solid rgba(201,168,106,0.15)">
-<p style="font-size:12px;line-height:1.8"><b>Time:</b> 13:00-18:00 (4 Services) • <b>Main Speaker:</b> Prophetess Elfridah • <b>Topic:</b> Different powerful monthly • <b>Dress:</b> None • <b>Cost:</b> FREE • <b>Men:</b> Last service only (16:30-18:00) • <b>Coordinators:</b> All branches • <b>Pastors Wives Network:</b> Building spiritually</p>
-<p style="font-size:10px;color:#c93a8a;font-weight:700;margin-top:10px;text-align:center;background:#fdf0f7;padding:8px;border-radius:20px">Men Welcome: Only Last Service (4th 16:30-18:00) • Women: All 4 Services 13:00-18:00</p>
-</div>
-</section>
+<footer style="background:var(--wine);color:#d9a9c9;text-align:center;padding:30px 24px;font-size:11px">WOI EST. 1997 • 29 Years • 4000 WOMEN • Monthly First Saturday 13:00-18:00 • Founder Elfridah Mhusambazi<br><a href="/transparency" style="color:white">Transparency</a> • <a href="https://wa.me/260975826286" style="color:white">WhatsApp</a> • <a href="#events" style="color:white">Upcoming Events</a></footer>
 
-<!-- INTERNATIONAL -->
-<section style="background:white;padding:60px 24px;border-top:1px solid rgba(201,168,106,0.1)">
-<h2 style="text-align:center;font-size:28px;color:#3c0f32">International Speakers</h2>
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:20px;max-width:900px;margin:0 auto;margin-top:20px">
-<div style="background:#fdf8f3;border-radius:12px;padding:14px;text-align:center">🇧🇼<br><b>Apostle Margret</b><br><span style="font-size:10px;color:#c93a8a">Botswana</span></div>
-<div style="background:#fdf8f3;border-radius:12px;padding:14px;text-align:center">🇧🇼<br><b>Rose Kajinga</b><br><span style="font-size:10px;color:#c93a8a">Botswana</span></div>
-<div style="background:#fdf8f3;border-radius:12px;padding:14px;text-align:center">🇺🇸<br><b>Catherine Kitchen</b><br><span style="font-size:10px;color:#1877F2">Atlanta</span></div>
-<div style="background:#fdf8f3;border-radius:12px;padding:14px;text-align:center">🇳🇬<br><b>Dr Ukha</b><br><span style="font-size:10px;color:#00a859">Nigeria</span></div>
-<div style="background:#fdf8f3;border-radius:12px;padding:14px;text-align:center">🇳🇦<br><b>Titi Goro</b><br><span style="font-size:10px;color:#c9a86a">Namibia</span></div>
-</div>
-</section>
+<a id="waFloat" href="https://wa.me/260975826286?text=Hello%20WOI%20I%20want%20to%20join" target="_blank">💬</a>
 
-<!-- ADMIN SECTION - RESTORED -->
-<section id="admin" style="background:#2a0a23;padding:60px 24px;color:white;border-top:4px solid #c93a8a">
-<div style="max-width:1000px;margin:0 auto">
-<span style="font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:#f3a9d9;font-weight:700;display:block;margin-bottom:8px">WOI Admin Only • Coordinators • Pastors Wives Network</span>
-<h2 style="font-size:32px;font-family:'Cormorant Garamond'">WOI Admin Portal</h2>
-<p style="font-size:12px;opacity:0.8;margin-top:8px;max-width:600px">For WOI Coordinators at all branches, Pastors Wives Network leaders, and Barak Ministries admin. Manage First Saturday 13:00-18:00, books orders K150, donations ABSA 0000001011355, speakers, foundations.</p>
+<!-- MODALS - KEEP PAYMENTS ONLY HERE -->
+<div id="joinModal" class="modal-bg"><div class="modal-box"><span class="close" onclick="closeModal('join')">&times;</span><h3>Join Women of Influence</h3><p style="font-size:11px;color:#8a7a7a;margin-top:4px">Monthly meeting: First Saturday 13:00-18:00 • No bank info needed here • 29 years since 1997</p><input id="j_name" class="input" placeholder="Full Name *"><input id="j_phone" class="input" placeholder="WhatsApp Number *"><input id="j_province" class="input" placeholder="Province * e.g. Lusaka"><input id="j_church" class="input" placeholder="Church / Organization"><select id="j_foundation" class="input"><option>Barak Foundation</option><option>Education Support</option><option>Business Empowerment</option><option>Pastors Wives Network</option></select><button class="btn-primary" style="width:100%;margin-top:14px" onclick="joinPython()">Submit — Join Free</button><p id="j_msg" style="display:none;color:green;font-size:11px;background:#e8ffe8;padding:8px;border-radius:8px;margin-top:8px"></p></div></div>
 
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:24px">
+<div id="book1Modal" class="modal-bg"><div class="modal-box"><span class="close" onclick="closeModal('book1')">&times;</span><h3>Woman of Influence — K150</h3><div class="momo-box"><b>PAYMENT END ONLY:</b><br>Airtel Money: <b>0975826286</b><br>ABSA: <b>0000001011355</b> WOI Foundation<br>Ref: BOOK1 + Name</div><input id="b1_name" class="input" placeholder="Name"><input id="b1_phone" class="input" placeholder="Phone"><select id="b1_method" class="input"><option>Airtel Money</option><option>MTN Money</option><option>ABSA Bank</option></select><input id="b1_ref" class="input" placeholder="Transaction ID"><button class="btn-primary" style="width:100%;margin-top:12px" onclick="orderBook('Woman of Influence','b1_name','b1_phone','b1_method','b1_ref','b1_msg')">Confirm Payment</button><p id="b1_msg" style="display:none;color:green"></p></div></div>
 
-<div style="background:rgba(255,255,255,0.06);border-radius:16px;padding:20px;border:1px solid rgba(255,255,255,0.1)">
-<h4 style="font-size:16px;color:white">📋 Coordinator Login</h4>
-<p style="font-size:11px;opacity:0.7;margin-top:6px">For coordinators at all branches — Lusaka, Ndola, Kitwe, Livingstone, Online</p>
-<div style="margin-top:14px">
-<input type="text" placeholder="Coordinator ID / Phone" style="width:100%;padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.2);background:rgba(0,0,0,0.3);color:white;font-size:12px;margin-bottom:8px">
-<input type="password" placeholder="Password" style="width:100%;padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.2);background:rgba(0,0,0,0.3);color:white;font-size:12px">
-<button style="width:100%;margin-top:10px;background:#c93a8a;color:white;padding:10px;border-radius:10px;border:none;font-weight:700;font-size:11px;cursor:pointer">Login as Coordinator</button>
-</div>
-</div>
+<div id="book2Modal" class="modal-bg"><div class="modal-box"><span class="close" onclick="closeModal('book2')">&times;</span><h3>Raising a Blessed Generation K150</h3><div class="momo-box">Airtel: 0975826286 | ABSA: 0000001011355</div><input id="b2_name" class="input" placeholder="Name"><input id="b2_phone" class="input" placeholder="Phone"><select id="b2_method" class="input"><option>Airtel Money</option><option>MTN</option><option>ABSA</option></select><input id="b2_ref" class="input" placeholder="Transaction ID"><button class="btn-primary" style="width:100%;margin-top:8px" onclick="orderBook('Raising a Blessed Generation','b2_name','b2_phone','b2_method','b2_ref','b2_msg')">Confirm</button><p id="b2_msg" style="display:none;color:green"></p></div></div>
 
-<div style="background:rgba(255,255,255,0.06);border-radius:16px;padding:20px;border:1px solid rgba(255,255,255,0.1)">
-<h4 style="font-size:16px;color:white">👑 Pastors Wives Network Admin</h4>
-<p style="font-size:11px;opacity:0.7;margin-top:6px">Building pastors wives spiritually — manage network, resources, meetings</p>
-<div style="margin-top:14px">
-<input type="text" placeholder="Pastors Wife Name / Church" style="width:100%;padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.2);background:rgba(0,0,0,0.3);color:white;font-size:12px;margin-bottom:8px">
-<button style="width:100%;margin-top:2px;background:#f3eef3;color:#3c0f32;padding:10px;border-radius:10px;border:none;font-weight:700;font-size:11px;cursor:pointer">Access Pastors Wives Portal</button>
-</div>
-<div style="margin-top:12px;font-size:10px;opacity:0.6">Includes: Apostle Margret, Rose Kajinga, Catherine Kitchen etc — building spiritually</div>
-</div>
+<div id="book3Modal" class="modal-bg"><div class="modal-box"><span class="close" onclick="closeModal('book3')">&times;</span><h3>Empowered to Influence K200</h3><div class="momo-box">Airtel: 0975826286 | ABSA: 0000001011355</div><input id="b3_name" class="input" placeholder="Name"><input id="b3_phone" class="input" placeholder="Phone"><select id="b3_method" class="input"><option>Airtel Money</option><option>MTN</option><option>ABSA</option></select><input id="b3_ref" class="input" placeholder="Transaction ID"><button class="btn-primary" style="width:100%;margin-top:8px" onclick="orderBook('Empowered to Influence','b3_name','b3_phone','b3_method','b3_ref','b3_msg')">Confirm</button><p id="b3_msg" style="display:none;color:green"></p></div></div>
 
-<div style="background:rgba(255,255,255,0.06);border-radius:16px;padding:20px;border:1px solid rgba(255,255,255,0.1)">
-<h4 style="font-size:16px;color:white">⚙️ Main Admin — Prophetess Office</h4>
-<p style="font-size:11px;opacity:0.7;margin-top:6px">Full site control — books K150, foundations, ABSA, videos, speakers Dallas/London/Pretoria, First Saturday 13-18hrs</p>
-<div style="margin-top:14px">
-<input type="text" placeholder="Admin Email" style="width:100%;padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.2);background:rgba(0,0,0,0.3);color:white;font-size:12px;margin-bottom:8px">
-<input type="password" placeholder="Admin Password" style="width:100%;padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.2);background:rgba(0,0,0,0.3);color:white;font-size:12px">
-<button style="width:100%;margin-top:10px;background:white;color:#3c0f32;padding:10px;border-radius:10px;border:none;font-weight:700;font-size:11px;cursor:pointer">Login to Main Admin Dashboard</button>
-</div>
-<div style="margin-top:12px;display:flex;gap:6px;flex-wrap:wrap">
-<span style="background:rgba(255,255,255,0.1);padding:4px 8px;border-radius:20px;font-size:9px">/admin</span>
-<span style="background:rgba(255,255,255,0.1);padding:4px 8px;border-radius:20px;font-size:9px">Books Stock</span>
-<span style="background:rgba(255,255,255,0.1);padding:4px 8px;border-radius:20px;font-size:9px">ABSA Donations</span>
-<span style="background:rgba(255,255,255,0.1);padding:4px 8px;border-radius:20px;font-size:9px">Foundations</span>
-<span style="background:rgba(255,255,255,0.1);padding:4px 8px;border-radius:20px;font-size:9px">First Saturday 13-18hrs</span>
-</div>
-</div>
+<div id="schoolModal" class="modal-bg"><div class="modal-box"><span class="close" onclick="closeModal('school')">&times;</span><h3>🏫 School Donation — Payment End</h3><div class="momo-box"><b>Airtel Money:</b> 0975826286 - Elfridah<br><b>ABSA:</b> 0000001011355 WOI<br>Ref: SCHOOL + Name</div><input id="s_name" class="input" placeholder="Name"><input id="s_amount" class="input" type="number" placeholder="Amount"><select id="s_method" class="input"><option>Airtel Money</option><option>MTN Money</option><option>ABSA Bank</option></select><input id="s_ref" class="input" placeholder="Transaction ID"><button class="btn-primary" style="width:100%;margin-top:12px" onclick="donatePython('school','s_name','s_amount','s_method','s_ref','s_msg')">Confirm — Saved to Transparency</button><p id="s_msg" style="display:none;color:green"></p></div></div>
 
-</div>
+<div id="universityModal" class="modal-bg"><div class="modal-box"><span class="close" onclick="closeModal('university')">&times;</span><h3>🎓 University — Payment End</h3><div class="momo-box">Airtel: 0975826286 | ABSA: 0000001011355</div><input id="u_name" class="input" placeholder="Name"><input id="u_amount" class="input" type="number" placeholder="Amount"><select id="u_method" class="input"><option>Airtel Money</option><option>MTN</option><option>ABSA</option></select><input id="u_ref" class="input" placeholder="Transaction ID"><button class="btn-primary" style="width:100%;margin-top:12px" onclick="donatePython('university','u_name','u_amount','u_method','u_ref','u_msg')">Confirm</button><p id="u_msg" style="display:none;color:green"></p></div></div>
 
-<div style="margin-top:24px;background:rgba(0,0,0,0.3);border-radius:12px;padding:14px;text-align:center;font-size:10px;color:#d9a9c9;border:1px dashed rgba(255,255,255,0.15)">
-This admin section is private — only WOI Coordinators, Pastors Wives Network leaders, and Barak Ministries office. If you are a visitor, use WhatsApp 260975826286 for books K150, First Saturday 13:00-18:00, donations ABSA 0000001011355. <a href="/history.html" style="color:#f3a9d9;text-decoration:underline">Full history from book → history.html</a>
-</div>
+<div id="clinicModal" class="modal-bg"><div class="modal-box"><span class="close" onclick="closeModal('clinic')">&times;</span><h3>🏥 Clinic — Payment End</h3><div class="momo-box">Airtel: 0975826286 | ABSA: 0000001011355</div><input id="c_name" class="input" placeholder="Name"><input id="c_amount" class="input" type="number" placeholder="Amount"><select id="c_method" class="input"><option>Airtel Money</option><option>MTN</option><option>ABSA</option></select><input id="c_ref" class="input" placeholder="Transaction ID"><button class="btn-primary" style="width:100%;margin-top:12px" onclick="donatePython('clinic','c_name','c_amount','c_method','c_ref','c_msg')">Confirm</button><p id="c_msg" style="display:none;color:green"></p></div></div>
 
-</div>
-</section>
-
-<section style="background:#3c0f32;padding:30px 24px;color:white;text-align:center">
-<h2 style="font-size:24px">ABSA: Women of Influence - 0000001011355</h2>
-<p style="font-size:11px;opacity:0.8">Supports Foundations • Education • Job Skills • Conferences Dallas/London/Pretoria</p>
-</section>
-
-<footer style="background:#1a0615;color:#d9a9c9;text-align:center;padding:36px 24px;font-size:11px;line-height:1.8">
-<b>Women of Influence Official</b> • Prophetess Doctor Elfridah Mhusambazi Faith • Barak Ministries International • Est. 1997 Chalota Hall Kamwala<br>
-From Book: Great leader, loving mother, 25+ years serving God, beautiful story of God's power — healed from terrible sickness, miracle changed life<br>
-<b>Foundations:</b> Barak Foundation • Education Foundation (orphans school + job skills) • Business & Leadership Foundation (Christian values, teaches thousands leaders)<br>
-4000 Women • Coordinators All Branches • Pastors Wives Network • Dallas London Pretoria • Margret, Rose Kajinga, Catherine Kitchen Atlanta, Dr Ukha, Titi Goro<br>
-First Saturday 13:00-18:00 • 4 Services • Men Last Only • Free • No Dress Code • Prophetess Elfridah Main Speaker • Different Topic Monthly • 5-Day First Week October<br>
-ABSA: Women of Influence - 0000001011355 • WhatsApp 260975826286 • <a href="/history.html" style="color:#f3a9d9;text-decoration:underline">history.html — Full Story From Book</a> • <a href="#admin" style="color:#f3a9d9;text-decoration:underline">Admin Login</a> • © 2026 WOI
-</footer>
-
+<script>
+function openModal(t){document.getElementById(t+'Modal').style.display='flex'}
+function closeModal(t){document.getElementById(t+'Modal').style.display='none'}
+window.onclick=e=>{if(e.target.classList.contains('modal-bg'))e.target.style.display='none'}
+async function joinPython(){const data={name:document.getElementById('j_name').value,phone:document.getElementById('j_phone').value,province:document.getElementById('j_province').value,church:document.getElementById('j_church').value,foundation:document.getElementById('j_foundation').value};if(!data.name||!data.phone){alert('Name and Phone required');return}const res=await fetch('/join',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});const d=await res.json();document.getElementById('j_msg').style.display='block';document.getElementById('j_msg').textContent=d.msg;setTimeout(()=>{closeModal('join');window.open('https://wa.me/260975826286?text=Hello%20I%20joined%20as%20'+encodeURIComponent(data.name),'_blank')},1200)}
+async function orderBook(book,nameId,phoneId,methodId,refId,msgId){const name=document.getElementById(nameId).value;const phone=document.getElementById(phoneId).value;const method=document.getElementById(methodId).value;const ref=document.getElementById(refId).value;const res=await fetch('/order-book',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,phone,book,method,ref})});const d=await res.json();document.getElementById(msgId).style.display='block';document.getElementById(msgId).textContent=d.msg;}
+async function donatePython(project,nameId,amountId,methodId,refId,msgId){const name=document.getElementById(nameId).value;const amount=document.getElementById(amountId).value;const method=document.getElementById(methodId).value;const reference=document.getElementById(refId).value;if(!name||!amount){alert('Enter name and amount');return}const res=await fetch('/donate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,project,amount,method,reference})});const d=await res.json();document.getElementById(msgId).style.display='block';document.getElementById(msgId).textContent=d.msg;}
+</script>
 </body>
 </html>
