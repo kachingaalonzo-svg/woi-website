@@ -1,0 +1,7 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Admin Login WOI</title>
+<style>body{background:#fef6f1;display:flex;align-items:center;justify-content:center;height:100vh;font-family:sans-serif;margin:0} .box{background:white;padding:30px;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,0.1);width:320px} input{width:100%;padding:12px;margin-top:10px;border-radius:8px;border:1px solid #ddd;box-sizing:border-box} button{width:100%;margin-top:14px;background:#3c0f32;color:white;padding:12px;border:0;border-radius:100px;font-weight:700;cursor:pointer} </style>
+</head><body>
+<div class="box"><h3>WOI Admin — Kondwani</h3><p style="font-size:11px;color:#888">WhatsApp: 0573617784</p>
+{% if error %}<p style="color:red;font-size:12px">{{error}}</p>{% endif %}
+<form method="POST"><input name="username" placeholder="Username (admin)" required><input name="password" type="password" placeholder="Password" required><button>Login</button></form>
+<p style="font-size:10px;color:#aaa;margin-top:12px">Default: admin / Kondwani2025</p></div></body></html>

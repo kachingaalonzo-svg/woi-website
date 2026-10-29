@@ -1,0 +1,16 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width"><title>Admin WOI</title>
+<style>body{font-family:sans-serif;background:#fef6f1;padding:20px;color:#2a1a2a} h2{color:#3c0f32} .stats{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0} .stat{background:white;padding:14px;border-radius:12px;border:1px solid #f0d8d0;min-width:130px} table{width:100%;background:white;border-collapse:collapse;margin-top:10px;border-radius:12px;overflow:hidden;font-size:12px} th,td{padding:8px;border-bottom:1px solid #f0e0d0;text-align:left} th{background:#3c0f32;color:white;font-size:10px} a{color:#c93a8a;font-weight:700;text-decoration:none} .btn{padding:6px 12px;border-radius:100px;font-size:11px;background:#3c0f32;color:white} section{margin-top:30px}</style>
+</head><body>
+<h2>Admin Dashboard — WOI — 0573617784</h2>
+<p><a href="/">Home</a> | <a href="/transparency">Transparency</a> | <a href="/admin/logout">Logout</a> — DB: {{'Permanent Postgres ✅' if use_db else 'JSON (Temporary)'}}</p>
+<div class="stats">
+<div class="stat"><b>K{{progress.total_all}}</b><br>Total Raised</div>
+<div class="stat"><b>{{progress.count}}</b><br>Donations</div>
+<div class="stat"><b>K{{progress.school_total}}</b><br>School</div>
+<div class="stat"><b>K{{progress.university_total}}</b><br>University</div>
+<div class="stat"><b>K{{progress.clinic_total}}</b><br>Clinic</div>
+</div>
+<section><h3>Members ({{members|length}}) <a class="btn" href="/admin/export/members">Export CSV</a></h3><table><tr><th>ID</th><th>Date</th><th>Name</th><th>Phone</th><th>Province</th><th>Foundation</th><th>Del</th></tr>{% for m in members %}<tr><td>{{m.id}}</td><td>{{m.date}}</td><td>{{m.name}}</td><td>{{m.phone}}</td><td>{{m.province}}</td><td>{{m.foundation}}</td><td><a href="/admin/delete/members/{{m.id}}">X</a></td></tr>{% endfor %}</table></section>
+<section><h3>Donations ({{donations|length}}) <a class="btn" href="/admin/export/donations">Export CSV</a></h3><table><tr><th>ID</th><th>Date</th><th>Name</th><th>Project</th><th>Amount</th><th>Ref</th><th>Del</th></tr>{% for d in donations %}<tr><td>{{d.id}}</td><td>{{d.date}}</td><td>{{d.name}}</td><td>{{d.project}}</td><td>K{{d.amount}}</td><td style="font-family:monospace">{{d.reference}}</td><td><a href="/admin/delete/donations/{{d.id}}">X</a></td></tr>{% endfor %}</table></section>
+<section><h3>Orders ({{orders|length}})</h3><table><tr><th>ID</th><th>Date</th><th>Name</th><th>Book</th><th>Del</th></tr>{% for o in orders %}<tr><td>{{o.id}}</td><td>{{o.date}}</td><td>{{o.name}}</td><td>{{o.book}}</td><td><a href="/admin/delete/orders/{{o.id}}">X</a></td></tr>{% endfor %}</table></section>
+</body></html>
