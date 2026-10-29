@@ -72,7 +72,8 @@ section{padding:60px 24px;max-width:1180px;margin:0 auto}
 <a class="pill pill-light" href="#events">Upcoming Events</a>
 <a class="pill pill-light" href="#foundation">Foundations</a>
 <a class="pill pill-light" href="/transparency">Transparency</a>
-<a class="pill pill-dark" href="#" onclick="openModal('join')">Join Us</a>
+<a class="pill pill-light" href="/member/login">Member Login</a>
+<a class="pill pill-dark" href="/register">Register Now</a>
 <a class="pill pill-green" href="https://wa.me/260975826286?text=Hello%20WOI" target="_blank">WhatsApp</a>
 </div>
 </header>
@@ -102,7 +103,7 @@ WOI is a movement of 3000-4000 women built on the Word of God. Running for <b>29
 </div>
 
 <div class="hero-tags">
-<button class="tag tag-wine" onclick="openModal('join')" style="border:0;cursor:pointer">Join Us — Free →</button>
+<button class="tag tag-wine" onclick="window.location.href='/register'" style="border:0;cursor:pointer">Register & Create Account →</button>
 <a class="tag tag-light" href="#events" style="text-decoration:none">Upcoming Events</a>
 <a class="tag tag-light" href="#foundation" style="text-decoration:none">Our Foundations</a>
 <a class="tag tag-pink" href="/history.html" style="text-decoration:none">Story From Book 📖</a>
@@ -121,7 +122,6 @@ WOI is a movement of 3000-4000 women built on the Word of God. Running for <b>29
 </div>
 </div>
 
-<!-- UPCOMING EVENTS - MID SECTION -->
 <section id="events">
 <span style="font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--rose);font-weight:700;text-align:center;display:block">Don't Miss • First Saturday 13:00-18:00</span>
 <h2 style="font-family:'Cormorant Garamond';font-size:34px;color:var(--wine);text-align:center;margin-top:4px">Upcoming Events</h2>
@@ -135,7 +135,7 @@ WOI is a movement of 3000-4000 women built on the Word of God. Running for <b>29
 <div style="margin-top:12px;display:flex;gap:8px">
 <span class="tag tag-wine">13:00-18:00</span><span class="tag tag-green">FREE</span>
 </div>
-<button class="btn-primary" style="margin-top:12px;width:100%" onclick="openModal('join')">Reserve Seat — Join Us</button>
+<button class="btn-primary" style="margin-top:12px;width:100%" onclick="window.location.href='/register'">Register Now — Create Account</button>
 </div>
 
 <div class="event-card" style="border-color:var(--rose)">
@@ -145,13 +145,13 @@ WOI is a movement of 3000-4000 women built on the Word of God. Running for <b>29
 <div style="margin-top:12px;display:flex;gap:8px">
 <span class="tag tag-wine">Special Event</span><span class="tag tag-light">Lusaka</span>
 </div>
-<button class="btn-primary" style="margin-top:12px;width:100%;background:var(--rose)" onclick="openModal('join')">Join Celebration</button>
+<button class="btn-primary" style="margin-top:12px;width:100%;background:var(--rose)" onclick="window.location.href='/register'">Register for Celebration</button>
 </div>
 
 <div class="event-card">
 <span class="event-date">Every Week • Prayer Line</span>
 <h4 style="margin-top:10px;color:var(--wine);font-family:'Cormorant Garamond';font-size:20px">Prayer & Word — Online</h4>
-<p style="font-size:12px;color:#6b5a6a;margin-top:6px">Weekly encouragement from the founder's books. Join WhatsApp group after you Join Us.</p>
+<p style="font-size:12px;color:#6b5a6a;margin-top:6px">Weekly encouragement from the founder's books. Join WhatsApp group after you register.</p>
 <div style="margin-top:12px">
 <a href="https://wa.me/260975826286?text=Hello%20I%20want%20prayer" target="_blank" style="font-size:11px;background:#25D366;color:white;padding:8px 14px;border-radius:100px;text-decoration:none;font-weight:700">WhatsApp for Prayer</a>
 </div>
@@ -177,12 +177,9 @@ WOI is a movement of 3000-4000 women built on the Word of God. Running for <b>29
 </div>
 </section>
 
-<footer style="background:var(--wine);color:#d9a9c9;text-align:center;padding:30px 24px;font-size:11px">WOI EST. 1997 • 29 Years • 4000 WOMEN • Monthly First Saturday 13:00-18:00 • Founder Elfridah Mhusambazi<br><a href="/transparency" style="color:white">Transparency</a> • <a href="https://wa.me/260975826286" style="color:white">WhatsApp</a> • <a href="#events" style="color:white">Upcoming Events</a></footer>
+<footer style="background:var(--wine);color:#d9a9c9;text-align:center;padding:30px 24px;font-size:11px">WOI EST. 1997 • 29 Years • 4000 WOMEN • Monthly First Saturday 13:00-18:00 • Founder Elfridah Mhusambazi<br><a href="/transparency" style="color:white">Transparency</a> • <a href="https://wa.me/260975826286" style="color:white">WhatsApp</a> • <a href="/register" style="color:white">Register</a> • <a href="/member/login" style="color:white">Member Login</a></footer>
 
 <a id="waFloat" href="https://wa.me/260975826286?text=Hello%20WOI%20I%20want%20to%20join" target="_blank">💬</a>
-
-<!-- MODALS - KEEP PAYMENTS ONLY HERE -->
-<div id="joinModal" class="modal-bg"><div class="modal-box"><span class="close" onclick="closeModal('join')">&times;</span><h3>Join Women of Influence</h3><p style="font-size:11px;color:#8a7a7a;margin-top:4px">Monthly meeting: First Saturday 13:00-18:00 • No bank info needed here • 29 years since 1997</p><input id="j_name" class="input" placeholder="Full Name *"><input id="j_phone" class="input" placeholder="WhatsApp Number *"><input id="j_province" class="input" placeholder="Province * e.g. Lusaka"><input id="j_church" class="input" placeholder="Church / Organization"><select id="j_foundation" class="input"><option>Barak Foundation</option><option>Education Support</option><option>Business Empowerment</option><option>Pastors Wives Network</option></select><button class="btn-primary" style="width:100%;margin-top:14px" onclick="joinPython()">Submit — Join Free</button><p id="j_msg" style="display:none;color:green;font-size:11px;background:#e8ffe8;padding:8px;border-radius:8px;margin-top:8px"></p></div></div>
 
 <div id="book1Modal" class="modal-bg"><div class="modal-box"><span class="close" onclick="closeModal('book1')">&times;</span><h3>Woman of Influence — K150</h3><div class="momo-box"><b>PAYMENT END ONLY:</b><br>Airtel Money: <b>0975826286</b><br>ABSA: <b>0000001011355</b> WOI Foundation<br>Ref: BOOK1 + Name</div><input id="b1_name" class="input" placeholder="Name"><input id="b1_phone" class="input" placeholder="Phone"><select id="b1_method" class="input"><option>Airtel Money</option><option>MTN Money</option><option>ABSA Bank</option></select><input id="b1_ref" class="input" placeholder="Transaction ID"><button class="btn-primary" style="width:100%;margin-top:12px" onclick="orderBook('Woman of Influence','b1_name','b1_phone','b1_method','b1_ref','b1_msg')">Confirm Payment</button><p id="b1_msg" style="display:none;color:green"></p></div></div>
 
@@ -200,7 +197,6 @@ WOI is a movement of 3000-4000 women built on the Word of God. Running for <b>29
 function openModal(t){document.getElementById(t+'Modal').style.display='flex'}
 function closeModal(t){document.getElementById(t+'Modal').style.display='none'}
 window.onclick=e=>{if(e.target.classList.contains('modal-bg'))e.target.style.display='none'}
-async function joinPython(){const data={name:document.getElementById('j_name').value,phone:document.getElementById('j_phone').value,province:document.getElementById('j_province').value,church:document.getElementById('j_church').value,foundation:document.getElementById('j_foundation').value};if(!data.name||!data.phone){alert('Name and Phone required');return}const res=await fetch('/join',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});const d=await res.json();document.getElementById('j_msg').style.display='block';document.getElementById('j_msg').textContent=d.msg;setTimeout(()=>{closeModal('join');window.open('https://wa.me/260975826286?text=Hello%20I%20joined%20as%20'+encodeURIComponent(data.name),'_blank')},1200)}
 async function orderBook(book,nameId,phoneId,methodId,refId,msgId){const name=document.getElementById(nameId).value;const phone=document.getElementById(phoneId).value;const method=document.getElementById(methodId).value;const ref=document.getElementById(refId).value;const res=await fetch('/order-book',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,phone,book,method,ref})});const d=await res.json();document.getElementById(msgId).style.display='block';document.getElementById(msgId).textContent=d.msg;}
 async function donatePython(project,nameId,amountId,methodId,refId,msgId){const name=document.getElementById(nameId).value;const amount=document.getElementById(amountId).value;const method=document.getElementById(methodId).value;const reference=document.getElementById(refId).value;if(!name||!amount){alert('Enter name and amount');return}const res=await fetch('/donate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,project,amount,method,reference})});const d=await res.json();document.getElementById(msgId).style.display='block';document.getElementById(msgId).textContent=d.msg;}
 </script>
