@@ -1,221 +1,260 @@
-from flask import Flask, render_template, request, jsonify, Response, redirect, session
-import os, csv, io
-from datetime import datetime
-from functools import wraps
+import os
+from datetime import datetime, date
+from flask import Flask, request, jsonify, render_template, redirect, url_for, session, flash
+from sqlalchemy import create_engine, Column, Integer, String, DateTime, Text, Date, func
+from sqlalchemy.orm import declarative_base, sessionmaker
+from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
-app.secret_key = os.environ.get('SECRET_KEY', 'woi-permanent-0573617784')
+app.secret_key = os.environ.get("SECRET_KEY", "woi-secret-2024-lusaka")
+app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024
 
-ADMIN_USER = os.environ.get('ADMIN_USER', 'admin')
-ADMIN_PASS = os.environ.get('ADMIN_PASS', 'Kondwani2025')
-DATABASE_URL = os.environ.get('DATABASE_URL', '')
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+UPLOAD_FOLDER = os.path.join(BASE_DIR, 'static', 'uploads')
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+ALLOWED_EXT = {'png','jpg','jpeg','webp'}
 
-# --- DB Setup ---
-if DATABASE_URL:
-    # Neon needs psycopg2
-    from sqlalchemy import create_engine, Column, Integer, String, Float, DateTime, Text
-    from sqlalchemy.orm import declarative_base, sessionmaker
-    # Fix Render url
-    if DATABASE_URL.startswith('postgres://'):
-        DATABASE_URL = DATABASE_URL.replace('postgres://','postgresql://',1)
-    engine = create_engine(DATABASE_URL, pool_pre_ping=True)
-    Base = declarative_base()
-    Session = sessionmaker(bind=engine)
+DATABASE_URL = os.environ.get("DATABASE_URL")
+if not DATABASE_URL:
+    DATABASE_URL = "sqlite:///woi.db"
+# fix for Render postgres URL
+if DATABASE_URL.startswith("postgres://"):
+    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
 
-    class Member(Base):
-        __tablename__='members'
-        id=Column(Integer,primary_key=True)
-        name=Column(String); phone=Column(String); province=Column(String)
-        church=Column(String); foundation=Column(String); date=Column(String)
+engine = create_engine(DATABASE_URL, pool_pre_ping=True)
+SessionLocal = sessionmaker(bind=engine)
+Base = declarative_base()
 
-    class Donation(Base):
-        __tablename__='donations'
-        id=Column(Integer,primary_key=True)
-        name=Column(String); project=Column(String); amount=Column(Float)
-        method=Column(String); reference=Column(String); date=Column(String)
+# MODELS
+class User(Base):
+    __tablename__ = "users"
+    id = Column(Integer, primary_key=True)
+    email = Column(String(150), unique=True, nullable=False)
+    password_hash = Column(String(255), nullable=False)
+    full_name = Column(String(200), nullable=False)
+    nrc = Column(String(50))
+    dob = Column(String(20))
+    gender = Column(String(20))
+    marital_status = Column(String(20))
+    phone = Column(String(30), nullable=False)
+    whatsapp = Column(String(30))
+    residential_address = Column(String(300))
+    compound = Column(String(100))
+    district = Column(String(100))
+    province = Column(String(100))
+    occupation = Column(String(100))
+    church = Column(String(200))
+    foundation_interest = Column(String(100))
+    next_of_kin_name = Column(String(200))
+    next_of_kin_phone = Column(String(30))
+    profile_pic = Column(String(300))
+    membership_status = Column(String(30), default="Pending")
+    created_at = Column(DateTime, default=datetime.utcnow)
 
-    class Order(Base):
-        __tablename__='orders'
-        id=Column(Integer,primary_key=True)
-        name=Column(String); phone=Column(String); book=Column(String)
-        method=Column(String); ref=Column(String); date=Column(String)
+class Member(Base):
+    __tablename__ = "members"
+    id = Column(Integer, primary_key=True)
+    name = Column(String(200))
+    phone = Column(String(50))
+    province = Column(String(100))
+    church = Column(String(200))
+    foundation = Column(String(100))
+    created_at = Column(DateTime, default=datetime.utcnow)
 
-    class Prayer(Base):
-        __tablename__='prayers'
-        id=Column(Integer,primary_key=True)
-        name=Column(String); prayer=Column(Text); date=Column(String)
+class Donation(Base):
+    __tablename__ = "donations"
+    id = Column(Integer, primary_key=True)
+    name = Column(String(200))
+    project = Column(String(100))
+    amount = Column(String(50))
+    method = Column(String(50))
+    reference = Column(String(100))
+    created_at = Column(DateTime, default=datetime.utcnow)
 
-    Base.metadata.create_all(engine)
-    USE_DB=True
-else:
-    USE_DB=False
-    import json
-    def load_json(f):
-        try:
-            if os.path.exists(f):
-                with open(f,'r') as fh:
-                    d=fh.read().strip()
-                    if d: return json.loads(d)
-        except: pass
-        return []
-    def save_json(f,d):
-        try:
-            with open(f,'w') as fh: json.dump(d,fh,indent=2)
-        except: pass
+class BookOrder(Base):
+    __tablename__ = "book_orders"
+    id = Column(Integer, primary_key=True)
+    name = Column(String(200))
+    phone = Column(String(50))
+    book = Column(String(100))
+    method = Column(String(50))
+    ref = Column(String(100))
+    created_at = Column(DateTime, default=datetime.utcnow)
 
-def login_required(f):
-    @wraps(f)
-    def dec(*args,**kwargs):
-        if not session.get('logged'): return redirect('/admin/login')
-        return f(*args,**kwargs)
-    return dec
+class HistoryEntry(Base):
+    __tablename__ = "history"
+    id = Column(Integer, primary_key=True)
+    title = Column(String(200))
+    content = Column(Text)
+    created_at = Column(DateTime, default=datetime.utcnow)
 
-def get_progress():
-    if USE_DB:
-        s=Session(); donations=s.query(Donation).all(); s.close()
-        def tot(p): return sum(d.amount or 0 for d in donations if d.project==p)
-        school, univ, clin = tot('school'), tot('university'), tot('clinic')
-    else:
-        donations=load_json('donations.json')
-        def tot(p): return sum(float(d.get('amount',0) or 0) for d in donations if d.get('project')==p)
-        school, univ, clin = tot('school'), tot('university'), tot('clinic')
-        donations=donations
-    return {
-        'school': min(100,int(school/100000*100)) if school else 12,
-        'school_total': school,
-        'university': min(100,int(univ/80000*100)) if univ else 8,
-        'university_total': univ,
-        'clinic': min(100,int(clin/60000*100)) if clin else 5,
-        'clinic_total': clin,
-        'total_all': school+univ+clin,
-        'count': len(donations) if 'donations' in locals() else 0
-    }
+Base.metadata.create_all(bind=engine)
 
-@app.route('/')
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXT
+
+# ROUTES
+@app.route("/")
 def home():
-    return render_template('index.html', progress=get_progress())
+    return render_template("index.html")
 
-@app.route('/transparency')
-def transparency():
-    if USE_DB:
-        s=Session(); donations=s.query(Donation).order_by(Donation.id.desc()).limit(200).all(); s.close()
-        # convert to dict for template
-        donations=[{'id':d.id,'date':d.date,'name':d.name,'project':d.project,'amount':d.amount,'method':d.method,'reference':d.reference} for d in donations]
-    else:
-        donations=load_json('donations.json')[::-1][:200]
-    return render_template('transparency.html', donations=donations, progress=get_progress())
+@app.route("/history.html")
+@app.route("/history")
+def history_page():
+    db = SessionLocal()
+    entries = db.query(HistoryEntry).order_by(HistoryEntry.created_at.desc()).all()
+    db.close()
+    return render_template("history.html", entries=entries)
 
-@app.route('/join', methods=['POST'])
+@app.route("/transparency")
+def transparency_page():
+    db = SessionLocal()
+    donations = db.query(Donation).order_by(Donation.created_at.desc()).all()
+    total = len(donations)
+    db.close()
+    return render_template("transparency.html", donations=donations, total=total)
+
+# NEW REGISTRATION
+@app.route("/register", methods=["GET","POST"])
+def register():
+    if request.method == "GET":
+        return render_template("register.html")
+    db = SessionLocal()
+    try:
+        email = request.form.get("email","").strip().lower()
+        if db.query(User).filter_by(email=email).first():
+            db.close()
+            return jsonify({"ok":False,"msg":"Email already registered. Please login."}), 400
+        
+        # handle pic
+        pic_path = ""
+        file = request.files.get("profile_pic")
+        if file and file.filename and allowed_file(file.filename):
+            filename = secure_filename(f"{datetime.now().strftime('%Y%m%d%H%M%S')}_{file.filename}")
+            save_path = os.path.join(UPLOAD_FOLDER, filename)
+            file.save(save_path)
+            pic_path = f"/static/uploads/{filename}"
+
+        user = User(
+            email=email,
+            password_hash=generate_password_hash(request.form.get("password","")),
+            full_name=request.form.get("full_name"),
+            nrc=request.form.get("nrc"),
+            dob=request.form.get("dob"),
+            gender=request.form.get("gender"),
+            marital_status=request.form.get("marital_status"),
+            phone=request.form.get("phone"),
+            whatsapp=request.form.get("whatsapp"),
+            residential_address=request.form.get("residential_address"),
+            compound=request.form.get("compound"),
+            district=request.form.get("district","Lusaka"),
+            province=request.form.get("province","Lusaka"),
+            occupation=request.form.get("occupation"),
+            church=request.form.get("church"),
+            foundation_interest=request.form.get("foundation_interest"),
+            next_of_kin_name=request.form.get("next_of_kin_name"),
+            next_of_kin_phone=request.form.get("next_of_kin_phone"),
+            profile_pic=pic_path,
+            membership_status="Pending"
+        )
+        db.add(user)
+        db.commit()
+        session["user_id"] = user.id
+        session["user_name"] = user.full_name
+        db.close()
+        return redirect("/member/dashboard")
+    except Exception as e:
+        db.rollback()
+        db.close()
+        return f"Error: {e}", 500
+
+@app.route("/member/login", methods=["GET","POST"])
+def member_login():
+    if request.method == "GET":
+        return render_template("member_login.html")
+    email = request.form.get("email","").lower().strip()
+    password = request.form.get("password","")
+    db = SessionLocal()
+    user = db.query(User).filter_by(email=email).first()
+    db.close()
+    if user and check_password_hash(user.password_hash, password):
+        session["user_id"] = user.id
+        session["user_name"] = user.full_name
+        return redirect("/member/dashboard")
+    return render_template("member_login.html", error="Invalid email or password")
+
+@app.route("/member/dashboard")
+def member_dashboard():
+    if "user_id" not in session:
+        return redirect("/member/login")
+    db = SessionLocal()
+    user = db.query(User).filter_by(id=session["user_id"]).first()
+    db.close()
+    if not user:
+        session.clear()
+        return redirect("/member/login")
+    return render_template("member_dashboard.html", user=user)
+
+@app.route("/member/logout")
+def member_logout():
+    session.clear()
+    return redirect("/")
+
+# OLD APIS KEEP
+@app.route("/join", methods=["POST"])
 def join():
-    data=request.get_json() or {}
-    if not data.get('name') or not data.get('phone'):
-        return jsonify({'msg':'Name & Phone required'}),400
-    if USE_DB:
-        s=Session()
-        m=Member(name=data.get('name'), phone=data.get('phone'), province=data.get('province'), church=data.get('church'), foundation=data.get('foundation'), date=datetime.now().strftime('%Y-%m-%d %H:%M'))
-        s.add(m); s.commit(); s.close()
-    else:
-        members=load_json('members.json'); data['id']=len(members)+1; data['date']=datetime.now().strftime('%Y-%m-%d %H:%M'); members.append(data); save_json('members.json',members)
-    return jsonify({'msg':f"Welcome {data.get('name')}! Joined {data.get('foundation','WOI')}. We will WhatsApp you on 0573617784."})
+    data = request.get_json() or {}
+    db = SessionLocal()
+    m = Member(name=data.get("name"), phone=data.get("phone"), province=data.get("province"), church=data.get("church"), foundation=data.get("foundation"))
+    db.add(m); db.commit(); db.close()
+    return jsonify({"msg":"Welcome to WOI! Redirecting to WhatsApp..."})
 
-@app.route('/donate', methods=['POST'])
+@app.route("/donate", methods=["POST"])
 def donate():
-    data=request.get_json() or {}
-    if not data.get('amount'): return jsonify({'msg':'Amount required'}),400
-    if USE_DB:
-        s=Session()
-        d=Donation(name=data.get('name'), project=data.get('project'), amount=float(data.get('amount') or 0), method=data.get('method'), reference=data.get('reference'), date=datetime.now().strftime('%Y-%m-%d %H:%M'))
-        s.add(d); s.commit(); s.close()
-    else:
-        donations=load_json('donations.json'); data['id']=len(donations)+1; data['date']=datetime.now().strftime('%Y-%m-%d %H:%M'); donations.append(data); save_json('donations.json',donations)
-    return jsonify({'msg':f"Thank you {data.get('name','Friend')}! K{data.get('amount')} saved to permanent DB. View on Transparency."})
+    data = request.get_json() or {}
+    db = SessionLocal()
+    d = Donation(name=data.get("name"), project=data.get("project"), amount=data.get("amount"), method=data.get("method"), reference=data.get("reference"))
+    db.add(d); db.commit(); db.close()
+    return jsonify({"msg":"Donation recorded — Thank you! Check Transparency page."})
 
-@app.route('/order-book', methods=['POST'])
+@app.route("/order-book", methods=["POST"])
 def order_book():
-    data=request.get_json() or {}
-    if USE_DB:
-        s=Session()
-        o=Order(name=data.get('name'), phone=data.get('phone'), book=data.get('book'), method=data.get('method'), ref=data.get('ref'), date=datetime.now().strftime('%Y-%m-%d %H:%M'))
-        s.add(o); s.commit(); s.close()
-    else:
-        orders=load_json('orders.json'); data['id']=len(orders)+1; data['date']=datetime.now().strftime('%Y-%m-%d %H:%M'); orders.append(data); save_json('orders.json',orders)
-    return jsonify({'msg':f"Order {data.get('book','Book')} saved permanently!"})
+    data = request.get_json() or {}
+    db = SessionLocal()
+    b = BookOrder(name=data.get("name"), phone=data.get("phone"), book=data.get("book"), method=data.get("method"), ref=data.get("ref"))
+    db.add(b); db.commit(); db.close()
+    return jsonify({"msg":"Order saved — Please pay and we will confirm."})
 
-@app.route('/prayer', methods=['POST'])
-def prayer():
-    data=request.get_json() or {}
-    if USE_DB:
-        s=Session(); p=Prayer(name=data.get('name'), prayer=data.get('prayer'), date=datetime.now().strftime('%Y-%m-%d %H:%M')); s.add(p); s.commit(); s.close()
-    else:
-        prayers=load_json('prayers.json'); data['id']=len(prayers)+1; data['date']=datetime.now().strftime('%Y-%m-%d %H:%M'); prayers.append(data); save_json('prayers.json',prayers)
-    return jsonify({'msg':'Prayer saved permanently!'})
+# ADMIN
+ADMIN_USER = os.environ.get("ADMIN_USER","admin")
+ADMIN_PASS = os.environ.get("ADMIN_PASS","admin123")
 
-@app.route('/admin/login', methods=['GET','POST'])
+@app.route("/admin/login", methods=["GET","POST"])
 def admin_login():
-    if request.method=='POST':
-        if request.form.get('username')==ADMIN_USER and request.form.get('password')==ADMIN_PASS:
-            session['logged']=True; return redirect('/admin')
-        return render_template('admin_login.html', error='Wrong password')
-    return render_template('admin_login.html')
+    if request.method == "POST":
+        if request.form.get("username")==ADMIN_USER and request.form.get("password")==ADMIN_PASS:
+            session["admin"] = True
+            return redirect("/admin")
+        return render_template("admin_login.html", error="Wrong credentials")
+    return render_template("admin_login.html")
 
-@app.route('/admin/logout')
-def admin_logout():
-    session.clear(); return redirect('/admin/login')
-
-@app.route('/admin')
-@login_required
+@app.route("/admin")
 def admin():
-    if USE_DB:
-        s=Session()
-        members=[{'id':m.id,'date':m.date,'name':m.name,'phone':m.phone,'province':m.province,'church':m.church,'foundation':m.foundation} for m in s.query(Member).order_by(Member.id.desc()).all()]
-        donations=[{'id':d.id,'date':d.date,'name':d.name,'project':d.project,'amount':d.amount,'method':d.method,'reference':d.reference} for d in s.query(Donation).order_by(Donation.id.desc()).all()]
-        orders=[{'id':o.id,'date':o.date,'name':o.name,'phone':o.phone,'book':o.book,'method':o.method,'ref':o.ref} for o in s.query(Order).order_by(Order.id.desc()).all()]
-        prayers=[{'id':p.id,'date':p.date,'name':p.name,'prayer':p.prayer} for p in s.query(Prayer).order_by(Prayer.id.desc()).all()]
-        s.close()
-    else:
-        members=load_json('members.json')[::-1]; donations=load_json('donations.json')[::-1]; orders=load_json('orders.json')[::-1]; prayers=load_json('prayers.json')[::-1]
-    return render_template('admin.html', members=members, donations=donations, orders=orders, prayers=prayers, progress=get_progress(), use_db=USE_DB)
+    if not session.get("admin"):
+        return redirect("/admin/login")
+    db = SessionLocal()
+    users = db.query(User).order_by(User.created_at.desc()).all()
+    members = db.query(Member).order_by(Member.created_at.desc()).all()
+    donations = db.query(Donation).order_by(Donation.created_at.desc()).all()
+    books = db.query(BookOrder).order_by(BookOrder.created_at.desc()).all()
+    db.close()
+    return render_template("admin.html", users=users, members=members, donations=donations, books=books)
 
-@app.route('/admin/delete/<typ>/<int:id>')
-@login_required
-def admin_delete(typ,id):
-    if USE_DB:
-        s=Session()
-        maps={'members':Member,'donations':Donation,'orders':Order,'prayers':Prayer}
-        if typ in maps:
-            obj=s.query(maps[typ]).filter_by(id=id).first()
-            if obj: s.delete(obj); s.commit()
-        s.close()
-    else:
-        import json
-        files={'members':'members.json','donations':'donations.json','orders':'orders.json','prayers':'prayers.json'}
-        if typ in files:
-            data=load_json(files[typ]); data=[d for d in data if d.get('id')!=id]; save_json(files[typ],data)
-    return redirect('/admin')
+@app.route("/admin/logout")
+def admin_logout():
+    session.pop("admin", None)
+    return redirect("/admin/login")
 
-@app.route('/admin/export/<typ>')
-@login_required
-def admin_export(typ):
-    if USE_DB:
-        s=Session()
-        maps={'members':Member,'donations':Donation,'orders':Order}
-        if typ not in maps: return "Invalid",400
-        objs=s.query(maps[typ]).all(); s.close()
-        if not objs: return "No data",404
-        si=io.StringIO(); writer=csv.writer(si)
-        writer.writerow([c.name for c in maps[typ].__table__.columns])
-        for o in objs: writer.writerow([getattr(o,c.name) for c in maps[typ].__table__.columns])
-        return Response(si.getvalue(), mimetype='text/csv', headers={'Content-Disposition':f'attachment; filename={typ}.csv'})
-    else:
-        import json
-        files={'members':'members.json','donations':'donations.json','orders':'orders.json'}
-        data=load_json(files[typ]); si=io.StringIO(); writer=csv.DictWriter(si, fieldnames=data[0].keys() if data else []); writer.writeheader(); writer.writerows(data)
-        return Response(si.getvalue(), mimetype='text/csv', headers={'Content-Disposition':f'attachment; filename={typ}.csv'})
-
-@app.route('/history.html')
-def history():
-    try: return render_template('history.html')
-    except: return "<h1>WOI Story 29 years</h1><a href='/'>Home</a>"
-
-if __name__=='__main__':
-    app.run(host='0.0.0.0',port=int(os.environ.get('PORT',5000)))
+if __name__ == "__main__":
+    app.run(debug=True)
