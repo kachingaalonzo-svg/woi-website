@@ -1,1 +1,97 @@
-<footer class="woi-footer"><div class="woi-footer-inner"><div>WOI EST. 1997 • 29 Years • 4000 WOMEN • Monthly First Saturday 13:00-18:00 • Founder Elfridah Mhusambazi</div><div class="woi-footer-links"><a href="/">Home</a> • <a href="/history.html">Story</a> • <a href="/transparency">Transparency</a> • <a href="/register">Register</a> • <a href="/member/login">Login</a> • <a href="https://wa.me/260975826286">Chat with our Pastor</a></div><div style="margin-top:10px;font-size:11px;opacity:0.7">© 1997-2025 WOI • Raising a Blessed Generation • Lusaka, Zambia</div></div></footer><a id="waFloat" href="https://wa.me/260975826286?text=Hello%20WOI%20I%20want%20to%20chat%20with%20our%20Pastor" target="_blank"><span class="wa-icon">💬</span><span class="wa-text">Chat with our Pastor</span></a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Member Login - WOI</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/style.css">
+<style>
+.login-wrap{max-width:460px;margin:60px auto;padding:0 20px}
+.login-card{background:white;border-radius:22px;padding:32px;border:1px solid #f0d8d0;box-shadow:0 12px 32px rgba(60,15,50,0.1)}
+.login-title{font-family:'Playfair Display';font-size:36px;color:#3c0f32;text-align:center;font-weight:800}
+.login-sub{font-family:'Outfit';text-align:center;color:#6a5a6a;margin-top:8px;font-size:14px}
+.input{width:100%;padding:14px 16px;border-radius:12px;border:1px solid #e8d0c8;margin-top:14px;font-size:15px;font-family:'Outfit'}
+.input:focus{outline:none;border-color:#c93a8a;box-shadow:0 0 0 3px rgba(201,58,138,0.1)}
+.btn-login{width:100%;margin-top:18px;background:#3c0f32;color:white;padding:14px;border-radius:100px;font-weight:800;border:0;cursor:pointer;font-family:'Outfit';font-size:15px;transition:0.3s}
+.btn-login:hover{background:#c93a8a;transform:translateY(-2px)}
+#l_msg{margin-top:14px;text-align:center;font-family:'Outfit';font-weight:600;font-size:14px;min-height:20px}
+</style>
+</head>
+<body>
+
+<header>
+<div class="logo"><div class="logo-icon">W</div><div class="logo-text">WOI<br><span>EST. 1997</span></div></div>
+<div class="nav-pills">
+<a class="pill pill-light" href="/">Home</a>
+<a class="pill pill-dark" href="/register">Register</a>
+</div>
+</header>
+
+<div class="login-wrap">
+<div class="login-card">
+<h2 class="login-title">Member Login</h2>
+<p class="login-sub">4000 Women • First Saturday 13:00-18:00 • WOI Est. 1997</p>
+
+<input id="l_phone" class="input" placeholder="Phone number e.g 0975826286" type="tel">
+<input id="l_pass" class="input" placeholder="Password" type="password">
+
+<button class="btn-login" onclick="login()">Login →</button>
+
+<p id="l_msg"></p>
+
+<p style="text-align:center;margin-top:16px;font-family:'Outfit';font-size:13px;color:#5a4a5a">
+No account yet? <a href="/register" style="color:#c93a8a;font-weight:800;text-decoration:none">Create WOI Account →</a>
+</p>
+</div>
+</div>
+
+<script>
+async function login(){
+  const phone = document.getElementById('l_phone').value.trim();
+  const password = document.getElementById('l_pass').value;
+  const msg = document.getElementById('l_msg');
+
+  if(!phone || !password){
+    msg.style.color='red';
+    msg.textContent='Enter phone and password';
+    return;
+  }
+
+  msg.style.color='#6a5a6a';
+  msg.textContent='Checking...';
+
+  try{
+    const res = await fetch('/api/login',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({phone: phone, password: password})
+    });
+    const data = await res.json();
+    
+    if(res.ok){
+      msg.style.color='green';
+      msg.textContent = data.msg + ' Redirecting...';
+      setTimeout(()=>{ window.location.href='/member/dashboard'; }, 1000);
+    } else {
+      msg.style.color='red';
+      msg.textContent = data.msg || 'Login failed';
+    }
+  } catch(err){
+    msg.style.color='red';
+    msg.textContent='Server error - check app.py /api/login route';
+  }
+}
+</script>
+
+<footer style="background:#3c0f32;color:#e8b8d8;text-align:center;padding:36px 24px;font-family:'Outfit';font-size:13px;margin-top:40px">
+<div>WOI EST. 1997 • 29 Years • 4000 WOMEN • Monthly First Saturday 13:00-18:00 • Founder Elfridah Mhusambazi</div>
+<div style="margin-top:8px"><a href="/" style="color:white;font-weight:700">Home</a> • <a href="/register" style="color:white">Register</a> • <a href="/transparency" style="color:white">Transparency</a> • <a href="https://wa.me/260975826286" style="color:white">Chat with our Pastor</a></div>
+<div style="margin-top:10px;font-size:11px;opacity:0.7">© 1997-2025 Women of Influence • Raising a Blessed Generation • Lusaka, Zambia</div>
+</footer>
+
+<a id="waFloat" href="https://wa.me/260975826286?text=Hello%20WOI%20I%20want%20to%20chat%20with%20our%20Pastor" target="_blank" style="position:fixed;bottom:22px;right:22px;background:linear-gradient(135deg,#25D366,#00a859);color:white;padding:14px 22px;border-radius:100px;display:flex;align-items:center;gap:10px;z-index:200;text-decoration:none;font-weight:800;font-family:'Outfit';box-shadow:0 0 0 0 rgba(37,211,102,0.7),0 10px 24px rgba(0,0,0,0.22);animation:glow 2.5s infinite">💬 Chat with our Pastor</a>
+<style>@keyframes glow{0%{box-shadow:0 0 0 0 rgba(37,211,102,0.7)}50%{box-shadow:0 0 0 18px rgba(37,211,102,0)}100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}}</style>
+
+</body>
+</html>
