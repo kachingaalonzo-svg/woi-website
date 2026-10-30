@@ -3,71 +3,13 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Women of Influence (WOI) Official - Raising a Blessed Generation</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-<style>
-:root{--wine:#3c0f32;--wine-deep:#2a0a23;--rose:#c93a8a;--beige:#fef6f1;--ink:#2a1a2a;}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Inter',sans-serif;background:var(--beige);color:var(--ink);line-height:1.6}
-header{position:sticky;top:0;z-index:100;background:var(--wine);border-bottom:1px solid rgba(255,255,255,0.08);padding:14px 24px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 4px 20px rgba(60,15,50,0.3)}
-.logo{display:flex;align-items:center;gap:10px}
-.logo-icon{width:38px;height:38px;border-radius:50%;background:white;color:var(--wine);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display';font-weight:800;font-size:16px}
-.logo-text{font-size:10px;font-weight:700;letter-spacing:0.08em;color:white;line-height:1.2} .logo-text span{color:#e8b8d8;font-weight:400}
-.nav-pills{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.pill{padding:8px 16px;border-radius:100px;font-size:11px;font-weight:600;text-decoration:none;cursor:pointer;border:1px solid transparent;transition:0.2s}
-.pill-light{background:rgba(255,255,255,0.12);border-color:rgba(255,255,255,0.18);color:white;backdrop-filter:blur(10px)}
-.pill-light:hover{background:white;color:var(--wine)}
-.pill-dark{background:white;color:var(--wine);font-weight:700}
-.pill-green{background:#25D366;color:white}
-.hero{max-width:900px;margin:0 auto;padding:50px 24px 30px;display:flex;flex-direction:column;align-items:center;text-align:center}
-.eyebrow{font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:var(--rose);font-weight:700;margin-bottom:12px;display:block}
-.hero-title{font-family:'Playfair Display',serif;font-size:clamp(44px,6vw,68px);line-height:0.9;color:var(--wine);font-weight:800;letter-spacing:-0.02em}
-.hero-title em{font-family:'Cormorant Garamond';font-style:italic;color:var(--rose);font-weight:600;font-size:1.1em}
-.hero-right{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;margin:28px 0 10px}
-.founder-circle-wrap{position:relative;width:320px;height:320px}
-.founder-circle{width:100%;height:100%;border-radius:50%;object-fit:cover;border:8px solid white;box-shadow:0 18px 40px rgba(60,15,50,0.25);background:#e8e0e0}
-.est-badge{position:absolute;bottom:18px;right:-2px;background:var(--wine);color:white;border:1px solid rgba(255,255,255,0.2);border-radius:10px;padding:7px 11px;font-size:9px;font-weight:700;line-height:1.2;box-shadow:0 8px 16px rgba(0,0,0,0.2)}
-.founder-name{margin-top:16px;font-family:'Playfair Display',serif;font-size:18px;font-weight:800;color:var(--wine);letter-spacing:-0.01em}
-.founder-role{font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--rose);font-weight:700;margin-top:4px}
-.founder-link{margin-top:10px;display:inline-flex;align-items:center;gap:4px;background:white;border:1px solid #f9d0e6;padding:8px 14px;border-radius:100px;font-size:10px;color:var(--wine);text-decoration:none;font-weight:700;box-shadow:0 4px 12px rgba(60,15,50,0.08)}
-.hero-desc{margin-top:24px;font-size:14px;color:#5a4a5a;max-width:640px;line-height:1.8;font-family:'Inter';}
-.from-book{margin-top:22px;background:white;border:1px solid #f3e0d6;border-radius:16px;padding:16px 18px;display:flex;gap:12px;align-items:flex-start;max-width:560px;text-align:left;box-shadow:0 8px 24px rgba(60,15,50,0.06)}
-.from-book-icon{width:36px;height:36px;border-radius:10px;background:#fdf0f7;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
-.from-book b{font-size:12px;color:var(--wine);font-family:'Playfair Display'} .from-book p{font-size:11.5px;color:#8a7a7a;margin-top:3px;line-height:1.5;font-style:italic}
-.from-book a{font-size:10px;color:var(--rose);font-weight:700;text-decoration:none;margin-left:auto;white-space:nowrap}
-.hero-tags{margin-top:20px;display:flex;gap:8px;flex-wrap:wrap;justify-content:center;max-width:600px}
-.tag{padding:9px 16px;border-radius:100px;font-size:10px;font-weight:700;letter-spacing:0.04em}
-.tag-wine{background:var(--wine);color:white}
-.tag-green{background:#00c853;color:white}
-.tag-light{background:white;border:1px solid #f0d8d0;color:var(--wine)}
-.tag-pink{background:#fde8f2;border:1px solid #f9d0e6;color:var(--wine)}
-#waFloat{position:fixed;bottom:20px;right:20px;background:#25D366;color:white;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;z-index:200;text-decoration:none;box-shadow:0 10px 20px rgba(0,0,0,0.15)}
-section{padding:60px 24px;max-width:1180px;margin:0 auto}
-.events-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin-top:20px}
-.event-card{background:white;border-radius:18px;padding:22px;border:1px solid rgba(201,168,106,0.15);position:relative;overflow:hidden}
-.event-card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--wine)}
-.event-date{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--rose);background:#fdf0f7;padding:4px 10px;border-radius:100px;display:inline-block}
-.books{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:24px}
-.book{background:white;border-radius:16px;overflow:hidden;border:1px solid rgba(201,168,106,0.15)}
-.book-cover{height:220px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:white;text-align:center;padding:16px}
-.book-info{padding:16px}
-.foundation{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin-top:24px}
-.f-card{background:white;border-radius:18px;padding:24px;border:1px solid rgba(201,168,106,0.15)}
-.momo-box{margin-top:10px;background:#fdf8f3;border:1px dashed #c9a86a55;border-radius:10px;padding:10px;font-size:11px}
-.modal-bg{position:fixed;inset:0;background:rgba(60,15,50,0.6);backdrop-filter:blur(8px);display:none;justify-content:center;align-items:center;z-index:400;padding:16px}
-.modal-box{background:var(--beige);padding:26px;border-radius:18px;max-width:440px;width:100%;position:relative}
-.close{position:absolute;top:12px;right:16px;font-size:22px;cursor:pointer}
-.input{width:100%;padding:11px 13px;border-radius:10px;border:1px solid #e8d0c8;margin-top:10px;font-size:12px}
-.btn-primary{background:var(--wine);color:white;padding:12px 22px;border-radius:100px;font-size:11px;font-weight:700;border:0;cursor:pointer}
-@media(max-width:900px){.founder-circle-wrap{width:280px;height:280px}}
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,600&family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
 
 <header>
-<div class="logo">
-<div class="logo-icon">W</div>
-<div class="logo-text">WOI<br><span>EST. 1897 • 4000 WOMEN</span></div>
-</div>
+<div class="logo"><div class="logo-icon">W</div><div class="logo-text">WOI<br><span>EST. 1997 • 4000 WOMEN</span></div></div>
 <div class="nav-pills">
 <a class="pill pill-light" href="/history.html">📖 Story From Book</a>
 <a class="pill pill-light" href="#events">Upcoming Events</a>
@@ -100,10 +42,7 @@ WOI is a movement of 3000-4000 women built on the Word of God. Running for <b>29
 
 <div class="from-book">
 <div class="from-book-icon">📖</div>
-<div>
-<b>From the Book</b>
-<p>"Her own life is a beautiful story of God's power. God healed her from a terrible sickness..." — Raising a Blessed Generation</p>
-</div>
+<div><b>From the Book</b><p>"Her own life is a beautiful story of God's power. God healed her from a terrible sickness..." — Raising a Blessed Generation</p></div>
 <a href="/history.html">Read →</a>
 </div>
 
@@ -112,7 +51,6 @@ WOI is a movement of 3000-4000 women built on the Word of God. Running for <b>29
 <span class="tag tag-green">FREE • No Dress Code</span>
 <span class="tag tag-light">29 Years • Since 1997</span>
 </div>
-
 <div class="hero-tags">
 <button class="tag tag-wine" onclick="window.location.href='/register'" style="border:0;cursor:pointer">Register & Create Account →</button>
 <a class="tag tag-light" href="#events" style="text-decoration:none">Upcoming Events</a>
@@ -122,70 +60,45 @@ WOI is a movement of 3000-4000 women built on the Word of God. Running for <b>29
 </div>
 
 <section id="events">
-<span style="font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--rose);font-weight:700;text-align:center;display:block">Don't Miss • First Saturday 13:00-18:00</span>
-<h2 style="font-family:'Playfair Display';font-size:36px;color:var(--wine);text-align:center;margin-top:4px;font-weight:800">Upcoming Events</h2>
-<p style="text-align:center;color:#8a7a7a;font-size:13px;margin-top:6px;max-width:600px;margin-left:auto;margin-right:auto">WOI has been running for 29 years since 1997 — monthly gatherings every first Saturday. No dress code, free entry.</p>
-
+<span style="font-size:12px;letter-spacing:0.25em;text-transform:uppercase;color:#c93a8a;font-weight:800;text-align:center;display:block;font-family:'Outfit'">Don't Miss • First Saturday 13:00-18:00</span>
+<h2 style="font-family:'Playfair Display';font-size:42px;color:#3c0f32;text-align:center;margin-top:6px;font-weight:800">Upcoming Events</h2>
+<p style="text-align:center;color:#6a5a6a;font-size:16px;margin-top:8px;max-width:650px;margin-left:auto;margin-right:auto;font-family:'Outfit';font-weight:500">WOI has been running for 29 years since 1997 — monthly gatherings every first Saturday. No dress code, free entry.</p>
 <div class="events-grid">
-<div class="event-card">
-<span class="event-date">First Saturday • November 2025 • 13:00-18:00</span>
-<h4 style="margin-top:10px;color:var(--wine);font-family:'Playfair Display';font-size:20px">Monthly WOI Gathering</h4>
-<p style="font-size:12px;color:#6b5a6a;margin-top:6px">Powerful teaching with Prophetess Elfridah Mhusambazi. Different topic each month, worship, prayer for women. Free, no dress code.</p>
-<div style="margin-top:12px;display:flex;gap:8px">
-<span class="tag tag-wine">13:00-18:00</span><span class="tag tag-green">FREE</span>
-</div>
-<button class="btn-primary" style="margin-top:12px;width:100%" onclick="window.location.href='/register'">Register Now — Create Account</button>
-</div>
-
-<div class="event-card" style="border-color:var(--rose)">
-<span class="event-date" style="background:#fde8f2">First Saturday • December 2025 • 13:00-18:00</span>
-<h4 style="margin-top:10px;color:var(--wine);font-family:'Playfair Display';font-size:20px">Year-End Thanksgiving & Blessed Generation Celebration</h4>
-<p style="font-size:12px;color:#6b5a6a;margin-top:6px">29 years of WOI — celebrating mothers, testimonies from books, awarding women who raised blessed generations.</p>
-<div style="margin-top:12px;display:flex;gap:8px">
-<span class="tag tag-wine">Special Event</span><span class="tag tag-light">Lusaka</span>
-</div>
-<button class="btn-primary" style="margin-top:12px;width:100%;background:var(--rose)" onclick="window.location.href='/register'">Register for Celebration</button>
-</div>
-
-<div class="event-card">
-<span class="event-date">Every Week • Prayer Line</span>
-<h4 style="margin-top:10px;color:var(--wine);font-family:'Playfair Display';font-size:20px">Prayer & Word — Online</h4>
-<p style="font-size:12px;color:#6b5a6a;margin-top:6px">Weekly encouragement from the founder's books. Join WhatsApp group after you register.</p>
-<div style="margin-top:12px">
-<a href="https://wa.me/260975826286?text=Hello%20I%20want%20prayer" target="_blank" style="font-size:11px;background:#25D366;color:white;padding:8px 14px;border-radius:100px;text-decoration:none;font-weight:700">WhatsApp for Prayer</a>
-</div>
-</div>
+<div class="event-card"><span class="event-date">First Saturday • November 2025 • 13:00-18:00</span><h4 style="margin-top:12px;color:#3c0f32;font-family:'Playfair Display';font-size:22px">Monthly WOI Gathering</h4><p style="font-size:14.5px;color:#5a4a5a;margin-top:8px;font-family:'Outfit';font-weight:500">Powerful teaching with Prophetess Elfridah Mhusambazi. Different topic each month, worship, prayer for women. Free, no dress code.</p><div style="margin-top:14px;display:flex;gap:8px"><span class="tag tag-wine">13:00-18:00</span><span class="tag tag-green">FREE</span></div><button class="btn-primary" style="margin-top:14px;width:100%" onclick="window.location.href='/register'">Register Now — Create Account</button></div>
+<div class="event-card" style="border-color:#c93a8a"><span class="event-date" style="background:#fde8f2">First Saturday • December 2025 • 13:00-18:00</span><h4 style="margin-top:12px;color:#3c0f32;font-family:'Playfair Display';font-size:22px">Year-End Thanksgiving & Blessed Generation Celebration</h4><p style="font-size:14.5px;color:#5a4a5a;margin-top:8px;font-family:'Outfit';font-weight:500">29 years of WOI — celebrating mothers, testimonies from books, awarding women who raised blessed generations.</p><div style="margin-top:14px;display:flex;gap:8px"><span class="tag tag-wine">Special Event</span><span class="tag tag-light">Lusaka</span></div><button class="btn-primary" style="margin-top:14px;width:100%;background:#c93a8a" onclick="window.location.href='/register'">Register for Celebration</button></div>
+<div class="event-card"><span class="event-date">Every Week • Prayer Line</span><h4 style="margin-top:12px;color:#3c0f32;font-family:'Playfair Display';font-size:22px">Prayer & Word — Online</h4><p style="font-size:14.5px;color:#5a4a5a;margin-top:8px;font-family:'Outfit';font-weight:500">Weekly encouragement from the founder's books. Join WhatsApp group after you register.</p><div style="margin-top:14px"><a href="https://wa.me/260975826286?text=Hello%20I%20want%20prayer" target="_blank" style="font-size:13px;background:#25D366;color:white;padding:10px 18px;border-radius:100px;text-decoration:none;font-weight:700;font-family:'Outfit'">WhatsApp for Prayer</a></div></div>
 </div>
 </section>
 
 <section id="books" style="padding-top:20px">
-<h2 style="font-family:'Playfair Display';font-size:30px;color:var(--wine);text-align:center;font-weight:800">Books K150 — From the Founder</h2>
+<h2 style="font-family:'Playfair Display';font-size:38px;color:#3c0f32;text-align:center;font-weight:800">Books K150 — From the Founder</h2>
 <div class="books">
-<div class="book"><div class="book-cover" style="background:linear-gradient(135deg,#3c0f32,#c93a8a)"><h4>WOMAN OF<br>INFLUENCE</h4></div><div class="book-info"><div style="font-family:'Playfair Display';font-size:18px;font-weight:700;color:var(--wine)">K150</div><div style="font-size:11px;color:#8a7a7a;margin-top:4px">Founder story inside — payment at checkout</div><button class="btn-primary" style="width:100%;margin-top:10px" onclick="openModal('book1')">Buy — Pay at End</button></div></div>
-<div class="book"><div class="book-cover" style="background:linear-gradient(135deg,#8a2a6e,#ff8ac6)"><h4>RAISING A<br>BLESSED GENERATION</h4></div><div class="book-info"><div style="font-family:'Playfair Display';font-size:18px;font-weight:700;color:var(--wine)">K150</div><div style="font-size:11px;color:#8a7a7a;margin-top:4px">29 years journey — how WOI started 1997</div><button class="btn-primary" style="width:100%;margin-top:10px" onclick="openModal('book2')">Buy</button></div></div>
-<div class="book"><div class="book-cover" style="background:linear-gradient(135deg,#1a3a2a,#00a859)"><h4>EMPOWERED<br>TO INFLUENCE</h4></div><div class="book-info"><div style="font-family:'Playfair Display';font-size:18px;font-weight:700;color:var(--wine)">K200</div><div style="font-size:11px;color:#8a7a7a">Official manual</div><button class="btn-primary" style="width:100%;margin-top:10px" onclick="openModal('book3')">Buy</button></div></div>
+<div class="book"><div class="book-cover" style="background:linear-gradient(135deg,#3c0f32,#c93a8a)"><h4 style="font-family:'Playfair Display';font-size:22px">WOMAN OF<br>INFLUENCE</h4></div><div class="book-info"><div style="font-family:'Outfit';font-size:20px;font-weight:800;color:#3c0f32">K150</div><div style="font-size:13px;color:#8a7a7a;margin-top:6px;font-family:'Outfit'">Founder story inside — payment at checkout</div><button class="btn-primary" style="width:100%;margin-top:12px" onclick="openModal('book1')">Buy — Pay at End</button></div></div>
+<div class="book"><div class="book-cover" style="background:linear-gradient(135deg,#8a2a6e,#ff8ac6)"><h4 style="font-family:'Playfair Display';font-size:22px">RAISING A<br>BLESSED GENERATION</h4></div><div class="book-info"><div style="font-family:'Outfit';font-size:20px;font-weight:800;color:#3c0f32">K150</div><div style="font-size:13px;color:#8a7a7a;margin-top:6px;font-family:'Outfit'">29 years journey — how WOI started 1997</div><button class="btn-primary" style="width:100%;margin-top:12px" onclick="openModal('book2')">Buy</button></div></div>
+<div class="book"><div class="book-cover" style="background:linear-gradient(135deg,#1a3a2a,#00a859)"><h4 style="font-family:'Playfair Display';font-size:22px">EMPOWERED<br>TO INFLUENCE</h4></div><div class="book-info"><div style="font-family:'Outfit';font-size:20px;font-weight:800;color:#3c0f32">K200</div><div style="font-size:13px;color:#8a7a7a;font-family:'Outfit'">Official manual</div><button class="btn-primary" style="width:100%;margin-top:12px" onclick="openModal('book3')">Buy</button></div></div>
 </div>
 </section>
 
 <section id="foundation" style="padding-top:20px">
-<h2 style="font-family:'Playfair Display';font-size:30px;color:var(--wine);text-align:center;font-weight:800">Our Foundations</h2>
+<h2 style="font-family:'Playfair Display';font-size:38px;color:#3c0f32;text-align:center;font-weight:800">Our Foundations</h2>
 <div class="foundation">
-<div class="f-card"><h4>🏫 Barak Foundation — School</h4><p style="font-size:12px;color:#6b5a6a">Provide desks, books for vulnerable children.</p><div class="momo-box">Payment only at confirmation: Airtel Money 0975826286 / ABSA 0000001011355</div><button class="btn-primary" style="width:100%;margin-top:10px" onclick="openModal('school')">Donate — See Payment Details</button></div>
-<div class="f-card"><h4>🎓 University Dreams</h4><p style="font-size:12px;color:#6b5a6a">Sponsor young women.</p><div class="momo-box">Payment at checkout</div><button class="btn-primary" style="width:100%;margin-top:10px" onclick="openModal('university')">Donate</button></div>
-<div class="f-card"><h4>🏥 Rural Clinic</h4><p style="font-size:12px;color:#6b5a6a">Maternal health outreach.</p><div class="momo-box">Payment at checkout</div><button class="btn-primary" style="width:100%;margin-top:10px" onclick="openModal('clinic')">Donate</button></div>
+<div class="f-card"><h4 style="font-family:'Playfair Display';font-size:18px">🏫 Barak Foundation — School</h4><p style="font-size:14.5px;color:#5a4a5a;font-family:'Outfit';font-weight:500">Provide desks, books for vulnerable children.</p><div class="momo-box">Payment only at confirmation: Airtel Money 0975826286 / ABSA 0000001011355</div><button class="btn-primary" style="width:100%;margin-top:14px" onclick="openModal('school')">Donate — See Payment Details</button></div>
+<div class="f-card"><h4 style="font-family:'Playfair Display';font-size:18px">🎓 University Dreams</h4><p style="font-size:14.5px;color:#5a4a5a;font-family:'Outfit';font-weight:500">Sponsor young women.</p><div class="momo-box">Payment at checkout</div><button class="btn-primary" style="width:100%;margin-top:14px" onclick="openModal('university')">Donate</button></div>
+<div class="f-card"><h4 style="font-family:'Playfair Display';font-size:18px">🏥 Rural Clinic</h4><p style="font-size:14.5px;color:#5a4a5a;font-family:'Outfit';font-weight:500">Maternal health outreach.</p><div class="momo-box">Payment at checkout</div><button class="btn-primary" style="width:100%;margin-top:14px" onclick="openModal('clinic')">Donate</button></div>
 </div>
 </section>
 
-<footer style="background:var(--wine);color:#d9a9c9;text-align:center;padding:30px 24px;font-size:11px">WOI EST. 1997 • 29 Years • 4000 WOMEN • Monthly First Saturday 13:00-18:00 • Founder Elfridah Mhusambazi<br><a href="/transparency" style="color:white">Transparency</a> • <a href="https://wa.me/260975826286" style="color:white">WhatsApp</a> • <a href="/register" style="color:white">Register</a> • <a href="/member/login" style="color:white">Member Login</a></footer>
+<footer style="background:#3c0f32;color:#e8b8d8;text-align:center;padding:36px 24px;font-size:13px;font-family:'Outfit'">WOI EST. 1997 • 29 Years • 4000 WOMEN • Monthly First Saturday 13:00-18:00 • Founder Elfridah Mhusambazi<br><a href="/transparency" style="color:white">Transparency</a> • <a href="https://wa.me/260975826286" style="color:white">WhatsApp</a> • <a href="/register" style="color:white">Register</a> • <a href="/member/login" style="color:white">Member Login</a></footer>
 
 <a id="waFloat" href="https://wa.me/260975826286?text=Hello%20WOI%20I%20want%20to%20join" target="_blank">💬</a>
 
-<div id="book1Modal" class="modal-bg"><div class="modal-box"><span class="close" onclick="closeModal('book1')">&times;</span><h3>Woman of Influence — K150</h3><div class="momo-box"><b>PAYMENT END ONLY:</b><br>Airtel Money: <b>0975826286</b><br>ABSA: <b>0000001011355</b> WOI Foundation<br>Ref: BOOK1 + Name</div><input id="b1_name" class="input" placeholder="Name"><input id="b1_phone" class="input" placeholder="Phone"><select id="b1_method" class="input"><option>Airtel Money</option><option>MTN Money</option><option>ABSA Bank</option></select><input id="b1_ref" class="input" placeholder="Transaction ID"><button class="btn-primary" style="width:100%;margin-top:12px" onclick="orderBook('Woman of Influence','b1_name','b1_phone','b1_method','b1_ref','b1_msg')">Confirm Payment</button><p id="b1_msg" style="display:none;color:green"></p></div></div>
-<div id="book2Modal" class="modal-bg"><div class="modal-box"><span class="close" onclick="closeModal('book2')">&times;</span><h3>Raising a Blessed Generation K150</h3><div class="momo-box">Airtel: 0975826286 | ABSA: 0000001011355</div><input id="b2_name" class="input" placeholder="Name"><input id="b2_phone" class="input" placeholder="Phone"><select id="b2_method" class="input"><option>Airtel Money</option><option>MTN</option><option>ABSA</option></select><input id="b2_ref" class="input" placeholder="Transaction ID"><button class="btn-primary" style="width:100%;margin-top:8px" onclick="orderBook('Raising a Blessed Generation','b2_name','b2_phone','b2_method','b2_ref','b2_msg')">Confirm</button><p id="b2_msg" style="display:none;color:green"></p></div></div>
-<div id="book3Modal" class="modal-bg"><div class="modal-box"><span class="close" onclick="closeModal('book3')">&times;</span><h3>Empowered to Influence K200</h3><div class="momo-box">Airtel: 0975826286 | ABSA: 0000001011355</div><input id="b3_name" class="input" placeholder="Name"><input id="b3_phone" class="input" placeholder="Phone"><select id="b3_method" class="input"><option>Airtel Money</option><option>MTN</option><option>ABSA</option></select><input id="b3_ref" class="input" placeholder="Transaction ID"><button class="btn-primary" style="width:100%;margin-top:8px" onclick="orderBook('Empowered to Influence','b3_name','b3_phone','b3_method','b3_ref','b3_msg')">Confirm</button><p id="b3_msg" style="display:none;color:green"></p></div></div>
-<div id="schoolModal" class="modal-bg"><div class="modal-box"><span class="close" onclick="closeModal('school')">&times;</span><h3>🏫 School Donation — Payment End</h3><div class="momo-box"><b>Airtel Money:</b> 0975826286 - Elfridah<br><b>ABSA:</b> 0000001011355 WOI<br>Ref: SCHOOL + Name</div><input id="s_name" class="input" placeholder="Name"><input id="s_amount" class="input" type="number" placeholder="Amount"><select id="s_method" class="input"><option>Airtel Money</option><option>MTN Money</option><option>ABSA Bank</option></select><input id="s_ref" class="input" placeholder="Transaction ID"><button class="btn-primary" style="width:100%;margin-top:12px" onclick="donatePython('school','s_name','s_amount','s_method','s_ref','s_msg')">Confirm — Saved to Transparency</button><p id="s_msg" style="display:none;color:green"></p></div></div>
-<div id="universityModal" class="modal-bg"><div class="modal-box"><span class="close" onclick="closeModal('university')">&times;</span><h3>🎓 University — Payment End</h3><div class="momo-box">Airtel: 0975826286 | ABSA: 0000001011355</div><input id="u_name" class="input" placeholder="Name"><input id="u_amount" class="input" type="number" placeholder="Amount"><select id="u_method" class="input"><option>Airtel Money</option><option>MTN</option><option>ABSA</option></select><input id="u_ref" class="input" placeholder="Transaction ID"><button class="btn-primary" style="width:100%;margin-top:12px" onclick="donatePython('university','u_name','u_amount','u_method','u_ref','u_msg')">Confirm</button><p id="u_msg" style="display:none;color:green"></p></div></div>
-<div id="clinicModal" class="modal-bg"><div class="modal-box"><span class="close" onclick="closeModal('clinic')">&times;</span><h3>🏥 Clinic — Payment End</h3><div class="momo-box">Airtel: 0975826286 | ABSA: 0000001011355</div><input id="c_name" class="input" placeholder="Name"><input id="c_amount" class="input" type="number" placeholder="Amount"><select id="c_method" class="input"><option>Airtel Money</option><option>MTN</option><option>ABSA</option></select><input id="c_ref" class="input" placeholder="Transaction ID"><button class="btn-primary" style="width:100%;margin-top:12px" onclick="donatePython('clinic','c_name','c_amount','c_method','c_ref','c_msg')">Confirm</button><p id="c_msg" style="display:none;color:green"></p></div></div>
+<!-- Modals keep same -->
+<div id="book1Modal" class="modal-bg"><div class="modal-box"><span class="close" onclick="closeModal('book1')">&times;</span><h3 style="font-family:'Playfair Display'">Woman of Influence — K150</h3><div class="momo-box"><b>PAYMENT END ONLY:</b><br>Airtel Money: <b>0975826286</b><br>ABSA: <b>0000001011355</b> WOI Foundation<br>Ref: BOOK1 + Name</div><input id="b1_name" class="input" placeholder="Name"><input id="b1_phone" class="input" placeholder="Phone"><select id="b1_method" class="input"><option>Airtel Money</option><option>MTN Money</option><option>ABSA Bank</option></select><input id="b1_ref" class="input" placeholder="Transaction ID"><button class="btn-primary" style="width:100%;margin-top:12px" onclick="orderBook('Woman of Influence','b1_name','b1_phone','b1_method','b1_ref','b1_msg')">Confirm Payment</button><p id="b1_msg" style="display:none;color:green"></p></div></div>
+<div id="book2Modal" class="modal-bg"><div class="modal-box"><span class="close" onclick="closeModal('book2')">&times;</span><h3 style="font-family:'Playfair Display'">Raising a Blessed Generation K150</h3><div class="momo-box">Airtel: 0975826286 | ABSA: 0000001011355</div><input id="b2_name" class="input" placeholder="Name"><input id="b2_phone" class="input" placeholder="Phone"><select id="b2_method" class="input"><option>Airtel Money</option><option>MTN</option><option>ABSA</option></select><input id="b2_ref" class="input" placeholder="Transaction ID"><button class="btn-primary" style="width:100%;margin-top:8px" onclick="orderBook('Raising a Blessed Generation','b2_name','b2_phone','b2_method','b2_ref','b2_msg')">Confirm</button><p id="b2_msg" style="display:none;color:green"></p></div></div>
+<div id="book3Modal" class="modal-bg"><div class="modal-box"><span class="close" onclick="closeModal('book3')">&times;</span><h3 style="font-family:'Playfair Display'">Empowered to Influence K200</h3><div class="momo-box">Airtel: 0975826286 | ABSA: 0000001011355</div><input id="b3_name" class="input" placeholder="Name"><input id="b3_phone" class="input" placeholder="Phone"><select id="b3_method" class="input"><option>Airtel Money</option><option>MTN</option><option>ABSA</option></select><input id="b3_ref" class="input" placeholder="Transaction ID"><button class="btn-primary" style="width:100%;margin-top:8px" onclick="orderBook('Empowered to Influence','b3_name','b3_phone','b3_method','b3_ref','b3_msg')">Confirm</button><p id="b3_msg" style="display:none;color:green"></p></div></div>
+<div id="schoolModal" class="modal-bg"><div class="modal-box"><span class="close" onclick="closeModal('school')">&times;</span><h3 style="font-family:'Playfair Display'">🏫 School Donation — Payment End</h3><div class="momo-box"><b>Airtel Money:</b> 0975826286 - Elfridah<br><b>ABSA:</b> 0000001011355 WOI<br>Ref: SCHOOL + Name</div><input id="s_name" class="input" placeholder="Name"><input id="s_amount" class="input" type="number" placeholder="Amount"><select id="s_method" class="input"><option>Airtel Money</option><option>MTN Money</option><option>ABSA Bank</option></select><input id="s_ref" class="input" placeholder="Transaction ID"><button class="btn-primary" style="width:100%;margin-top:12px" onclick="donatePython('school','s_name','s_amount','s_method','s_ref','s_msg')">Confirm — Saved to Transparency</button><p id="s_msg" style="display:none;color:green"></p></div></div>
+<div id="universityModal" class="modal-bg"><div class="modal-box"><span class="close" onclick="closeModal('university')">&times;</span><h3 style="font-family:'Playfair Display'">🎓 University — Payment End</h3><div class="momo-box">Airtel: 0975826286 | ABSA: 0000001011355</div><input id="u_name" class="input" placeholder="Name"><input id="u_amount" class="input" type="number" placeholder="Amount"><select id="u_method" class="input"><option>Airtel Money</option><option>MTN</option><option>ABSA</option></select><input id="u_ref" class="input" placeholder="Transaction ID"><button class="btn-primary" style="width:100%;margin-top:12px" onclick="donatePython('university','u_name','u_amount','u_method','u_ref','u_msg')">Confirm</button><p id="u_msg" style="display:none;color:green"></p></div></div>
+<div id="clinicModal" class="modal-bg"><div class="modal-box"><span class="close" onclick="closeModal('clinic')">&times;</span><h3 style="font-family:'Playfair Display'">🏥 Clinic — Payment End</h3><div class="momo-box">Airtel: 0975826286 | ABSA: 0000001011355</div><input id="c_name" class="input" placeholder="Name"><input id="c_amount" class="input" type="number" placeholder="Amount"><select id="c_method" class="input"><option>Airtel Money</option><option>MTN</option><option>ABSA</option></select><input id="c_ref" class="input" placeholder="Transaction ID"><button class="btn-primary" style="width:100%;margin-top:12px" onclick="donatePython('clinic','c_name','c_amount','c_method','c_ref','c_msg')">Confirm</button><p id="c_msg" style="display:none;color:green"></p></div></div>
 
 <script>
 function openModal(t){document.getElementById(t+'Modal').style.display='flex'}
