@@ -1,0 +1,60 @@
+/* WOI Official - Main Stylesheet - Dark Purple + Awesome Font */
+:root{--wine:#3c0f32;--rose:#c93a8a;--beige:#fef6f1;}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',sans-serif;background:var(--beige);color:#2a1a2a;line-height:1.7;font-size:15px}
+
+/* HEADER - DARK PURPLE */
+header{position:sticky;top:0;z-index:100;background:var(--wine);padding:16px 26px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 6px 24px rgba(60,15,50,0.35)}
+.logo{display:flex;align-items:center;gap:12px}
+.logo-icon{width:42px;height:42px;border-radius:50%;background:white;color:var(--wine);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display';font-weight:800;font-size:18px}
+.logo-text{font-size:11px;font-weight:800;letter-spacing:0.08em;color:white;line-height:1.2} .logo-text span{color:#e8b8d8;font-weight:500}
+.nav-pills{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.pill{padding:10px 18px;border-radius:100px;font-size:12.5px;font-weight:700;text-decoration:none;cursor:pointer;border:1px solid transparent;transition:0.2s;font-family:'Outfit'}
+.pill-light{background:rgba(255,255,255,0.14);border-color:rgba(255,255,255,0.2);color:white}
+.pill-light:hover{background:white;color:var(--wine)}
+.pill-dark{background:white;color:var(--wine);font-weight:800}
+.pill-green{background:#25D366;color:white}
+
+/* HERO - CENTERED FOUNDER */
+.hero{max-width:900px;margin:0 auto;padding:50px 24px 30px;display:flex;flex-direction:column;align-items:center;text-align:center}
+.eyebrow{font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:var(--rose);font-weight:800;margin-bottom:14px;display:block}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(48px,7vw,76px);line-height:0.9;color:var(--wine);font-weight:800}
+.hero-title em{font-family:'Cormorant Garamond';font-style:italic;color:var(--rose);font-weight:600}
+.hero-right{position:relative;display:flex;flex-direction:column;align-items:center;margin:32px 0 14px}
+.founder-circle-wrap{position:relative;width:340px;height:340px}
+.founder-circle{width:100%;height:100%;border-radius:50%;object-fit:cover;border:8px solid white;box-shadow:0 20px 50px rgba(60,15,50,0.3)}
+.est-badge{position:absolute;bottom:20px;right:0;background:var(--wine);color:white;border-radius:12px;padding:8px 12px;font-size:10px;font-weight:800;box-shadow:0 8px 16px rgba(0,0,0,0.2)}
+.founder-name{margin-top:18px;font-family:'Playfair Display';font-size:20px;font-weight:800;color:var(--wine)}
+.founder-role{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--rose);font-weight:700;margin-top:6px}
+.founder-link{margin-top:12px;display:inline-flex;align-items:center;background:white;border:1px solid #f9d0e6;padding:10px 18px;border-radius:100px;font-size:12px;color:var(--wine);text-decoration:none;font-weight:700;box-shadow:0 4px 12px rgba(60,15,50,0.08)}
+.hero-desc{margin-top:26px;font-size:17px;color:#3a2a3a;max-width:680px;line-height:1.85;font-weight:500}
+.from-book{margin-top:24px;background:white;border:1px solid #f3e0d6;border-radius:18px;padding:18px 20px;display:flex;gap:14px;max-width:600px;text-align:left;box-shadow:0 10px 28px rgba(60,15,50,0.07)}
+.from-book-icon{width:40px;height:40px;border-radius:12px;background:#fdf0f7;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.from-book b{font-size:13px;color:var(--wine);font-family:'Playfair Display'} .from-book p{font-size:13.5px;color:#6a5a6a;margin-top:4px;line-height:1.6}
+.from-book a{font-size:11px;color:var(--rose);font-weight:800;text-decoration:none;margin-left:auto;white-space:nowrap}
+.hero-tags{margin-top:22px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center;max-width:700px}
+.tag{padding:10px 18px;border-radius:100px;font-size:12.5px;font-weight:700}
+.tag-wine{background:var(--wine);color:white}
+.tag-green{background:#00c853;color:white}
+.tag-light{background:white;border:1px solid #f0d8d0;color:var(--wine)}
+.tag-pink{background:#fde8f2;border:1px solid #f9d0e6;color:var(--wine)}
+
+/* SECTIONS */
+#waFloat{position:fixed;bottom:22px;right:22px;background:#25D366;color:white;width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;z-index:200;text-decoration:none;box-shadow:0 10px 24px rgba(0,0,0,0.18)}
+section{padding:70px 26px;max-width:1200px;margin:0 auto}
+.events-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:22px;margin-top:22px}
+.event-card{background:white;border-radius:20px;padding:24px;border:1px solid rgba(201,168,106,0.15);position:relative;overflow:hidden}
+.event-card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--wine)}
+.event-date{font-size:11px;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--rose);background:#fdf0f7;padding:6px 12px;border-radius:100px;display:inline-block}
+.books{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px;margin-top:26px}
+.book{background:white;border-radius:18px;overflow:hidden;border:1px solid rgba(201,168,106,0.15)}
+.book-cover{height:240px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:white;text-align:center;padding:18px}
+.book-info{padding:18px}
+.foundation{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:22px;margin-top:26px}
+.f-card{background:white;border-radius:20px;padding:26px;border:1px solid rgba(201,168,106,0.15)}
+.momo-box{margin-top:12px;background:#fdf8f3;border:1px dashed #c9a86a55;border-radius:12px;padding:12px;font-size:13px}
+.modal-bg{position:fixed;inset:0;background:rgba(60,15,50,0.6);backdrop-filter:blur(8px);display:none;justify-content:center;align-items:center;z-index:400;padding:16px}
+.modal-box{background:var(--beige);padding:28px;border-radius:20px;max-width:460px;width:100%;position:relative}
+.close{position:absolute;top:14px;right:18px;font-size:24px;cursor:pointer}
+.input{width:100%;padding:12px 14px;border-radius:12px;border:1px solid #e8d0c8;margin-top:12px;font-size:14px}
+.btn-primary{background:var(--wine);color:white;padding:14px 24px;border-radius:100px;font-size:13px;font-weight:800;border:0;cursor:pointer}
