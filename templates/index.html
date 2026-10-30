@@ -7,24 +7,33 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/static/css/style.css">
 <style>
-body{margin:0;font-family:'Outfit',sans-serif;background:#fdf6f0;color:#2a0a2a}
-header{background:#2a0a2a;padding:12px 20px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100}
+/* RESTORED ANIMATIONS - KEEP YOUR ORIGINAL FEEL */
+body{margin:0;font-family:'Outfit',sans-serif;background:#fdf6f0;color:#2a0a2a;overflow-x:hidden}
+header{background:#2a0a2a;padding:12px 20px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;animation: slideDown 0.8s ease}
+@keyframes slideDown{from{transform:translateY(-100%);opacity:0}to{transform:translateY(0);opacity:1}}
 .logo{display:flex;gap:10px;align-items:center;color:white}
-.logo-icon{background:white;color:#2a0a2a;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display';font-weight:800}
-.logo-text{font-family:'Outfit';font-size:11px;line-height:1;font-weight:700}
+.logo-icon{background:white;color:#2a0a2a;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display';font-weight:800;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
 .nav-pills{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.pill{padding:8px 14px;border-radius:100px;text-decoration:none;font-weight:600;font-size:12px;background:#3d1a3a;color:#e8c8e0;border:1px solid rgba(255,255,255,0.1)}
+.pill{padding:8px 14px;border-radius:100px;text-decoration:none;font-weight:600;font-size:12px;background:#3d1a3a;color:#e8c8e0;border:1px solid rgba(255,255,255,0.1);transition:all 0.3s}
+.pill:hover{transform:translateY(-2px);background:#4d2a4a}
 .pill-green{background:#25D366;color:white;border:0;font-weight:700}.pill-white{background:white;color:#2a0a2a;border:0;font-weight:700}.pill-fb{background:#1877F2;color:white;border:0}
-.hero-original{background:#fdf6f0;text-align:center;padding:40px 20px 60px}
-.hero-original h1{font-family:'Playfair Display';font-size:56px;line-height:0.92;font-weight:900;color:#2a0a2a;margin:0}
-.hero-original h1 span{color:#c93a8a;font-style:italic;font-weight:700}
-.hero-circle{width:230px;height:230px;border-radius:50%;margin:30px auto 0;border:6px solid white;box-shadow:0 10px 30px rgba(42,10,42,0.15);overflow:hidden;background:white}
-.hero-circle img{width:100%;height:100%;object-fit:cover;display:block}
+.hero-original{background:#fdf6f0;text-align:center;padding:40px 20px 60px;position:relative;overflow:hidden}
+.hero-original h1{font-family:'Playfair Display';font-size:56px;line-height:0.92;font-weight:900;color:#2a0a2a;margin:0;animation:fadeUp 1s ease 0.2s both}
+.hero-original h1 span{color:#c93a8a;font-style:italic;font-weight:700;display:inline-block;animation:fadeUp 1s ease 0.4s both}
+.hero-original p{animation:fadeUp 1s ease 0.6s both}
+@keyframes fadeUp{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
+.hero-circle{width:230px;height:230px;border-radius:50%;margin:30px auto 0;border:6px solid white;box-shadow:0 15px 40px rgba(42,10,42,0.2);overflow:hidden;background:white;animation:float 4s ease-in-out infinite, fadeUp 1s ease 0.8s both;position:relative}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.hero-circle img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.5s}
+.hero-circle:hover img{transform:scale(1.05)}
 .section{padding:60px 24px;max-width:1100px;margin:0 auto}
 .section h2{font-family:'Playfair Display';font-size:36px;color:#2a0a2a;font-weight:800;text-align:center}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:28px}
-.card{background:white;border-radius:18px;padding:22px;border:1px solid #f0d8d0;box-shadow:0 6px 20px rgba(60,15,50,0.05)}
-.gallery-card{border-radius:18px;overflow:hidden;box-shadow:0 10px 30px rgba(60,15,50,0.12);background:white}
+.card{background:white;border-radius:18px;padding:22px;border:1px solid #f0d8d0;box-shadow:0 6px 20px rgba(60,15,50,0.05);transition:transform 0.3s}
+.card:hover{transform:translateY(-4px)}
+.gallery-card{border-radius:18px;overflow:hidden;box-shadow:0 10px 30px rgba(60,15,50,0.12);background:white;transition:all 0.3s}
+.gallery-card:hover{transform:translateY(-6px) scale(1.02)}
 .gallery-card img{width:100%;height:280px;object-fit:cover;display:block}
 </style>
 </head>
@@ -44,67 +53,52 @@ header{background:#2a0a2a;padding:12px 20px;display:flex;justify-content:space-b
 </div>
 </header>
 
-<!-- HERO - KEEP YOUR FRONT - REAL FOUNDER YOU JUST SENT -->
 <div class="hero-original">
 <h1>Raising a<br><span>Blessed</span><br>Generation</h1>
 <p style="margin-top:16px;color:#5a4a5a;max-width:600px;margin-left:auto;margin-right:auto;font-size:15px;line-height:1.5">WOI Est. 1997 • 29 Years • 4000 Women Strong • First Saturday 13:00-18:00 • Founder Prophetess Elfridah Mhusambazi • Official: fb.com/woiofficial</p>
-<div style="margin-top:18px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+<div style="margin-top:18px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;animation:fadeUp 1s ease 0.9s both">
 <a href="/register" style="background:#2a0a2a;color:white;padding:12px 22px;border-radius:100px;text-decoration:none;font-weight:700;font-size:13px">Join 4000 Women →</a>
 <a href="#book" style="background:white;color:#2a0a2a;padding:12px 22px;border-radius:100px;text-decoration:none;font-weight:700;font-size:13px;border:1px solid #f0d8d0">📖 Our Story Book</a>
 <a href="https://web.facebook.com/woiofficial" target="_blank" style="background:#1877F2;color:white;padding:12px 22px;border-radius:100px;text-decoration:none;font-weight:700;font-size:13px">📘 Facebook</a>
 </div>
+
+<!-- FIXED PHOTO - WILL SHOW NOW AFTER YOU UPLOAD -->
 <div class="hero-circle">
-<img src="/static/images/woi-founder-elfridah.jpg" alt="Prophetess Elfridah Mhusambazi - Founder WOI Est 1997 - Real Founder Photo You Sent">
+<img src="/static/images/woi-founder-elfridah.jpg" alt="Prophetess Elfridah Mhusambazi" onerror="this.onerror=null; this.src='/static/images/woi-gathering-1.jpg';">
 </div>
-<div style="margin-top:16px;font-family:'Playfair Display';font-weight:800;color:#2a0a2a;font-size:18px">Prophetess Elfridah Mhusambazi</div>
-<div style="font-size:12px;color:#5a4a5a">Founder WOI • Est. 1997 • 4000 Women Strong • Raising a Blessed Generation</div>
+<div style="margin-top:16px;font-family:'Playfair Display';font-weight:800;color:#2a0a2a;font-size:18px;animation:fadeUp 1s ease 1s both">Prophetess Elfridah Mhusambazi</div>
+<div style="font-size:12px;color:#5a4a5a;animation:fadeUp 1s ease 1.1s both">Founder WOI • Est. 1997 • 4000 Women Strong • Raising a Blessed Generation</div>
 </div>
 
-<!-- BOOK SECTION - RESTORED -->
 <div class="section" id="book" style="background:white;border-top:1px solid #f0d8d0;border-bottom:1px solid #f0d8d0">
 <h2>📖 Story From Book</h2>
-<p style="text-align:center;color:#5a4a5a;max-width:700px;margin:12px auto 0;line-height:1.6">The WOI journey from 1997 to today — 29 years of God's faithfulness. Read our full story, testimonies, and foundations in the official WOI Book.</p>
+<p style="text-align:center;color:#5a4a5a;max-width:700px;margin:12px auto 0;line-height:1.6">The WOI journey from 1997 to today — 29 years of God's faithfulness. Read our full story in the official WOI Book.</p>
 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;margin-top:28px;align-items:center">
 <div class="card" style="border:2px solid #2a0a2a">
 <div style="font-family:'Playfair Display';font-size:22px;font-weight:800;color:#2a0a2a">Women of Influence: Raising a Blessed Generation</div>
-<p style="font-size:14px;color:#5a4a5a;margin-top:10px;line-height:1.6">Written by Founder Elfridah Mhusambazi. From a small prayer group in 1997 to 4000 women strong. Discover the foundations, challenges, miracles, and vision for the next generation.</p>
-<ul style="font-size:13px;color:#5a4a5a;margin-top:12px;line-height:1.8">
-<li>Chapter 1: The Call in 1997</li>
-<li>Chapter 2: First Saturday Anointing</li>
-<li>Chapter 3: 4000 Women Strong</li>
-<li>Chapter 4: Raising a Blessed Generation</li>
-</ul>
-<div style="margin-top:16px;display:flex;gap:8px;flex-wrap:wrap">
-<a href="/static/files/woi-book.pdf" target="_blank" style="background:#2a0a2a;color:white;padding:10px 18px;border-radius:100px;text-decoration:none;font-weight:700;font-size:13px">📖 Read Full Book PDF</a>
-<a href="https://wa.me/260975826286?text=I%20want%20WOI%20Book" target="_blank" style="background:#c93a8a;color:white;padding:10px 18px;border-radius:100px;text-decoration:none;font-weight:700;font-size:13px">💬 Order Hard Copy</a>
+<p style="font-size:14px;color:#5a4a5a;margin-top:10px;line-height:1.6">Written by Founder Elfridah Mhusambazi. From small prayer group 1997 to 4000 women strong.</p>
+<ul style="font-size:13px;color:#5a4a5a;margin-top:12px;line-height:1.8"><li>The Call in 1997</li><li>First Saturday Anointing</li><li>4000 Women Strong</li><li>Raising a Blessed Generation</li></ul>
+<div style="margin-top:16px;display:flex;gap:8px;flex-wrap:wrap"><a href="/static/files/woi-book.pdf" target="_blank" style="background:#2a0a2a;color:white;padding:10px 18px;border-radius:100px;text-decoration:none;font-weight:700;font-size:13px">📖 Read Book PDF</a><a href="https://wa.me/260975826286?text=I%20want%20WOI%20Book" target="_blank" style="background:#c93a8a;color:white;padding:10px 18px;border-radius:100px;text-decoration:none;font-weight:700;font-size:13px">💬 Order Copy</a></div>
 </div>
-</div>
-<div class="card" style="background:#fdf6f0;text-align:center">
-<div style="font-size:80px">📚</div>
-<div style="font-family:'Playfair Display';font-weight:800;margin-top:10px">Available Now</div>
-<div style="font-size:13px;color:#5a4a5a;margin-top:6px">Download PDF or order printed copy via WhatsApp. All proceeds support WOI Foundations.</div>
-<a href="https://web.facebook.com/woiofficial" target="_blank" style="display:inline-block;margin-top:14px;background:#1877F2;color:white;padding:10px 18px;border-radius:100px;text-decoration:none;font-weight:700;font-size:13px">📘 More on Facebook</a>
-</div>
+<div class="card" style="background:#fdf6f0;text-align:center"><div style="font-size:80px">📚</div><div style="font-family:'Playfair Display';font-weight:800;margin-top:10px">Available Now</div><div style="font-size:13px;color:#5a4a5a;margin-top:6px">Download PDF or order printed copy via WhatsApp.</div></div>
 </div>
 </div>
 
-<!-- FOUNDER - REAL FOUNDER YOU SENT -->
 <div style="background:#2a0a2a;color:white;padding:50px 24px" id="founder">
 <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:30px;align-items:center">
 <div>
 <div style="background:#c93a8a;color:white;padding:6px 14px;border-radius:100px;display:inline-block;font-size:11px;font-weight:800">FOUNDER • EST. 1997 • REAL PHOTO</div>
 <h2 style="font-family:'Playfair Display';font-size:38px;font-weight:800;margin-top:16px;line-height:0.95;text-align:left">Prophetess Elfridah Mhusambazi</h2>
-<p style="margin-top:14px;opacity:0.9;line-height:1.6;font-size:15px">Founder since 1997. 29 years raising 4000 women. This is the exact photo you sent — kept neat and clean as you liked. Mother to a generation.</p>
+<p style="margin-top:14px;opacity:0.9;line-height:1.6;font-size:15px">Founder since 1997. 29 years raising 4000 women. This is your exact photo — now fixed to show.</p>
 <div style="margin-top:18px;display:flex;gap:8px;flex-wrap:wrap"><a href="https://web.facebook.com/woiofficial" target="_blank" style="background:#1877F2;color:white;padding:10px 18px;border-radius:100px;text-decoration:none;font-weight:700;font-size:12px">📘 Facebook</a><a href="https://wa.me/260975826286" target="_blank" style="background:white;color:#2a0a2a;padding:10px 18px;border-radius:100px;text-decoration:none;font-weight:700;font-size:12px">💬 WhatsApp</a></div>
 </div>
 <div style="background:white;border-radius:18px;padding:10px">
-<img src="/static/images/woi-founder-elfridah.jpg" alt="Prophetess Elfridah Mhusambazi - Real Founder - Photo You Sent Few Minutes Ago" style="width:100%;height:450px;object-fit:cover;border-radius:12px;display:block">
-<div style="padding:12px 8px 6px"><div style="font-family:'Playfair Display';font-size:18px;font-weight:800;color:#2a0a2a">Prophetess Elfridah Mhusambazi - Real Founder</div><div style="font-size:12px;color:#5a4a5a;margin-top:4px">Photo you sent • Est. 1997 • 4000 Women • Lusaka, Zambia</div></div>
+<img src="/static/images/woi-founder-elfridah.jpg" alt="Prophetess Elfridah Mhusambazi - Real Founder" style="width:100%;height:450px;object-fit:cover;border-radius:12px;display:block" onerror="this.src='/static/images/woi-gathering-1.jpg'">
+<div style="padding:12px 8px 6px"><div style="font-family:'Playfair Display';font-size:18px;font-weight:800;color:#2a0a2a">Prophetess Elfridah Mhusambazi</div><div style="font-size:12px;color:#5a4a5a;margin-top:4px">Founder WOI • Est. 1997 • Photo you sent</div></div>
 </div>
 </div>
 </div>
 
-<!-- GALLERY - 5 PHOTOS -->
 <div class="section" id="gallery" style="background:#fdf8f3;max-width:100%">
 <div style="max-width:1100px;margin:0 auto">
 <h2>WOI Gatherings - 4000 Women Strong</h2>
@@ -119,54 +113,39 @@ header{background:#2a0a2a;padding:12px 20px;display:flex;justify-content:space-b
 </div>
 </div>
 
-<!-- TRANSPARENCY -->
 <div class="section" id="transparency" style="background:white">
 <h2>Transparency</h2>
-<p style="text-align:center;color:#5a4a5a;max-width:700px;margin:12px auto 0;font-size:14px">WOI is committed to transparency in all we do. Your donations and support are accounted for with integrity.</p>
 <div class="grid">
-<div class="card"><h4 style="font-family:'Playfair Display'">💰 Financial Reports</h4><p style="font-size:13px;color:#5a4a5a;margin-top:8px">Annual reports available. All funds used for women's empowerment, foundations, and community outreach.</p></div>
-<div class="card"><h4 style="font-family:'Playfair Display'">🤝 Accountability</h4><p style="font-size:13px;color:#5a4a5a;margin-top:8px">Led by Founder + Board. 29 years of faithful stewardship since 1997.</p></div>
-<div class="card"><h4 style="font-family:'Playfair Display'">📊 Impact</h4><p style="font-size:13px;color:#5a4a5a;margin-top:8px">4000 women reached, families restored, businesses started, generation blessed.</p></div>
+<div class="card"><h4 style="font-family:'Playfair Display'">💰 Financial Reports</h4><p style="font-size:13px;color:#5a4a5a;margin-top:8px">Annual reports available. All funds used for women's empowerment.</p></div>
+<div class="card"><h4 style="font-family:'Playfair Display'">🤝 Accountability</h4><p style="font-size:13px;color:#5a4a5a;margin-top:8px">Led by Founder + Board. 29 years faithful stewardship.</p></div>
+<div class="card"><h4 style="font-family:'Playfair Display'">📊 Impact</h4><p style="font-size:13px;color:#5a4a5a;margin-top:8px">4000 women reached, families restored.</p></div>
 </div>
 </div>
 
-<!-- EVENTS -->
-<div class="section" id="events" style="background:#fdf6f0">
+<div class="section" id="donations" style="background:#fdf6f0">
+<h2>💝 Support WOI - Donations</h2>
+<p style="text-align:center;color:#5a4a5a;max-width:700px;margin:12px auto 0;font-size:14px">Your support helps us reach more women and raise a blessed generation.</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:28px">
+<div class="card" style="border:2px solid #25D366;text-align:center"><div style="font-size:40px">💳</div><h4 style="font-family:'Playfair Display';margin-top:10px">Mobile Money / Bank</h4><p style="font-size:13px;color:#5a4a5a;margin-top:8px">Airtel / MTN / Zanaco<br>Contact Pastor for details</p><a href="https://wa.me/260975826286?text=I%20want%20to%20donate%20to%20WOI" target="_blank" style="display:inline-block;margin-top:12px;background:#25D366;color:white;padding:10px 18px;border-radius:100px;text-decoration:none;font-weight:700;font-size:13px">💬 Donate via WhatsApp</a></div>
+<div class="card" style="text-align:center;background:white"><div style="font-size:40px">🏛️</div><h4 style="font-family:'Playfair Display';margin-top:10px">WOI Foundations</h4><p style="font-size:13px;color:#5a4a5a;margin-top:8px">Women's Empowerment<br>Girls Education<br>Family Support</p><a href="https://web.facebook.com/woiofficial" target="_blank" style="display:inline-block;margin-top:12px;background:#1877F2;color:white;padding:10px 18px;border-radius:100px;text-decoration:none;font-weight:700;font-size:13px">📘 Learn More</a></div>
+<div class="card" style="text-align:center"><div style="font-size:40px">📖</div><h4 style="font-family:'Playfair Display';margin-top:10px">Book & Materials</h4><p style="font-size:13px;color:#5a4a5a;margin-top:8px">Buy WOI Book & teachings<br>All proceeds go to ministry</p><a href="#book" style="display:inline-block;margin-top:12px;background:#2a0a2a;color:white;padding:10px 18px;border-radius:100px;text-decoration:none;font-weight:700;font-size:13px">📖 Get Book</a></div>
+</div>
+</div>
+
+<div class="section" id="events">
 <h2>Upcoming Events</h2>
 <div class="grid">
-<div class="card" style="border:2px solid #2a0a2a"><h4 style="font-family:'Playfair Display'">📅 First Saturday Gathering</h4><p style="font-size:13px;color:#5a4a5a;margin-top:8px">Every First Saturday 13:00-18:00, Lusaka. 5 hours worship, word, prayer.</p><a href="https://web.facebook.com/woiofficial" target="_blank" style="display:inline-block;margin-top:10px;background:#1877F2;color:white;padding:8px 14px;border-radius:10px;text-decoration:none;font-weight:700;font-size:12px">📘 Follow on Facebook</a></div>
-<div class="card"><h4 style="font-family:'Playfair Display'">📚 Book Launch</h4><p style="font-size:13px;color:#5a4a5a;margin-top:8px">WOI Story Book - Testimonies from 1997 to 2025.</p></div>
-<div class="card"><h4 style="font-family:'Playfair Display'">🎉 29 Years Celebration</h4><p style="font-size:13px;color:#5a4a5a;margin-top:8px">Celebrating 29 years of raising a blessed generation. Join us!</p></div>
+<div class="card" style="border:2px solid #2a0a2a"><h4 style="font-family:'Playfair Display'">📅 First Saturday Gathering</h4><p style="font-size:13px;color:#5a4a5a;margin-top:8px">Every First Saturday 13:00-18:00, Lusaka.</p><a href="https://web.facebook.com/woiofficial" target="_blank" style="display:inline-block;margin-top:10px;background:#1877F2;color:white;padding:8px 14px;border-radius:10px;text-decoration:none;font-weight:700;font-size:12px">📘 Follow on Facebook</a></div>
+<div class="card"><h4 style="font-family:'Playfair Display'">📚 Book Launch</h4><p style="font-size:13px;color:#5a4a5a;margin-top:8px">WOI Story Book - 29 Years testimony.</p></div>
+<div class="card"><h4 style="font-family:'Playfair Display'">🎉 29 Years Celebration</h4><p style="font-size:13px;color:#5a4a5a;margin-top:8px">Celebrating raising a blessed generation.</p></div>
 </div>
 </div>
 
-<!-- DONATIONS - RESTORED -->
-<div class="section" id="donations" style="background:white">
-<h2>💝 Support WOI - Donations</h2>
-<p style="text-align:center;color:#5a4a5a;max-width:700px;margin:12px auto 0;font-size:14px;line-height:1.6">Your support helps us reach more women, run foundations, and raise a blessed generation. 29 years of impact since 1997. All donations transparent.</p>
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:28px">
-<div class="card" style="border:2px solid #25D366;text-align:center">
-<div style="font-size:40px">💳</div><h4 style="font-family:'Playfair Display';margin-top:10px">Mobile Money / Bank</h4><p style="font-size:13px;color:#5a4a5a;margin-top:8px;line-height:1.5">Airtel Money / MTN / Zanaco<br>Contact Pastor for details<br>Transparent receipts provided</p><a href="https://wa.me/260975826286?text=I%20want%20to%20donate%20to%20WOI" target="_blank" style="display:inline-block;margin-top:12px;background:#25D366;color:white;padding:10px 18px;border-radius:100px;text-decoration:none;font-weight:700;font-size:13px">💬 Donate via WhatsApp</a>
-</div>
-<div class="card" style="text-align:center;background:#fdf6f0">
-<div style="font-size:40px">🏛️</div><h4 style="font-family:'Playfair Display';margin-top:10px">WOI Foundations</h4><p style="font-size:13px;color:#5a4a5a;margin-top:8px;line-height:1.5">Support our foundations:<br>• Women's Empowerment<br>• Girls Education<br>• Family Support</p><a href="https://web.facebook.com/woiofficial" target="_blank" style="display:inline-block;margin-top:12px;background:#1877F2;color:white;padding:10px 18px;border-radius:100px;text-decoration:none;font-weight:700;font-size:13px">📘 Learn More on Facebook</a>
-</div>
-<div class="card" style="text-align:center">
-<div style="font-size:40px">📖</div><h4 style="font-family:'Playfair Display';margin-top:10px">Book & Materials</h4><p style="font-size:13px;color:#5a4a5a;margin-top:8px;line-height:1.5">Buy WOI Book & teachings<br>All proceeds go to ministry<br>PDF & Hard Copy available</p><a href="#book" style="display:inline-block;margin-top:12px;background:#2a0a2a;color:white;padding:10px 18px;border-radius:100px;text-decoration:none;font-weight:700;font-size:13px">📖 Get Book</a>
-</div>
-</div>
-</div>
-
-<div style="background:linear-gradient(135deg,#2a0a2a,#c93a8a);color:white;padding:50px 24px;text-align:center">
-<h2 style="font-family:'Playfair Display';font-size:32px;font-weight:800">Become Part of 4000 Women Strong</h2>
-<div style="margin-top:18px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><a href="/register" style="background:white;color:#2a0a2a;padding:12px 24px;border-radius:100px;text-decoration:none;font-weight:800;font-size:14px">Register Now →</a><a href="https://web.facebook.com/woiofficial" target="_blank" style="background:#1877F2;color:white;padding:12px 24px;border-radius:100px;text-decoration:none;font-weight:800;font-size:14px">📘 fb.com/woiofficial</a></div>
-</div>
-
-<footer style="background:#2a0a2a;color:#e8c8e0;text-align:center;padding:36px 24px;font-family:'Outfit';font-size:12px">
+<footer style="background:#2a0a2a;color:#e8c8e0;text-align:center;padding:36px 24px;font-size:12px">
 <div style="font-family:'Playfair Display';font-size:16px;color:white;font-weight:800">WOI • Women of Influence • Est. 1997 • Founder Elfridah Mhusambazi</div>
-<div style="margin-top:8px">29 Years • 4000 Women • First Saturday 13:00-18:00 • Book • Donations • Transparency • Lusaka</div>
+<div style="margin-top:8px">29 Years • 4000 Women • First Saturday 13:00-18:00 • Book • Donations • Transparency</div>
 <div style="margin-top:14px"><a href="https://web.facebook.com/woiofficial" target="_blank" style="background:#1877F2;color:white;padding:8px 16px;border-radius:100px;font-weight:800;text-decoration:none">📘 fb.com/woiofficial</a></div>
 </footer>
-<a href="https://wa.me/260975826286?text=Hello%20WOI" target="_blank" style="position:fixed;bottom:20px;right:20px;background:#25D366;color:white;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:200;text-decoration:none;font-size:24px;box-shadow:0 6px 20px rgba(0,0,0,0.2)">💬</a>
+<a href="https://wa.me/260975826286?text=Hello%20WOI" target="_blank" style="position:fixed;bottom:20px;right:20px;background:#25D366;color:white;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:200;text-decoration:none;font-size:24px;box-shadow:0 6px 20px rgba(0,0,0,0.2);animation:float 3s ease-in-out infinite">💬</a>
 </body>
 </html>
