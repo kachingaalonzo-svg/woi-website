@@ -1,7 +1,7 @@
 import os
 from datetime import datetime, date
 from flask import Flask, request, jsonify, render_template, redirect, url_for, session, flash
-from sqlalchemy import create_engine, Column, Integer, String, DateTime, Text, Date, func
+from sqlalchemy import create_engine, Column, Integer, String, DateTime, Text, Date, func, text
 from sqlalchemy.orm import declarative_base, sessionmaker
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
@@ -18,7 +18,6 @@ ALLOWED_EXT = {'png','jpg','jpeg','webp'}
 DATABASE_URL = os.environ.get("DATABASE_URL")
 if not DATABASE_URL:
     DATABASE_URL = "sqlite:///woi.db"
-# fix for Render postgres URL
 if DATABASE_URL.startswith("postgres://"):
     DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
 
@@ -91,10 +90,24 @@ class HistoryEntry(Base):
 
 Base.metadata.create_all(bind=engine)
 
+# TRY TO ADD MISSING COLUMNS TO OLD POSTGRES TABLES (auto-fix)
+def fix_old_db():
+    try:
+        with engine.connect() as conn:
+            conn.execute(text("ALTER TABLE members ADD COLUMN IF NOT EXISTS created_at TIMESTAMP"))
+            conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS created_at TIMESTAMP"))
+            conn.execute(text("ALTER TABLE donations ADD COLUMN IF NOT EXISTS created_at TIMESTAMP"))
+            conn.execute(text("ALTER TABLE book_orders ADD COLUMN IF NOT EXISTS created_at TIMESTAMP"))
+            conn.commit()
+            print("DB fix: added missing created_at columns if needed")
+    except Exception as e:
+        print(f"DB fix ignored: {e}")
+
+fix_old_db()
+
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXT
 
-# ROUTES
 @app.route("/")
 def home():
     return render_template("index.html")
@@ -122,7 +135,6 @@ def transparency_page():
     db.close()
     return render_template("transparency.html", donations=donations, total=total)
 
-# NEW REGISTRATION
 @app.route("/register", methods=["GET","POST"])
 def register():
     if request.method == "GET":
@@ -133,8 +145,6 @@ def register():
         if db.query(User).filter_by(email=email).first():
             db.close()
             return jsonify({"ok":False,"msg":"Email already registered. Please login."}), 400
-        
-        # handle pic
         pic_path = ""
         file = request.files.get("profile_pic")
         if file and file.filename and allowed_file(file.filename):
@@ -142,7 +152,6 @@ def register():
             save_path = os.path.join(UPLOAD_FOLDER, filename)
             file.save(save_path)
             pic_path = f"/static/uploads/{filename}"
-
         user = User(
             email=email,
             password_hash=generate_password_hash(request.form.get("password","")),
@@ -208,7 +217,6 @@ def member_logout():
     session.clear()
     return redirect("/")
 
-# OLD APIS KEEP
 @app.route("/join", methods=["POST"])
 def join():
     data = request.get_json() or {}
@@ -216,7 +224,7 @@ def join():
     try:
         m = Member(name=data.get("name"), phone=data.get("phone"), province=data.get("province"), church=data.get("church"), foundation=data.get("foundation"))
         db.add(m); db.commit()
-    except Exception as e:
+    except:
         db.rollback()
     db.close()
     return jsonify({"msg":"Welcome to WOI! Redirecting to WhatsApp..."})
@@ -228,10 +236,10 @@ def donate():
     try:
         d = Donation(name=data.get("name"), project=data.get("project"), amount=data.get("amount"), method=data.get("method"), reference=data.get("reference"))
         db.add(d); db.commit()
-    except Exception as e:
+    except:
         db.rollback()
     db.close()
-    return jsonify({"msg":"Donation recorded — Thank you! Check Transparency page."})
+    return jsonify({"msg":"Donation recorded — Thank you!"})
 
 @app.route("/order-book", methods=["POST"])
 def order_book():
@@ -240,12 +248,11 @@ def order_book():
     try:
         b = BookOrder(name=data.get("name"), phone=data.get("phone"), book=data.get("book"), method=data.get("method"), ref=data.get("ref"))
         db.add(b); db.commit()
-    except Exception as e:
+    except:
         db.rollback()
     db.close()
     return jsonify({"msg":"Order saved — Please pay and we will confirm."})
 
-# ADMIN - FIXED SAFE VERSION
 ADMIN_USER = os.environ.get("ADMIN_USER","admin")
 ADMIN_PASS = os.environ.get("ADMIN_PASS","admin123")
 
@@ -262,34 +269,44 @@ def admin_login():
 def admin():
     if not session.get("admin"):
         return redirect("/admin/login")
+    db = SessionLocal()
+    # SAFE queries - if order fails, fallback to no order
     try:
-        db = SessionLocal()
         users = db.query(User).order_by(User.created_at.desc()).all()
-        members = db.query(Member).order_by(Member.created_at.desc()).all()
-        donations = db.query(Donation).order_by(Donation.created_at.desc()).all()
-        books = db.query(BookOrder).order_by(BookOrder.created_at.desc()).all()
-        db.close()
-        return render_template("admin.html", users=users, members=members, donations=donations, books=books)
-    except Exception as e:
-        print(f"Admin error: {e}")
+    except:
         try:
-            Base.metadata.create_all(bind=engine)
-            db = SessionLocal()
-            users = db.query(User).order_by(User.created_at.desc()).all()
-            members = db.query(Member).order_by(Member.created_at.desc()).all()
-            donations = db.query(Donation).order_by(Donation.created_at.desc()).all()
-            books = db.query(BookOrder).order_by(BookOrder.created_at.desc()).all()
-            db.close()
-            return render_template("admin.html", users=users, members=members, donations=donations, books=books)
-        except Exception as e2:
-            return f"Admin load error: {e} | Second error: {e2}. Please check logs."
+            users = db.query(User).all()
+        except:
+            users = []
+    try:
+        members = db.query(Member).order_by(Member.created_at.desc()).all()
+    except:
+        try:
+            members = db.query(Member).all()
+        except:
+            members = []
+    try:
+        donations = db.query(Donation).order_by(Donation.created_at.desc()).all()
+    except:
+        try:
+            donations = db.query(Donation).all()
+        except:
+            donations = []
+    try:
+        books = db.query(BookOrder).order_by(BookOrder.created_at.desc()).all()
+    except:
+        try:
+            books = db.query(BookOrder).all()
+        except:
+            books = []
+    db.close()
+    return render_template("admin.html", users=users, members=members, donations=donations, books=books)
 
 @app.route("/admin/logout")
 def admin_logout():
     session.pop("admin", None)
     return redirect("/admin/login")
 
-# DEBUG ROUTE - to check deployment
 @app.route("/routes")
 def list_routes():
     output = []
