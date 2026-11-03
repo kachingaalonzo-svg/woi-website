@@ -1,13 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Register - WOI</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/static/css/style.css"></head>
+<html>
+<head><title>WOI Register</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>body{font-family:'Outfit';background:#fdf6f0;margin:0;padding:20px} .box{background:white;max-width:600px;margin:0 auto;padding:24px;border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,0.08)} input,select,textarea{width:100%;padding:11px;border-radius:10px;border:1px solid #ddd;margin-top:8px;box-sizing:border-box} button{width:100%;margin-top:16px;background:#2a0a2a;color:white;padding:14px;border-radius:12px;border:0;font-weight:800;cursor:pointer} label{font-size:12px;font-weight:700;color:#444;margin-top:12px;display:block}</style>
+</head>
 <body>
-<header><div class="logo"><div class="logo-icon">W</div><div class="logo-text">WOI<br><span>EST. 1997</span></div></div><div class="nav-pills"><a class="pill pill-light" href="/">Home</a><a class="pill pill-light" href="/history.html">Story</a><a class="pill pill-light" href="/transparency">Transparency</a></div></header>
-<section style="max-width:600px;margin:0 auto"><h2 style="font-family:'Playfair Display';font-size:42px;color:#3c0f32;text-align:center">Create WOI Account</h2><p style="text-align:center;color:#6a5a6a;margin-top:8px">Join 4000 women • First Saturday 13:00-18:00 • FREE</p>
-<div style="background:white;border-radius:20px;padding:28px;margin-top:24px;border:1px solid #f0d8d0"><input id="r_name" class="input" placeholder="Full Name"><input id="r_phone" class="input" placeholder="Phone (097...)"><input id="r_email" class="input" placeholder="Email (optional)"><input id="r_pass" type="password" class="input" placeholder="Create Password"><button class="btn-primary" style="width:100%;margin-top:16px" onclick="registerNow()">Create Account & Join WOI →</button><p id="r_msg" style="margin-top:12px;text-align:center"></p><p style="text-align:center;margin-top:14px;font-size:13px">Already have account? <a href="/member/login" style="color:#c93a8a;font-weight:700">Login</a></p></div></section>
-<script>async function registerNow(){const name=document.getElementById('r_name').value,phone=document.getElementById('r_phone').value,email=document.getElementById('r_email').value,password=document.getElementById('r_pass').value;if(!name||!phone||!password){alert('Fill name phone password');return}const res=await fetch('/api/register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,phone,email,password})});const d=await res.json();document.getElementById('r_msg').textContent=d.msg;if(res.ok){setTimeout(()=>window.location.href='/member/login',1500)}}</script>
-{% include 'partials/footer.html' %}
+<div class="box">
+<h2 style="font-family:'Playfair Display';text-align:center;color:#2a0a2a">Join WOI - 4000 Women Strong</h2>
+<p style="text-align:center;font-size:13px;color:#666">Est. 1997 • First Saturday 13:00-18:00 • Founder Elfridah Mhusambazi</p>
+<form method="POST" enctype="multipart/form-data">
+<label>Full Name</label><input name="full_name" required>
+<label>Email</label><input name="email" type="email" required>
+<label>Password</label><input name="password" type="password" required>
+<label>Phone</label><input name="phone" required>
+<label>Province</label><select name="province"><option>Lusaka</option><option>Copperbelt</option><option>Central</option><option>Western</option><option>Eastern</option><option>Northern</option><option>Southern</option><option>Muchinga</option><option>North-Western</option><option>Luapula</option></select>
+<label>District</label><input name="district" value="Lusaka">
+<label>Church</label><input name="church" placeholder="Your church">
+<label>Profile Photo (optional)</label><input type="file" name="profile_pic" accept="image/*">
+<button type="submit">Register → Join 4000 Women</button>
+</form>
+<p style="text-align:center;font-size:13px;margin-top:16px"><a href="/member/login" style="color:#c93a8a;font-weight:700;text-decoration:none">Already have account? Login</a></p>
+</div>
 </body>
 </html>
