@@ -1,16 +1,74 @@
-<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width"><title>Admin WOI</title>
-<style>body{font-family:sans-serif;background:#fef6f1;padding:20px;color:#2a1a2a} h2{color:#3c0f32} .stats{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0} .stat{background:white;padding:14px;border-radius:12px;border:1px solid #f0d8d0;min-width:130px} table{width:100%;background:white;border-collapse:collapse;margin-top:10px;border-radius:12px;overflow:hidden;font-size:12px} th,td{padding:8px;border-bottom:1px solid #f0e0d0;text-align:left} th{background:#3c0f32;color:white;font-size:10px} a{color:#c93a8a;font-weight:700;text-decoration:none} .btn{padding:6px 12px;border-radius:100px;font-size:11px;background:#3c0f32;color:white} section{margin-top:30px}</style>
-</head><body>
-<h2>Admin Dashboard — WOI — 0573617784</h2>
-<p><a href="/">Home</a> | <a href="/transparency">Transparency</a> | <a href="/admin/logout">Logout</a> — DB: {{'Permanent Postgres ✅' if use_db else 'JSON (Temporary)'}}</p>
-<div class="stats">
-<div class="stat"><b>K{{progress.total_all}}</b><br>Total Raised</div>
-<div class="stat"><b>{{progress.count}}</b><br>Donations</div>
-<div class="stat"><b>K{{progress.school_total}}</b><br>School</div>
-<div class="stat"><b>K{{progress.university_total}}</b><br>University</div>
-<div class="stat"><b>K{{progress.clinic_total}}</b><br>Clinic</div>
+<!DOCTYPE html>
+<html>
+<head>
+<title>WOI Admin - Works 100%</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+body{font-family:'Outfit',sans-serif;background:#fdf6f0;margin:0;padding:20px;color:#2a0a2a}
+header{display:flex;justify-content:space-between;align-items:center;background:#2a0a2a;color:white;padding:14px 20px;border-radius:14px;flex-wrap:wrap;gap:10px}
+table{width:100%;border-collapse:collapse;background:white;border-radius:12px;overflow:hidden;margin-top:16px;box-shadow:0 6px 20px rgba(0,0,0,0.05)}
+th,td{padding:10px 12px;border-bottom:1px solid #eee;font-size:12px;text-align:left}th{background:#2a0a2a;color:white;font-weight:700}
+.btn{padding:8px 14px;border-radius:100px;text-decoration:none;font-weight:700;font-size:12px;display:inline-block}
+.btn-white{background:white;color:#2a0a2a}.btn-pink{background:#c93a8a;color:white}
+.count{font-family:'Playfair Display';font-size:20px;font-weight:800}
+.card{background:white;border-radius:14px;padding:16px;border:1px solid #f0d8d0;display:inline-block;margin:8px 8px 0 0;min-width:140px}
+</style>
+</head>
+<body>
+<header>
+<div><b style="font-family:'Playfair Display'">WOI Admin</b> - Est. 1997 • 4000 Women</div>
+<div><a class="btn btn-white" href="/">View Site</a> <a class="btn btn-pink" href="/admin/logout">Logout</a></div>
+</header>
+
+<div style="margin-top:20px">
+<div class="card"><div style="font-size:12px;color:#666">Total Users</div><div class="count">{{ users|length if users else 0 }}</div></div>
+<div class="card"><div style="font-size:12px;color:#666">Donations</div><div class="count">{{ donations|length if donations else 0 }}</div></div>
+<div class="card"><div style="font-size:12px;color:#666">Book Orders</div><div class="count">{{ books|length if books else 0 }}</div></div>
+<div class="card"><div style="font-size:12px;color:#666">Old Members</div><div class="count">{{ members|length if members else 0 }}</div></div>
 </div>
-<section><h3>Members ({{members|length}}) <a class="btn" href="/admin/export/members">Export CSV</a></h3><table><tr><th>ID</th><th>Date</th><th>Name</th><th>Phone</th><th>Province</th><th>Foundation</th><th>Del</th></tr>{% for m in members %}<tr><td>{{m.id}}</td><td>{{m.date}}</td><td>{{m.name}}</td><td>{{m.phone}}</td><td>{{m.province}}</td><td>{{m.foundation}}</td><td><a href="/admin/delete/members/{{m.id}}">X</a></td></tr>{% endfor %}</table></section>
-<section><h3>Donations ({{donations|length}}) <a class="btn" href="/admin/export/donations">Export CSV</a></h3><table><tr><th>ID</th><th>Date</th><th>Name</th><th>Project</th><th>Amount</th><th>Ref</th><th>Del</th></tr>{% for d in donations %}<tr><td>{{d.id}}</td><td>{{d.date}}</td><td>{{d.name}}</td><td>{{d.project}}</td><td>K{{d.amount}}</td><td style="font-family:monospace">{{d.reference}}</td><td><a href="/admin/delete/donations/{{d.id}}">X</a></td></tr>{% endfor %}</table></section>
-<section><h3>Orders ({{orders|length}})</h3><table><tr><th>ID</th><th>Date</th><th>Name</th><th>Book</th><th>Del</th></tr>{% for o in orders %}<tr><td>{{o.id}}</td><td>{{o.date}}</td><td>{{o.name}}</td><td>{{o.book}}</td><td><a href="/admin/delete/orders/{{o.id}}">X</a></td></tr>{% endfor %}</table></section>
-</body></html>
+
+<h3 style="margin-top:28px;font-family:'Playfair Display'">Recent Members - New Registration</h3>
+<table>
+<tr><th>Name</th><th>Email</th><th>Phone</th><th>Province</th><th>Status</th></tr>
+{% if users %}
+{% for u in users %}
+<tr>
+<td>{{ u.full_name or 'No name' }}</td>
+<td>{{ u.email or '' }}</td>
+<td>{{ u.phone or '' }}</td>
+<td>{{ u.province or '' }}</td>
+<td>{{ u.membership_status or 'Pending' }}</td>
+</tr>
+{% endfor %}
+{% else %}
+<tr><td colspan="5">No users yet</td></tr>
+{% endif %}
+</table>
+
+<h3 style="margin-top:28px;font-family:'Playfair Display'">Donations</h3>
+<table>
+<tr><th>Name</th><th>Project</th><th>Amount</th><th>Method</th></tr>
+{% if donations %}
+{% for d in donations %}
+<tr><td>{{ d.name }}</td><td>{{ d.project }}</td><td>{{ d.amount }}</td><td>{{ d.method }}</td></tr>
+{% endfor %}
+{% else %}
+<tr><td colspan="4">No donations yet</td></tr>
+{% endif %}
+</table>
+
+<h3 style="margin-top:28px;font-family:'Playfair Display'">Book Orders</h3>
+<table>
+<tr><th>Name</th><th>Phone</th><th>Book</th></tr>
+{% if books %}
+{% for b in books %}
+<tr><td>{{ b.name }}</td><td>{{ b.phone }}</td><td>{{ b.book }}</td></tr>
+{% endfor %}
+{% else %}
+<tr><td colspan="3">No book orders yet</td></tr>
+{% endif %}
+</table>
+
+</body>
+</html>
