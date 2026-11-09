@@ -3,149 +3,178 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WOI International | 4000 Women Strong | Est. 1997 | Prophetess Elfridah</title>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+<title>Women of Influence International | Prophetess Elfridah Mhusambazi | 4000 Women Strong</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&family=Playfair+Display:wght@700;800;900&family=Cinzel+Decorative:wght@700;900&display=swap" rel="stylesheet">
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <style>
 :root{--wine:#2a0a2a;--pink:#c93a8a;--cream:#fdf6f0;--gold:#d4af37}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--wine);overflow-x:hidden}
 h1,h2,h3{font-family:'Playfair Display',serif}
-/* ANIMATIONS */
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
-.float{animation:float 4s ease-in-out infinite}
-.pulse{animation:pulse 2s ease-in-out infinite}
-/* NAV */
-nav{background:rgba(42,10,42,0.95);backdrop-filter:blur(10px);color:white;padding:14px 20px;position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center}
-nav b{font-size:12px;letter-spacing:1px}.nav-links a{color:white;text-decoration:none;margin-left:8px;font-size:11px;font-weight:700;background:rgba(255,255,255,0.15);padding:7px 13px;border-radius:100px;transition:0.3s}.nav-links a:hover{background:var(--pink)}
-/* HERO WITH ANIMATION */
-.hero{background:radial-gradient(circle at top, #4a154b 0%, var(--wine) 70%);color:white;padding:60px 20px;text-align:center;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle, rgba(201,58,138,0.15) 0%, transparent 60%);animation:float 6s ease-in-out infinite}
-.hero-content{position:relative;z-index:2}
-.hero h1{font-size:36px;line-height:1.05;font-weight:900}.hero h1 span{color:var(--pink);display:block;font-size:42px}
-.hero p{margin-top:12px;opacity:0.85;font-size:14px}
-.badges{margin-top:18px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap}.badge{background:white;color:var(--wine);padding:7px 14px;border-radius:100px;font-size:11px;font-weight:800;box-shadow:0 4px 15px rgba(0,0,0,0.2)}
-.btn{display:inline-block;padding:13px 24px;border-radius:100px;text-decoration:none;font-weight:800;font-size:13px;margin:6px;transition:0.3s;box-shadow:0 6px 20px rgba(0,0,0,0.15)}.btn:hover{transform:translateY(-3px)}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:0.6}50%{transform:scale(1.07);opacity:1}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes glow{0%,100%{box-shadow:0 0 20px rgba(212,175,55,0.5)}50%{box-shadow:0 0 40px rgba(201,58,138,0.8)}}
+.float{animation:float 5s ease-in-out infinite}
+nav{background:rgba(42,10,42,0.98);color:white;padding:14px 18px;position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center}
+nav a{color:white;text-decoration:none;margin-left:6px;font-size:11px;font-weight:700;background:rgba(255,255,255,0.15);padding:7px 12px;border-radius:100px}
+.awesome-header{font-family:'Cinzel Decorative',cursive;font-weight:900;font-size:42px;line-height:0.95;letter-spacing:2px;background:linear-gradient(135deg,#fff 0%,#ffb6e1 40%,#d4af37 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 2px 10px rgba(0,0,0,0.4))}
+.awesome-sub{font-family:'Playfair Display',serif;font-weight:800;font-size:18px;letter-spacing:5px;color:var(--gold);margin-top:8px}
+.section{padding:45px 20px;max-width:1150px;margin:0 auto}
+.section-dark{background:var(--wine);color:white;border-radius:28px;margin:20px;padding:40px 20px}
+.card{background:white;border-radius:18px;padding:22px;box-shadow:0 10px 30px rgba(42,10,42,0.06);margin-top:16px;transition:0.3s}
+.card:hover{transform:translateY(-4px)}
+.grid{display:grid;grid-template-columns:1fr;gap:14px}
+@media(min-width:768px){.grid{grid-template-columns:1fr 1fr}.grid-3{grid-template-columns:1fr 1fr 1fr}}
+.testimony{border-left:4px solid var(--pink);padding:12px 14px;margin-top:16px;background:#fff8fb;border-radius:0 12px 12px 0}
+.tag{display:inline-block;background:#fce4f0;color:var(--pink);font-size:10px;font-weight:800;padding:5px 10px;border-radius:100px}
+.official{background:white;border:2px dashed var(--pink);border-radius:16px;padding:18px;font-size:12.5px;line-height:1.6}
+.video-box{background:#000;border-radius:16px;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center}
+.play{width:56px;height:56px;background:var(--pink);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:22px}
+.book{border:2px solid #f3d1e3;border-radius:16px;padding:16px;text-align:center;background:white}
+.btn{display:inline-block;padding:13px 24px;border-radius:100px;text-decoration:none;font-weight:800;font-size:13px;margin:6px}
 .btn-pink{background:var(--pink);color:white}.btn-white{background:white;color:var(--wine)}.btn-gold{background:var(--gold);color:var(--wine)}.btn-dark{background:var(--wine);color:white}
-.section{padding:50px 20px;max-width:1150px;margin:0 auto}
-.section-dark{background:var(--wine);color:white;border-radius:28px;margin:20px;padding:45px 22px;position:relative;overflow:hidden}
-.card{background:white;border-radius:20px;padding:24px;box-shadow:0 10px 40px rgba(42,10,42,0.07);margin-top:18px;transition:0.3s;border:1px solid rgba(42,10,42,0.04)}.card:hover{transform:translateY(-5px);box-shadow:0 20px 50px rgba(42,10,42,0.12)}
-.grid{display:grid;grid-template-columns:1fr;gap:16px}@media(min-width:768px){.grid{grid-template-columns:1fr 1fr}.grid-3{grid-template-columns:1fr 1fr 1fr}}
-.testimony{border-left:4px solid var(--pink);padding:14px 16px;margin-top:18px;background:#fff8fb;border-radius:0 14px 14px 0}
-.tag{display:inline-block;background:#fce4f0;color:var(--pink);font-size:10px;font-weight:800;padding:5px 10px;border-radius:100px;margin-bottom:6px}
-.official{background:linear-gradient(135deg, #fff 0%, #fff6fb 100%);border:2px dashed var(--pink);border-radius:20px;padding:22px;font-size:12.5px;line-height:1.7}
-.video-box{background:black;border-radius:18px;overflow:hidden;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;color:white;position:relative;cursor:pointer}
-.video-box .play{width:60px;height:60px;background:var(--pink);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 8px 25px rgba(201,58,138,0.5)}
-.book{border:2px solid #f3d1e3;border-radius:18px;padding:18px;text-align:center;background:white}
-.donate-card{background:linear-gradient(135deg, var(--wine) 0%, #4a154b 100%);color:white;border-radius:20px;padding:24px}
-input,select,textarea{width:100%;padding:12px;border-radius:12px;border:1px solid #e8d5e0;margin-top:8px;box-sizing:border-box;font-family:'Outfit'}
-.footer{background:#150415;color:white;padding:35px 20px;text-align:center;font-size:12px;margin-top:30px}
-.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:200;justify-content:center;align-items:center;padding:20px}.modal.active{display:flex}
-.modal-box{background:white;border-radius:20px;padding:26px;max-width:420px;width:100%;max-height:90vh;overflow-y:auto}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:200;justify-content:center;align-items:center;padding:20px}.modal.active{display:flex}.modal-box{background:white;border-radius:18px;padding:24px;max-width:400px;width:100%}
+.footer{background:#150415;color:white;padding:30px 20px;text-align:center;font-size:12px;margin-top:20px}
+input,select{width:100%;padding:11px;border-radius:10px;border:1px solid #ddd;margin-top:8px;box-sizing:border-box}
+.gallery-img{width:100%;height:180px;object-fit:cover;border-radius:14px}
+@media(max-width:480px){.awesome-header{font-size:32px}}
 </style>
 </head>
 <body>
-<nav data-aos="fade-down">
+<nav>
 <b>WOI • PACRA 51848 • 4000 STRONG</b>
-<div class="nav-links">
-<a href="/">Home</a>
-<a href="#videos">Videos</a>
-<a href="#books">Books</a>
-<a href="#donate">Donate</a>
-<a href="/register">Join</a>
-<a href="/member/login">Login</a>
-</div>
+<div><a href="/">Home</a><a href="#videos">Videos</a><a href="#books">Books</a><a href="#donate">Donate</a><a href="/register">Join</a><a href="/member/login">Login</a></div>
 </nav>
 
-<div class="hero">
-<div class="hero-content" data-aos="zoom-in">
-<h1 class="float">WOMEN OF INFLUENCE <span>INTERNATIONAL</span></h1>
-<p>Para Church Organization • Affiliated to Barak Ministries • Est. 1997</p>
-<p style="font-size:11px;margin-top:8px;opacity:0.6">Plot 16804 Alick Nkhata, Mass Media • Box 37878 Lusaka • +260 975826286 • elfridah60@yahoo.com</p>
-<div class="badges" data-aos="fade-up" data-aos-delay="200">
-<div class="badge pulse">4000 WOMEN STRONG</div>
-<div class="badge">10,000+ REACHED</div>
-<div class="badge">PACRA 51848</div>
+<!-- ===== FOUNDER HERO - STYLED HEADER ABOVE ROUND FOUNDER PHOTO ===== -->
+<div style="background:radial-gradient(ellipse at top,#4a154b 0%,#2a0a2a 60%,#150415 100%);color:white;padding:32px 20px 30px;text-align:center;position:relative;overflow:hidden">
+<div data-aos="zoom-in">
+<h1 class="awesome-header float">WOMEN OF<br>INFLUENCE</h1>
+<div class="awesome-sub">INTERNATIONAL</div>
+<p style="font-size:11px;letter-spacing:3px;opacity:0.7;margin-top:8px;font-weight:700">PACRA 51848 • BARAK MINISTRIES COVERING • EST. 1997</p>
+
+<!-- ROUND FOUNDER PHOTO WITH ANIMATIONS - USES founder.jpg ONLY -->
+<div style="position:relative;display:inline-block;margin-top:28px">
+<div style="position:absolute;inset:-14px;border-radius:50%;border:3px dashed #d4af37;animation:spin 12s linear infinite"></div>
+<div style="position:absolute;inset:-28px;border-radius:50%;border:2px solid rgba(201,58,138,0.5);animation:pulse 2s ease-in-out infinite"></div>
+<div style="position:absolute;inset:-42px;border-radius:50%;border:1px solid rgba(255,255,255,0.25)"></div>
+<span style="position:absolute;top:-12px;right:8px;font-size:26px;animation:float 3s ease-in-out infinite;z-index:4">✨</span>
+<span style="position:absolute;bottom:22px;left:-20px;font-size:22px;animation:float 4s ease-in-out infinite;z-index:4">💖</span>
+<span style="position:absolute;top:40%;right:-30px;font-size:20px;animation:float 3.5s ease-in-out infinite;z-index:4">⭐</span>
+<img src="/static/founder.jpg" alt="Prophetess Elfridah Mhusambazi - Founder" style="width:300px;height:300px;object-fit:cover;object-position:top center;border-radius:50%;border:6px solid white;box-shadow:0 20px 60px rgba(0,0,0,0.5),0 0 0 6px #c93a8a,0 0 0 12px #d4af37;display:block;position:relative;z-index:2;animation:glow 3s ease-in-out infinite">
+<div style="position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);background:white;color:#2a0a2a;padding:10px 22px;border-radius:100px;font-weight:900;font-size:12px;box-shadow:0 10px 30px rgba(0,0,0,0.4);white-space:nowrap;z-index:3">✦ Prophetess Elfridah Mhusambazi - FOUNDER ✦</div>
 </div>
-<div style="margin-top:26px" data-aos="fade-up" data-aos-delay="400">
-<a class="btn btn-pink" href="/register">Join 4000 Women →</a>
-<a class="btn btn-white" href="#videos">▶ Watch Founder</a>
+
+<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:38px">
+<span style="background:rgba(255,255,255,0.12);padding:9px 16px;border-radius:100px;font-size:11px;font-weight:800">💜 4000 WOMEN STRONG</span>
+<span style="background:rgba(255,255,255,0.12);padding:9px 16px;border-radius:100px;font-size:11px;font-weight:800">🌍 10,000+ REACHED</span>
+<span style="background:rgba(255,255,255,0.12);padding:9px 16px;border-radius:100px;font-size:11px;font-weight:800">📍 Lusaka • Mass Media</span>
 </div>
-<p style="margin-top:18px;font-size:11px;letter-spacing:3px;font-weight:900;color:var(--gold)">MAKING EVERY LIFE COUNT!</p>
+<div style="margin-top:22px">
+<a href="/register" class="btn btn-pink">Join 4000 Women →</a>
+<a href="#videos" class="btn btn-white">▶ Watch Teachings</a>
+</div>
+<p style="margin-top:14px;font-size:11px;letter-spacing:3px;font-weight:900;color:#d4af37">MAKING EVERY LIFE COUNT!</p>
+<p style="font-size:10px;opacity:0.5;margin-top:6px">Plot 16804 Alick Nkhata • Box 37878 Lusaka • +260 975826286 • elfridah60@yahoo.com</p>
 </div>
 </div>
 
-<!-- OFFICIAL PROFILE -->
+<!-- ===== OFFICIAL PROFILE ===== -->
 <div class="section">
 <div class="official" data-aos="fade-up">
-<b style="font-size:14px">ORGANISATION PROFILE - OFFICIAL (From Your DOCX)</b><br><br>
+<b>ORGANISATION PROFILE - OFFICIAL</b><br><br>
 Women of Influence International is Zambian registered under PACRA Registration Number 51848. Para Church Organization affiliated to Barak Ministries (mother body covering).<br><br>
 Founded 1997, reaching women, widows and orphans through word of God and empowerment trainings. Over 10,000 women Zambia + 500 in America, Europe, South Africa, Botswana, Tanzania. Goal: 100,000 in next 10 years.
 </div>
-
-<div class="grid" style="margin-top:20px">
-<div class="card" data-aos="fade-right"><h3>VISION</h3><p style="font-size:13.5px;margin-top:8px;line-height:1.7">To influence and empower women, widows and orphans in various aspects of life through skills training; and to help realize and bring out potential in every person according to developmental need.</p></div>
-<div class="card" data-aos="fade-left"><h3>MISSION</h3><ul style="font-size:13px;margin-top:8px;line-height:1.6"><li>Raise Women to place of Influence in Life, Family, Community, Work, Society</li><li>Ministry of Word through Conferences, Seminars, Books, Tapes</li><li>Network Pastors and Pastors Wives Conference</li><li>Health Facilities, Education for Orphans, HIV/AIDS Counseling, Empowering Widows</li></ul></div>
+<div class="grid" style="margin-top:16px">
+<div class="card" data-aos="fade-right"><h3>VISION</h3><p style="font-size:13.5px;margin-top:8px;line-height:1.6">To influence and empower women, widows and orphans in various aspects of life through skills training; and to help realize and bring out potential in every person according to their developmental need.</p></div>
+<div class="card" data-aos="fade-left"><h3>MISSION</h3><ul style="font-size:13px;margin-top:8px;line-height:1.6"><li>Raise Women to place of Influence in Life, Family, Community, Work, Society</li><li>Ministry of Word through Conferences, Seminars, Books and Tapes</li><li>Network Pastors and Pastors Wives Conference</li><li>Health Facilities, Education for Orphans, HIV/AIDS Counseling, Empowering Widows</li></ul></div>
 </div>
-
 <div class="grid">
 <div class="card" data-aos="fade-up"><h3>OBJECTIVES</h3><ul style="font-size:13px"><li>Preach word, train prayer warriors</li><li>Counselling & support HIV/AIDS & oppressed</li><li>Raise orphans education to university</li><li>Raise widows, pastors wives with skills & business</li><li>Help disadvantaged identify callings</li></ul></div>
-<div class="card" data-aos="fade-up" data-aos-delay="100"><h3>ACTIVITIES</h3><ul style="font-size:13px"><li>Gospel preaching - darkness to light Col 1:12-14</li><li>Teach prayer - Esther 4:8, Hosea 4:6</li><li>Talent & creativity for business</li><li>Mobilize orphans to school + skills</li><li>Widows empowerment trainings</li><li>Education for less privileged</li><li>Counselling HIV/AIDS</li></ul></div>
+<div class="card" data-aos="fade-up"><h3>ACTIVITIES</h3><ul style="font-size:13px"><li>Gospel - darkness to light Col 1:12-14</li><li>Teach prayer - Esther 4:8, Hosea 4:6</li><li>Talent & creativity for business</li><li>Mobilize orphans to school + skills</li><li>Widows empowerment trainings</li><li>Education for less privileged</li><li>Counselling HIV/AIDS</li></ul></div>
+</div>
+<div class="card" data-aos="zoom-in"><h3>OWNERSHIP & DIRECTORS</h3><p style="font-size:13px">Founded by <b>Prophetess Elfridah Mhusambazi</b> - interdenominational faith-based, membership based.</p><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px"><span class="tag">FOUNDER Prophetess Elfridah Mhusambazi</span><span class="tag">Pastor Precaria Manasseh</span><span class="tag">Mumba M. Simukanga</span><span class="tag">Pastor Thembi Nyasha</span></div><p style="margin-top:12px;font-size:12px"><b>CLIENTELE:</b> Lusaka, Ndola, Kitwe, Solwezi, Livingstone + South Africa, America, Europe, Botswana, Tanzania | <b>BANK:</b> Access Zambia, Thabo Mbeki Road</p></div>
 </div>
 
-<div class="card" data-aos="zoom-in"><h3>OWNERSHIP & DIRECTORS</h3><p style="font-size:13px">Founded by <b>Prophetess Elfridah Mhusambazi</b> - interdenominational faith-based, membership based.</p><div class="grid" style="margin-top:12px"><div><span class="tag">FOUNDER</span><br><b>Prophetess Elfridah Mhusambazi</b></div><div><span class="tag">DIRECTOR</span><br>Pastor Mrs Precaria Manasseh</div><div><span class="tag">DIRECTOR</span><br>Mrs. Mumba M. Simukanga</div><div><span class="tag">DIRECTOR</span><br>Pastor Mrs. Thembi Nyasha</div></div><p style="margin-top:12px;font-size:12px"><b>CLIENTELE:</b> Lusaka, Ndola, Kitwe, Solwezi, Livingstone + South Africa, America, Europe, Botswana, Tanzania | <b>BANK:</b> Access Zambia, Thabo Mbeki Road</p></div>
-</div>
-
-<!-- VIDEOS - ANIMATED -->
+<!-- ===== VIDEOS ===== -->
 <div class="section-dark" id="videos" data-aos="fade-up">
-<h2 style="text-align:center;font-size:28px">🎥 Watch Founder Teachings</h2><p style="text-align:center;opacity:0.7;font-size:13px;margin-top:8px">Live from Prophetess Elfridah Mhusambazi - Facebook Videos</p>
-<div class="grid" style="margin-top:24px">
-<div class="card" style="color:var(--wine)" data-aos="flip-left"><div class="video-box" onclick="window.open('https://web.facebook.com/share/v/1H8PjJ1zdc/','_blank')"><div class="play">▶</div></div><h3 style="margin-top:12px">Powerful Teaching - Video 1</h3><p style="font-size:12px;color:#666;margin-top:4px">From WOI Official Facebook - Prophetess Elfridah</p><a href="https://web.facebook.com/share/v/1H8PjJ1zdc/" target="_blank" class="btn btn-pink" style="margin-top:10px">Watch on Facebook</a></div>
-<div class="card" style="color:var(--wine)" data-aos="flip-right"><div class="video-box" onclick="window.open('https://web.facebook.com/share/v/1A2FkeeqWs/','_blank')"><div class="play">▶</div></div><h3 style="margin-top:12px">Influence & Prayer - Video 2</h3><p style="font-size:12px;color:#666;margin-top:4px">How to pray and see results - Esther 4:8</p><a href="https://web.facebook.com/share/v/1A2FkeeqWs/" target="_blank" class="btn" style="background:#1877F2;color:white;margin-top:10px">Watch on Facebook</a></div>
-</div>
-</div>
-
-<!-- WORKS DONE -->
-<div class="section">
-<div class="section-dark" data-aos="fade-up"><h2 style="text-align:center">WORKS DONE FROM INCEPTION</h2><div class="grid" style="margin-top:20px"><div class="card" style="color:var(--wine)"><h3>150 Orphans - Garden Compound</h3><p style="font-size:13px;margin-top:6px">Collected 150 orphans, enrolled in Achievers Christian Academy Grade 1-7, provided lunch Mon-Fri, opportunity to sing & testify at conferences.</p></div><div class="card" style="color:var(--wine)"><h3>Skills Trainings</h3><ul style="font-size:13px"><li>Tie and Dye African print</li><li>Flower gardening practical</li><li>Food covers & doormats</li><li>Certificates given</li></ul></div></div></div>
-
-<!-- TESTIMONIES -->
-<div class="card" data-aos="fade-up"><h2 style="text-align:center">TESTIMONIES - SCHOLARSHIP BENEFICIARIES</h2>
-<div class="testimony"><span class="tag">DOUBLE ORPHAN → INDEPENDENT</span><h3>Precious Ngoma</h3><p style="font-size:13px">Double orphan, dropped out, WOI sponsored to complete high school, now working independent. My dreams became reality.</p></div>
-<div class="testimony"><span class="tag">1992 → 5-STAR HOTEL MANAGER</span><h3>Henry Chandalala</h3><p style="font-size:13px">Lost father at 3. Scholarship 2007 Achievers Academy Grade 10-12, Chreso University, now manager 5-star hotel, married with son.</p></div>
-<div class="testimony"><span class="tag">→ UNZA → WORKING</span><h3>Chuma Sharleen Subulwa</h3><p style="font-size:13px">Sponsored at Achievers, meals + academic support, made it to UNZA, now working.</p></div>
-<div class="testimony"><span class="tag">MALAWIAN → TV JOURNALIST</span><h3>Lightwell Lughali</h3><p style="font-size:13px">Lost both parents, Prophetess Elfridah educated me, completed 2017, studied electronic Journalism 2018, now TV station job.</p></div>
-<div class="testimony"><span class="tag">→ CHALIMBANA UNIVERSITY SOCIAL WORK</span><h3>Febby</h3><p style="font-size:13px">Father died 1998, fell pregnant, mother refused school fees, WOI gave chance to complete Grade 12, studied social work Chalimbana.</p></div>
-</div>
-</div>
-
-<!-- BOOKS SECTION - ANIMATED -->
-<div class="section" id="books" data-aos="fade-up">
-<h2 style="text-align:center;font-size:28px">📚 Books by Prophetess Elfridah</h2><p style="text-align:center;font-size:13px;color:#666;margin-top:6px">Empowerment through Word - Order now via WhatsApp</p>
-<div class="grid grid-3" style="margin-top:20px">
-<div class="book" data-aos="zoom-in"><div style="height:120px;background:linear-gradient(135deg,var(--wine),var(--pink));border-radius:12px;display:flex;align-items:center;justify-content:center;color:white;font-weight:900;font-size:18px">WOMAN OF<br>INFLUENCE</div><h3 style="margin-top:12px">Woman of Influence</h3><p style="font-size:12px;color:#666">Raise to place of Influence</p><button class="btn btn-pink" style="margin-top:10px" onclick="orderBook('Woman of Influence')">Order - K150</button></div>
-<div class="book" data-aos="zoom-in" data-aos-delay="100"><div style="height:120px;background:linear-gradient(135deg,#d4af37,#f5d76e);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--wine);font-weight:900;font-size:18px">PRAYER<br>WARRIOR</div><h3 style="margin-top:12px">Prayer Warrior</h3><p style="font-size:12px;color:#666">Teach to pray & see results</p><button class="btn btn-pink" style="margin-top:10px" onclick="orderBook('Prayer Warrior')">Order - K150</button></div>
-<div class="book" data-aos="zoom-in" data-aos-delay="200"><div style="height:120px;background:linear-gradient(135deg,#1877F2,#6bb6ff);border-radius:12px;display:flex;align-items:center;justify-content:center;color:white;font-weight:900;font-size:18px">MAKING<br>EVERY LIFE<br>COUNT</div><h3 style="margin-top:12px">Making Every Life Count</h3><p style="font-size:12px;color:#666">Official WOI Manual</p><button class="btn btn-pink" style="margin-top:10px" onclick="orderBook('Making Every Life Count')">Order - K200</button></div>
-</div>
-</div>
-
-<!-- DONATIONS - ANIMATED -->
-<div class="section" id="donate" data-aos="fade-up">
-<h2 style="text-align:center;font-size:28px">💜 Support 4000 Women Strong</h2>
+<h2 style="text-align:center;font-family:'Cinzel Decorative';font-size:26px">🎥 Watch Founder Teachings</h2><p style="text-align:center;opacity:0.7;font-size:13px;margin-top:8px">Live from Prophetess Elfridah Mhusambazi</p>
 <div class="grid" style="margin-top:20px">
-<div class="donate-card" data-aos="fade-right"><h3>Donate - Empower Widows & Orphans</h3><p style="font-size:13px;opacity:0.9;margin-top:8px">Your donation sends orphans to school, feeds 150 children, trains widows in tie & dye, flower garden. Access Zambia - Thabo Mbeki.</p><div style="margin-top:16px"><button class="btn btn-gold" onclick="openDonate()">Donate Now</button><a href="/transparency" class="btn btn-white" style="margin-left:6px">View Transparency</a></div></div>
-<div class="card" data-aos="fade-left"><h3>Join Monthly Meeting</h3><p style="font-size:13px;margin-top:6px">First Saturday • 13:00-18:00 • Mass Media, Lusaka • Founder Elfridah Mhusambazi</p><div style="margin-top:14px"><a class="btn btn-dark" href="/register">Register</a><a class="btn" style="background:#25D366;color:white;margin-left:6px" href="https://wa.me/260975826286">WhatsApp</a></div><p style="font-size:11px;margin-top:10px;color:#666">P.O Box 37878 Lusaka • elfridah60@yahoo.com</p></div>
+<div class="card" style="color:var(--wine)"><div class="video-box" onclick="window.open('https://web.facebook.com/share/v/1H8PjJ1zdc/','_blank')"><div class="play">▶</div></div><h3 style="margin-top:10px">Video 1 - Powerful Teaching</h3><a href="https://web.facebook.com/share/v/1H8PjJ1zdc/" target="_blank" class="btn btn-pink" style="margin-top:8px">Watch on Facebook</a></div>
+<div class="card" style="color:var(--wine)"><div class="video-box" onclick="window.open('https://web.facebook.com/share/v/1A2FkeeqWs/','_blank')"><div class="play">▶</div></div><h3 style="margin-top:10px">Video 2 - Prayer & Influence</h3><a href="https://web.facebook.com/share/v/1A2FkeeqWs/" target="_blank" class="btn btn-pink" style="margin-top:8px">Watch on Facebook</a></div>
 </div>
 </div>
 
-<!-- JOIN MODALS -->
-<div id="donateModal" class="modal"><div class="modal-box"><h3>Donate to WOI</h3><input id="dName" placeholder="Your Name"><select id="dProject"><option>Orphans Education</option><option>Widows Empowerment</option><option>Garden Project</option><option>General</option></select><input id="dAmount" placeholder="Amount K"><select id="dMethod"><option>Airtel Money</option><option>MTN</option><option>Bank Access Zambia</option></select><input id="dRef" placeholder="Reference / Phone"><button class="btn btn-pink" style="width:100%;margin-top:12px" onclick="submitDonate()">Submit Donation</button><button class="btn btn-white" style="width:100%;margin-top:8px" onclick="closeDonate()">Close</button></div></div>
-<div id="bookModal" class="modal"><div class="modal-box"><h3 id="bookTitle">Order Book</h3><input id="bName" placeholder="Your Name"><input id="bPhone" placeholder="Phone"><select id="bMethod"><option>Airtel Money</option><option>MTN</option><option>Cash</option></select><input id="bRef" placeholder="Payment Ref"><button class="btn btn-pink" style="width:100%;margin-top:12px" onclick="submitBook()">Confirm Order</button><button class="btn btn-white" style="width:100%;margin-top:8px" onclick="closeBook()">Close</button></div></div>
-
-<div class="footer" data-aos="fade-up">
-<b>WOMEN OF INFLUENCE INTERNATIONAL</b><br>PACRA 51848 • Barak Ministries • Est. 1997 • 4000 Women Strong<br>Plot 16804 Alick Nkhata, Mass Media • Box 37878 Lusaka • +260 975826286 / 979221392<br>elfridah60@yahoo.com • MAKING EVERY LIFE COUNT!<br><br>© 2026 WOI • <a href="/admin/login" style="color:var(--pink)">Admin</a> • <a href="/history" style="color:var(--pink)">History</a> • <a href="/transparency" style="color:var(--gold)">Transparency</a>
+<!-- ===== WORKS DONE + TESTIMONIES ===== -->
+<div class="section">
+<div class="section-dark" data-aos="fade-up"><h2 style="text-align:center">WORKS DONE FROM INCEPTION</h2><div class="grid" style="margin-top:16px"><div class="card" style="color:var(--wine)"><h3>150 Orphans - Garden Compound</h3><p style="font-size:13px;margin-top:6px">Collected 150 orphans, enrolled in Achievers Christian Academy Grade 1-7, provided lunch Mon-Fri, opportunity to sing & testify at conferences.</p></div><div class="card" style="color:var(--wine)"><h3>Skills Trainings</h3><ul style="font-size:13px"><li>Tie and Dye African print</li><li>Flower gardening practical</li><li>Food covers & doormats</li><li>Certificates given</li></ul></div></div></div>
+<div class="card" data-aos="fade-up"><h2 style="text-align:center">TESTIMONIES - SCHOLARSHIP BENEFICIARIES</h2>
+<div class="testimony"><span class="tag">DOUBLE ORPHAN → INDEPENDENT</span><h3>Precious Ngoma</h3><p style="font-size:13px">Double orphan, dropped out, WOI sponsored to complete high school, now working independent.</p></div>
+<div class="testimony"><span class="tag">1992 → 5-STAR HOTEL MANAGER</span><h3>Henry Chandalala</h3><p style="font-size:13px">Lost father at 3. Scholarship 2007 Achievers Grade 10-12, Chreso University, now manager 5-star hotel, married with son.</p></div>
+<div class="testimony"><span class="tag">→ UNZA → WORKING</span><h3>Chuma Sharleen Subulwa</h3><p style="font-size:13px">Sponsored at Achievers, meals + academic support, made it to UNZA, now working.</p></div>
+<div class="testimony"><span class="tag">MALAWIAN → TV JOURNALIST</span><h3>Lightwell Lughali</h3><p style="font-size:13px">Lost both parents, Prophetess educated me, completed 2017, studied electronic Journalism 2018, now TV station job.</p></div>
+<div class="testimony"><span class="tag">→ CHALIMBANA SOCIAL WORK</span><h3>Febby</h3><p style="font-size:13px">Father died 1998, fell pregnant, mother refused fees, WOI gave chance to complete Grade 12, studied social work Chalimbana.</p></div>
 </div>
+</div>
+
+<!-- ===== HISTORICAL PICTURES - USES YOUR EXACT NAMES founder_0.jpg to founder_6.jpg ===== -->
+<div class="section" data-aos="fade-up">
+<h2 style="text-align:center;font-family:'Cinzel Decorative';font-size:26px">📸 HISTORICAL PICTURES - Then</h2>
+<p style="text-align:center;font-size:13px;color:#666;margin-top:6px">From Garden Compound - 150 orphans, Achievers Academy, Tie & Dye, Flower Gardening - Back then</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px">
+<div><img src="/static/founder_0.jpg" class="gallery-img"><p style="font-size:11px;text-align:center;margin-top:6px">Orphans singing at conference - Garden Compound</p></div>
+<div><img src="/static/founder_1.jpg" class="gallery-img"><p style="font-size:11px;text-align:center;margin-top:6px">Training - Women learning skills</p></div>
+<div><img src="/static/founder_2.jpg" class="gallery-img"><p style="font-size:11px;text-align:center;margin-top:6px">Beneficiaries group photo</p></div>
+<div><img src="/static/founder_3.jpg" class="gallery-img"><p style="font-size:11px;text-align:center;margin-top:6px">Receiving certificates after training</p></div>
+<div><img src="/static/founder_4.jpg" class="gallery-img"><p style="font-size:11px;text-align:center;margin-top:6px">Tie & Dye materials ready</p></div>
+<div><img src="/static/founder_5.jpg" class="gallery-img"><p style="font-size:11px;text-align:center;margin-top:6px">Flower gardening practical</p></div>
+<div><img src="/static/founder_6.jpg" class="gallery-img"><p style="font-size:11px;text-align:center;margin-top:6px">Tie & Dye dyeing process + Food covers & doormats</p></div>
+</div>
+</div>
+
+<!-- ===== MODERN - HOW WOI IS OPERATING NOW ===== -->
+<div class="section-dark" data-aos="fade-up">
+<h2 style="text-align:center;font-family:'Cinzel Decorative';font-size:26px">✨ WOI NOW - Operating Today</h2>
+<p style="text-align:center;font-size:13px;opacity:0.8;margin-top:8px">4000 Women Strong • First Saturday Monthly • 13:00-18:00 • Mass Media, Lusaka</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px;text-align:left">
+<div style="background:white;color:#2a0a2a;border-radius:14px;padding:16px"><b>📚 Books & Teachings</b><p style="font-size:12px;margin-top:6px">Prophetess teaching weekly, books available - Woman of Influence, Prayer Warrior</p></div>
+<div style="background:white;color:#2a0a2a;border-radius:14px;padding:16px"><b>🎥 Videos & Facebook Live</b><p style="font-size:12px;margin-top:6px">Live teachings, conferences, prayer meetings</p></div>
+<div style="background:white;color:#2a0a2a;border-radius:14px;padding:16px"><b>💜 Donations & Transparency</b><p style="font-size:12px;margin-top:6px">Access Zambia, Thabo Mbeki - every Kwacha tracked</p></div>
+<div style="background:white;color:#2a0a2a;border-radius:14px;padding:16px"><b>👩‍👧‍👦 Monthly Meetings</b><p style="font-size:12px;margin-top:6px">4000 women meet, pray, learn skills, support widows & orphans</p></div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px">
+<div><img src="/static/modern_1.jpg" class="gallery-img"><p style="font-size:11px;text-align:center;margin-top:6px;color:white">Modern Meeting - WOI Today</p></div>
+<div><img src="/static/modern_2.jpg" class="gallery-img"><p style="font-size:11px;text-align:center;margin-top:6px;color:white">Women Empowerment Now</p></div>
+<div><img src="/static/modern_3.jpg" class="gallery-img"><p style="font-size:11px;text-align:center;margin-top:6px;color:white">Conference & Prayer Now</p></div>
+<div><img src="/static/modern_4.jpg" class="gallery-img"><p style="font-size:11px;text-align:center;margin-top:6px;color:white">Community Outreach Now</p></div>
+</div>
+</div>
+
+<!-- ===== BOOKS ===== -->
+<div class="section" id="books" data-aos="fade-up">
+<h2 style="text-align:center;font-family:'Cinzel Decorative';font-size:26px">📚 Books by Prophetess Elfridah</h2>
+<div class="grid grid-3" style="margin-top:18px">
+<div class="book"><div style="height:110px;background:linear-gradient(135deg,var(--wine),var(--pink));border-radius:12px;display:flex;align-items:center;justify-content:center;color:white;font-weight:900">WOMAN OF<br>INFLUENCE</div><h3 style="margin-top:10px">Woman of Influence</h3><button class="btn btn-pink" onclick="orderBook('Woman of Influence')" style="margin-top:8px">Order K150</button></div>
+<div class="book"><div style="height:110px;background:linear-gradient(135deg,#d4af37,#f5d76e);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--wine);font-weight:900">PRAYER<br>WARRIOR</div><h3 style="margin-top:10px">Prayer Warrior</h3><button class="btn btn-pink" onclick="orderBook('Prayer Warrior')" style="margin-top:8px">Order K150</button></div>
+<div class="book"><div style="height:110px;background:linear-gradient(135deg,#1877F2,#6bb6ff);border-radius:12px;display:flex;align-items:center;justify-content:center;color:white;font-weight:900">MAKING EVERY<br>LIFE COUNT</div><h3 style="margin-top:10px">Making Every Life Count</h3><button class="btn btn-pink" onclick="orderBook('Making Every Life Count')" style="margin-top:8px">Order K200</button></div>
+</div>
+</div>
+
+<!-- ===== DONATIONS ===== -->
+<div class="section" id="donate" data-aos="fade-up">
+<h2 style="text-align:center;font-size:26px">💜 Support 4000 Women Strong</h2>
+<div class="grid" style="margin-top:18px">
+<div class="card" style="background:linear-gradient(135deg,var(--wine),#4a154b);color:white"><h3>Donate - Empower Widows & Orphans</h3><p style="font-size:13px;opacity:0.9;margin-top:8px">Your donation sends orphans to school, feeds 150 children, trains widows. Access Zambia - Thabo Mbeki.</p><button class="btn btn-gold" onclick="openDonate()" style="margin-top:14px">Donate Now</button><a href="/transparency" class="btn btn-white" style="margin-left:6px">View Transparency</a></div>
+<div class="card"><h3>Join Monthly Meeting</h3><p style="font-size:13px;margin-top:6px">First Saturday • 13:00-18:00 • Mass Media, Lusaka • Founder Elfridah Mhusambazi</p><div style="margin-top:14px"><a href="/register" class="btn btn-dark">Register</a><a href="https://wa.me/260975826286" class="btn" style="background:#25D366;color:white;margin-left:6px">WhatsApp</a></div><p style="font-size:11px;margin-top:10px;color:#666">P.O Box 37878 Lusaka • elfridah60@yahoo.com</p></div>
+</div>
+</div>
+
+<div id="donateModal" class="modal"><div class="modal-box"><h3>Donate to WOI</h3><input id="dName" placeholder="Your Name"><select id="dProject"><option>Orphans Education</option><option>Widows Empowerment</option><option>General</option></select><input id="dAmount" placeholder="Amount K"><button class="btn btn-pink" style="width:100%;margin-top:12px" onclick="submitDonate()">Submit Donation</button><button class="btn btn-white" style="width:100%;margin-top:8px" onclick="closeDonate()">Close</button></div></div>
+<div id="bookModal" class="modal"><div class="modal-box"><h3 id="bookTitle">Order Book</h3><input id="bName" placeholder="Your Name"><input id="bPhone" placeholder="Phone"><button class="btn btn-pink" style="width:100%;margin-top:12px" onclick="submitBook()">Confirm Order</button><button class="btn btn-white" style="width:100%;margin-top:8px" onclick="closeBook()">Close</button></div></div>
+
+<div class="footer">WOMEN OF INFLUENCE INTERNATIONAL • PACRA 51848 • Plot 16804 Mass Media • Box 37878 Lusaka • +260 975826286 / 979221392<br>elfridah60@yahoo.com • MAKING EVERY LIFE COUNT! • Est. 1997 • 4000 Women Strong<br><br>© 2026 WOI • <a href="/admin/login" style="color:var(--pink)">Admin</a> • <a href="/history" style="color:var(--pink)">History</a> • <a href="/transparency" style="color:var(--gold)">Transparency</a></div>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
@@ -153,10 +182,10 @@ AOS.init({duration:800,once:true});
 let currentBook='';
 function openDonate(){document.getElementById('donateModal').classList.add('active')}
 function closeDonate(){document.getElementById('donateModal').classList.remove('active')}
-function orderBook(title){currentBook=title;document.getElementById('bookTitle').innerText='Order: '+title;document.getElementById('bookModal').classList.add('active')}
+function orderBook(t){currentBook=t;document.getElementById('bookTitle').innerText='Order: '+t;document.getElementById('bookModal').classList.add('active')}
 function closeBook(){document.getElementById('bookModal').classList.remove('active')}
-async function submitDonate(){const data={name:document.getElementById('dName').value,project:document.getElementById('dProject').value,amount:document.getElementById('dAmount').value,method:document.getElementById('dMethod').value,reference:document.getElementById('dRef').value};const r=await fetch('/donate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});const j=await r.json();alert(j.msg);closeDonate()}
-async function submitBook(){const data={name:document.getElementById('bName').value,phone:document.getElementById('bPhone').value,book:currentBook,method:document.getElementById('bMethod').value,ref:document.getElementById('bRef').value};const r=await fetch('/order-book',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});const j=await r.json();alert(j.msg);closeBook()}
+async function submitDonate(){const d={name:document.getElementById('dName').value,project:document.getElementById('dProject').value,amount:document.getElementById('dAmount').value};const r=await fetch('/donate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)});const j=await r.json();alert(j.msg||'Thank you!');closeDonate()}
+async function submitBook(){const d={name:document.getElementById('bName').value,phone:document.getElementById('bPhone').value,book:currentBook};const r=await fetch('/order-book',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)});const j=await r.json();alert(j.msg||'Order received!');closeBook()}
 </script>
 </body>
-</html>
+  </html>
