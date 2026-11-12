@@ -1,9 +1,74 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Member Login - WOI</title><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800;900&display=swap" rel="stylesheet"><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Outfit',sans-serif;background:#fdf6f0}nav{background:#2a0a2a;color:white;padding:14px 18px;display:flex;justify-content:space-between}nav a{color:white;text-decoration:none;font-size:12px;font-weight:800;background:rgba(255,255,255,0.18);padding:8px 13px;border-radius:100px;margin-left:6px}.box{max-width:420px;margin:30px auto;background:white;border-radius:18px;padding:26px;box-shadow:0 10px 30px rgba(0,0,0,0.08)}input{width:100%;padding:13px;border-radius:10px;border:1px solid #bbb;margin-top:10px;font-size:15px}.btn{width:100%;padding:14px;border:none;border-radius:100px;background:#2a0a2a;color:white;font-weight:900;margin-top:16px;cursor:pointer}</style></head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Member Login - Women of Influence International</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Playfair+Display:wght@700;800;900&family=Cinzel+Decorative:wght@700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',sans-serif;background:#fdf6f0;color:#1a1a1a;min-height:100vh;display:flex;flex-direction:column}
+nav{background:#2a0a2a;color:white;padding:14px 18px;display:flex;justify-content:space-between;align-items:center}
+nav a{color:white;text-decoration:none;font-size:12px;font-weight:800;background:rgba(255,255,255,0.18);padding:8px 13px;border-radius:100px;margin-left:6px}
+.hero{background:linear-gradient(180deg,#2a0a2a 0%,#1a051a 100%);color:white;padding:32px 20px 28px;text-align:center}
+.hero h1{font-family:'Cinzel Decorative',cursive;font-size:30px;line-height:1.1;color:white}
+.hero p{font-size:12px;letter-spacing:3px;font-weight:900;color:#ffdf6b;margin-top:10px}
+.box{max-width:440px;width:92%;margin:-10px auto 20px;background:white;border-radius:20px;padding:28px 24px;box-shadow:0 14px 35px rgba(42,10,42,0.12);position:relative;z-index:2}
+.box h2{font-family:'Playfair Display',serif;font-size:24px;color:#2a0a2a;text-align:center}
+.box p.sub{text-align:center;font-size:14px;color:#555;margin-top:8px;line-height:1.6}
+label{font-size:13px;font-weight:800;color:#2a0a2a;display:block;margin-top:18px}
+input{width:100%;padding:14px;border-radius:12px;border:1.5px solid #ddd;margin-top:8px;font-size:15px;font-family:'Outfit',sans-serif}
+input:focus{outline:none;border-color:#c93a8a}
+.btn{width:100%;padding:15px;border:none;border-radius:100px;background:#c93a8a;color:white;font-weight:900;font-size:15px;margin-top:20px;cursor:pointer}
+.btn-dark{width:100%;padding:13px;border-radius:100px;background:#2a0a2a;color:white;font-weight:800;font-size:14px;margin-top:10px;display:block;text-align:center;text-decoration:none}
+.divider{text-align:center;font-size:12px;color:#999;margin:18px 0 0}
+</style>
+</head>
 <body>
-<nav><b>WOI • MEMBER LOGIN</b><div><a href="/">Home</a><a href="/register">Join</a></div></nav>
-<div class="box"><h2 style="text-align:center;color:#2a0a2a">Welcome Back</h2><p style="text-align:center;font-size:14px;color:#333;margin-top:8px">Login with the phone you used to register</p>
-{% if error %}<p style="background:#f8d7da;padding:12px;border-radius:10px;margin-top:14px;text-align:center;font-weight:700">{{error}}</p>{% endif %}
-<form method="POST"><input name="phone" placeholder="Phone e.g. 0975..." required><button class="btn">Login →</button></form>
-<p style="text-align:center;font-size:13px;margin-top:14px">Not yet a member? <a href="/register" style="color:#c93a8a;font-weight:800">Register</a></p></div>
-<footer style="background:#150415;color:white;padding:30px 20px;text-align:center;font-size:13px;margin-top:30px;line-height:1.7"><p style="color:#eee;font-size:13px"><b style="color:white">WOMEN OF INFLUENCE INTERNATIONAL</b> • PACRA 51848<br>Plot 16804 Alick Nkhata, Mass Media • P.O Box 37878 Lusaka<br>+260 975826286 / 979221392 • elfridah60@yahoo.com<br><b style="color:#ffdf6b">MAKING EVERY LIFE COUNT!</b> • Est. 1997 • 4000 Women Strong</p><p style="margin-top:12px;font-size:12px"><a href="/" style="color:#ff9ec9;text-decoration:none;margin:0 6px">Home</a> • <a href="/register" style="color:#ff9ec9;text-decoration:none;margin:0 6px">Join</a> • <a href="/history" style="color:#ff9ec9;text-decoration:none;margin:0 6px">History</a> • <a href="/transparency" style="color:#ffdf6b;text-decoration:none;margin:0 6px">Transparency</a> • <a href="/admin/login" style="color:#ff9ec9;text-decoration:none;margin:0 6px">Admin</a></p><p style="margin-top:10px;font-size:11px;color:#aaa">© 2026 WOI • Barak Ministries Covering</p></footer>
-</body></html>
+
+<nav><b style="font-size:13px">WOI • PACRA 51848</b><div><a href="/">Home</a><a href="/register">Join</a></div></nav>
+
+<div class="hero">
+<h1>WOMEN OF<br>INFLUENCE</h1>
+<p>MAKING EVERY LIFE COUNT!</p>
+<p style="font-size:12px;color:white;opacity:0.9;letter-spacing:0;font-weight:600;margin-top:10px">Welcome back, Woman of Influence</p>
+</div>
+
+<div class="box">
+<h2>Member Login</h2>
+<p class="sub">Login with the phone number you used when you registered.<br>First Saturday • 13:00-18:00 • Mass Media, Lusaka</p>
+
+{% if error %}
+<p style="background:#f8d7da;color:#721c24;padding:12px;border-radius:10px;margin-top:16px;text-align:center;font-weight:700;font-size:14px">{{error}}</p>
+{% endif %}
+
+<form method="POST">
+<label>PHONE NUMBER</label>
+<input name="phone" placeholder="e.g. 0975826286" required>
+<button class="btn">Login →</button>
+</form>
+
+<p class="divider">— OR —</p>
+<a href="/register" class="btn-dark">Not yet a member? Register Now</a>
+
+<p style="text-align:center;font-size:13px;color:#777;margin-top:16px;line-height:1.6">Need help? WhatsApp us<br><a href="https://wa.me/260975826286" style="color:#c93a8a;font-weight:800;text-decoration:none">+260 975 826 286</a></p>
+</div>
+
+<!-- ===== WOI FOOTER - USE ON ALL PAGES ===== -->
+<footer style="background:#150415;color:white;padding:30px 20px;text-align:center;font-size:13px;margin-top:auto;line-height:1.7">
+<p style="color:#eee;font-size:13px"><b style="color:white">WOMEN OF INFLUENCE INTERNATIONAL</b> • PACRA 51848<br>
+Plot 16804 Alick Nkhata, Mass Media • P.O Box 37878 Lusaka<br>
++260 975826286 / 979221392 • elfridah60@yahoo.com<br>
+<b style="color:#ffdf6b">MAKING EVERY LIFE COUNT!</b> • Est. 1997 • 4000 Women Strong</p>
+<p style="margin-top:12px;font-size:12px">
+<a href="/" style="color:#ff9ec9;text-decoration:none;margin:0 6px">Home</a> •
+<a href="/register" style="color:#ff9ec9;text-decoration:none;margin:0 6px">Join</a> •
+<a href="/history" style="color:#ff9ec9;text-decoration:none;margin:0 6px">History</a> •
+<a href="/transparency" style="color:#ffdf6b;text-decoration:none;margin:0 6px">Transparency</a> •
+<a href="/admin/login" style="color:#ff9ec9;text-decoration:none;margin:0 6px">Admin</a>
+</p>
+<p style="margin-top:10px;font-size:11px;color:#aaa">© 2026 WOI • Barak Ministries Covering</p>
+</footer>
+
+</body>
+</html>
