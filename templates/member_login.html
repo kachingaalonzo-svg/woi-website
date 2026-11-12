@@ -1,30 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>WOI Member Login</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-<style>
-body{font-family:'Outfit';background:#fdf6f0;display:flex;justify-content:center;align-items:center;min-height:100vh;margin:0}
-.box{background:white;padding:32px;border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,0.1);width:100%;max-width:380px;text-align:center}
-input{width:100%;padding:12px;border-radius:10px;border:1px solid #ddd;margin-top:12px;box-sizing:border-box}
-button{width:100%;margin-top:16px;background:#2a0a2a;color:white;padding:12px;border-radius:10px;border:0;font-weight:700;cursor:pointer}
-.error{background:#ffe0e0;color:#a00;padding:10px;border-radius:8px;margin-top:12px;font-size:13px}
-a{color:#c93a8a;text-decoration:none;font-weight:600}
-</style>
-</head>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Member Login - WOI</title><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800;900&display=swap" rel="stylesheet"><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Outfit',sans-serif;background:#fdf6f0}nav{background:#2a0a2a;color:white;padding:14px 18px;display:flex;justify-content:space-between}nav a{color:white;text-decoration:none;font-size:12px;font-weight:800;background:rgba(255,255,255,0.18);padding:8px 13px;border-radius:100px;margin-left:6px}.box{max-width:420px;margin:30px auto;background:white;border-radius:18px;padding:26px;box-shadow:0 10px 30px rgba(0,0,0,0.08)}input{width:100%;padding:13px;border-radius:10px;border:1px solid #bbb;margin-top:10px;font-size:15px}.btn{width:100%;padding:14px;border:none;border-radius:100px;background:#2a0a2a;color:white;font-weight:900;margin-top:16px;cursor:pointer}</style></head>
 <body>
-<div class="box">
-<h2 style="font-family:'Playfair Display';color:#2a0a2a">Member Login</h2>
-<p style="font-size:13px;color:#666">4000 Women Strong • Est. 1997</p>
-{% if error %}<div class="error">{{ error }}</div>{% endif %}
-<form method="POST">
-<input name="email" type="email" placeholder="Email address" required>
-<input name="password" type="password" placeholder="Password" required>
-<button type="submit">Login →</button>
-</form>
-<p style="font-size:13px;margin-top:16px">No account? <a href="/register">Register Now</a></p>
-<p style="font-size:12px;margin-top:10px"><a href="/">← Back to Home</a></p>
-</div>
-</body>
-</html>
+<nav><b>WOI • MEMBER LOGIN</b><div><a href="/">Home</a><a href="/register">Join</a></div></nav>
+<div class="box"><h2 style="text-align:center;color:#2a0a2a">Welcome Back</h2><p style="text-align:center;font-size:14px;color:#333;margin-top:8px">Login with the phone you used to register</p>
+{% if error %}<p style="background:#f8d7da;padding:12px;border-radius:10px;margin-top:14px;text-align:center;font-weight:700">{{error}}</p>{% endif %}
+<form method="POST"><input name="phone" placeholder="Phone e.g. 0975..." required><button class="btn">Login →</button></form>
+<p style="text-align:center;font-size:13px;margin-top:14px">Not yet a member? <a href="/register" style="color:#c93a8a;font-weight:800">Register</a></p></div>
+<footer style="background:#150415;color:white;padding:30px 20px;text-align:center;font-size:13px;margin-top:30px;line-height:1.7"><p style="color:#eee;font-size:13px"><b style="color:white">WOMEN OF INFLUENCE INTERNATIONAL</b> • PACRA 51848<br>Plot 16804 Alick Nkhata, Mass Media • P.O Box 37878 Lusaka<br>+260 975826286 / 979221392 • elfridah60@yahoo.com<br><b style="color:#ffdf6b">MAKING EVERY LIFE COUNT!</b> • Est. 1997 • 4000 Women Strong</p><p style="margin-top:12px;font-size:12px"><a href="/" style="color:#ff9ec9;text-decoration:none;margin:0 6px">Home</a> • <a href="/register" style="color:#ff9ec9;text-decoration:none;margin:0 6px">Join</a> • <a href="/history" style="color:#ff9ec9;text-decoration:none;margin:0 6px">History</a> • <a href="/transparency" style="color:#ffdf6b;text-decoration:none;margin:0 6px">Transparency</a> • <a href="/admin/login" style="color:#ff9ec9;text-decoration:none;margin:0 6px">Admin</a></p><p style="margin-top:10px;font-size:11px;color:#aaa">© 2026 WOI • Barak Ministries Covering</p></footer>
+</body></html>
