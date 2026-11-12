@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for
 import sqlite3, os
 from datetime import datetime
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 app.secret_key = "woi-2026-secret"
@@ -12,15 +13,13 @@ def get_db():
 
 def init_db():
     conn = get_db()
-    conn.execute('''CREATE TABLE IF NOT EXISTS members (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, phone TEXT, location TEXT, created_at TEXT)''')
+    conn.execute('''CREATE TABLE IF NOT EXISTS members (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, phone TEXT, location TEXT, profile_pic TEXT, created_at TEXT)''')
     conn.execute('''CREATE TABLE IF NOT EXISTS donations (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, project TEXT, amount TEXT, created_at TEXT)''')
     conn.execute('''CREATE TABLE IF NOT EXISTS book_orders (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, phone TEXT, book TEXT, created_at TEXT)''')
     conn.commit(); conn.close()
 
 init_db()
-
-# --- FOOTER SNIPPET USED IN ALL TEMPLATES ---
-# Footer is hardcoded in each HTML file below so it shows on every page
+os.makedirs('static/uploads', exist_ok=True)
 
 @app.route('/')
 def home():
@@ -38,16 +37,40 @@ def register():
 
 @app.route('/member/login', methods=['GET','POST'])
 def member_login():
-    if request.method == 'POST':
-        phone = request.form.get('phone')
-        conn = get_db()
-        user = conn.execute("SELECT * FROM members WHERE phone=?", (phone,)).fetchone()
-        conn.close()
-        if user:
-            session['member'] = dict(user)
-            return redirect(url_for('home'))
-        return render_template('login.html', error="Phone not found. Please register first.")
-    return render_template('login.html')
+    try:
+        if request.method == 'POST':
+            phone = request.form.get('phone','').strip()
+            if not phone:
+                return render_template('login.html', error="Please enter your phone number.")
+            profile_pic_filename = None
+            if 'profile_pic' in request.files:
+                file = request.files['profile_pic']
+                if file and file.filename != '':
+                    os.makedirs('static/uploads', exist_ok=True)
+                    safe_name = f"{phone}_{secure_filename(file.filename)}"
+                    file.save(os.path.join('static/uploads', safe_name))
+                    profile_pic_filename = f"uploads/{safe_name}"
+            conn = get_db()
+            try:
+                conn.execute("ALTER TABLE members ADD COLUMN profile_pic TEXT")
+                conn.commit()
+            except:
+                pass
+            user = conn.execute("SELECT * FROM members WHERE phone=?", (phone,)).fetchone()
+            if user:
+                if profile_pic_filename:
+                    conn.execute("UPDATE members SET profile_pic=? WHERE phone=?", (profile_pic_filename, phone))
+                    conn.commit()
+                    user = conn.execute("SELECT * FROM members WHERE phone=?", (phone,)).fetchone()
+                conn.close()
+                session['member'] = dict(user)
+                return redirect(url_for('home'))
+            conn.close()
+            return render_template('login.html', error="Phone not found. Please register first.")
+        return render_template('login.html')
+    except Exception as e:
+        print("LOGIN ERROR:", e)
+        return render_template('login.html', error="Something went wrong, please try again.")
 
 @app.route('/history')
 def history():
