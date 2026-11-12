@@ -132,7 +132,7 @@ button{width:100%;padding:14px;background:#7a1f3d;color:white;border:none;border
 button:hover{background:#5e1730}.error{background:#ffe8e8;color:#c00;padding:10px;border-radius:10px;font-size:14px}
 .back{display:block;margin-top:16px;color:#888;font-size:13px;text-decoration:none}
 </style></head>
-<body><div class="card"><div class="logo">✦</div><h2>Welcome Back</h2><p class="sub">Women of Integrity • Admin Portal</p>
+<body><div class="card"><div class="logo">✦</div><h2>Welcome Back</h2><p class="sub">Women of Influence • Admin Portal</p>
 {% if error %}<div class="error">{{ error }}</div>{% endif %}
 <form method="POST"><input name="username" placeholder="Username" required>
 <input type="password" name="password" placeholder="Password" required>
@@ -167,7 +167,7 @@ td{padding:12px 18px;border-top:1px solid #f5f1ed;font-size:14px}tr:hover td{bac
 .pill{background:#e8f8f0;color:#0a7a52;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:700}
 </style></head>
 <body>
-<div class="top"><div><b>✦ WOI Admin</b><br><span>Women of Integrity • Dashboard</span></div><div><a href="/">View Site</a> <a class="red" href="/admin/logout">Logout</a></div></div>
+<div class="top"><div><b>✦ WOI Admin</b><br><span>Women of Influence • Dashboard</span></div><div><a href="/">View Site</a> <a class="red" href="/admin/logout">Logout</a></div></div>
 <div class="wrap">
 <div class="stats">
 <div class="stat pink"><small>Total Members</small><h3>{{ members|length }}</h3><p>Registered women</p></div>
