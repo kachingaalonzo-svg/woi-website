@@ -1,119 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
+<title>WOI Member Login</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Member Login - Women of Influence International</title>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Playfair+Display:wght@700;800;900&family=Cinzel+Decorative:wght@700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Outfit',sans-serif;background:#fdf6f0;color:#1a1a1a;min-height:100vh;display:flex;flex-direction:column}
-nav{background:#2a0a2a;color:white;padding:14px 18px;display:flex;justify-content:space-between;align-items:center}
-nav a{color:white;text-decoration:none;font-size:12px;font-weight:800;background:rgba(255,255,255,0.18);padding:8px 13px;border-radius:100px;margin-left:6px}
-.hero{background:linear-gradient(180deg,#2a0a2a 0%,#1a051a 100%);color:white;padding:32px 20px 55px;text-align:center}
-.hero h1{font-family:'Cinzel Decorative',cursive;font-size:30px;line-height:1.1;color:white}
-.hero p{font-size:12px;letter-spacing:3px;font-weight:900;color:#ffdf6b;margin-top:10px}
-.box{max-width:440px;width:92%;margin:-35px auto 20px;background:white;border-radius:20px;padding:28px 24px 24px;box-shadow:0 14px 35px rgba(42,10,42,0.12);position:relative;z-index:2;text-align:center}
-.profile-wrap{position:relative;width:120px;height:120px;margin:0 auto}
-.profile-pic{width:120px;height:120px;border-radius:50%;object-fit:cover;border:4px solid white;box-shadow:0 8px 20px rgba(0,0,0,0.2);background:#fce4f0;display:flex;align-items:center;justify-content:center;font-size:38px;color:#c93a8a;overflow:hidden}
-.profile-pic img{width:100%;height:100%;object-fit:cover}
-.camera-btn{position:absolute;bottom:2px;right:2px;width:36px;height:36px;border-radius:50%;background:#c93a8a;color:white;border:3px solid white;display:flex;align-items:center;justify-content:center;font-size:16px;cursor:pointer;box-shadow:0 4px 10px rgba(0,0,0,0.2)}
-label{font-size:13px;font-weight:800;color:#2a0a2a;display:block;margin-top:18px;text-align:left}
-input{width:100%;padding:14px;border-radius:12px;border:1.5px solid #ddd;margin-top:8px;font-size:15px;font-family:'Outfit',sans-serif}
-input:focus{outline:none;border-color:#c93a8a}
-.btn{width:100%;padding:15px;border:none;border-radius:100px;background:#c93a8a;color:white;font-weight:900;font-size:15px;margin-top:20px;cursor:pointer}
-.btn-dark{width:100%;padding:13px;border-radius:100px;background:#2a0a2a;color:white;font-weight:800;font-size:14px;margin-top:10px;display:block;text-align:center;text-decoration:none}
-.hint{font-size:12px;color:#888;margin-top:8px}
+body{font-family:'Outfit';background:#fdf6f0;display:flex;justify-content:center;align-items:center;min-height:100vh;margin:0}
+.box{background:white;padding:32px;border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,0.1);width:100%;max-width:380px;text-align:center}
+input{width:100%;padding:12px;border-radius:10px;border:1px solid #ddd;margin-top:12px;box-sizing:border-box}
+button{width:100%;margin-top:16px;background:#2a0a2a;color:white;padding:12px;border-radius:10px;border:0;font-weight:700;cursor:pointer}
+.error{background:#ffe0e0;color:#a00;padding:10px;border-radius:8px;margin-top:12px;font-size:13px}
+a{color:#c93a8a;text-decoration:none;font-weight:600}
 </style>
 </head>
 <body>
-
-<nav><b style="font-size:13px">WOI • PACRA 51848</b><div><a href="/">Home</a><a href="/register">Join</a></div></nav>
-
-<div class="hero">
-<h1>WOMEN OF<br>INFLUENCE</h1>
-<p>MAKING EVERY LIFE COUNT!</p>
-<p style="font-size:12px;color:white;opacity:0.9;letter-spacing:0;font-weight:600;margin-top:10px">Welcome back, Woman of Influence</p>
-</div>
-
 <div class="box">
-
-<!-- ===== PROFILE PICTURE PROVISION ===== -->
-<div class="profile-wrap">
-<div class="profile-pic" id="profilePreview">
-<span id="profileInitial">👤</span>
-<img id="profileImg" style="display:none" alt="Profile">
-</div>
-<label for="profileInput" class="camera-btn">📷</label>
-<input type="file" id="profileInput" accept="image/*" style="display:none" onchange="previewProfile(event)">
-</div>
-<p style="font-size:13px;font-weight:800;color:#2a0a2a;margin-top:10px">Your Profile Picture</p>
-<p style="font-size:12px;color:#777;margin-top:4px">Tap the camera 📷 to choose / change your photo</p>
-
-<h2 style="font-family:'Playfair Display',serif;font-size:24px;color:#2a0a2a;margin-top:18px">Member Login</h2>
-<p style="font-size:14px;color:#555;margin-top:8px;line-height:1.6">Login with the phone number you used when you registered.</p>
-
-{% if error %}
-<p style="background:#f8d7da;color:#721c24;padding:12px;border-radius:10px;margin-top:16px;text-align:center;font-weight:700;font-size:14px">{{error}}</p>
-{% endif %}
-
-<form method="POST" enctype="multipart/form-data" style="text-align:left">
-<label>PHONE NUMBER</label>
-<input name="phone" id="phoneInput" placeholder="e.g. 0975826286" required>
-<p class="hint">Your profile picture will be saved with your account.</p>
-<button class="btn">Login →</button>
+<h2 style="font-family:'Playfair Display';color:#2a0a2a">Member Login</h2>
+<p style="font-size:13px;color:#666">4000 Women Strong • Est. 1997</p>
+{% if error %}<div class="error">{{ error }}</div>{% endif %}
+<form method="POST">
+<input name="email" type="email" placeholder="Email address" required>
+<input name="password" type="password" placeholder="Password" required>
+<button type="submit">Login →</button>
 </form>
-
-<p style="text-align:center;font-size:12px;color:#999;margin:18px 0 0">— OR —</p>
-<a href="/register" class="btn-dark">Not yet a member? Register Now</a>
-
-<p style="text-align:center;font-size:13px;color:#777;margin-top:16px;line-height:1.6">Need help? WhatsApp us<br><a href="https://wa.me/260975826286" style="color:#c93a8a;font-weight:800;text-decoration:none">+260 975 826 286</a></p>
+<p style="font-size:13px;margin-top:16px">No account? <a href="/register">Register Now</a></p>
+<p style="font-size:12px;margin-top:10px"><a href="/">← Back to Home</a></p>
 </div>
-
-<!-- ===== WOI FOOTER - USE ON ALL PAGES ===== -->
-<footer style="background:#150415;color:white;padding:30px 20px;text-align:center;font-size:13px;margin-top:auto;line-height:1.7">
-<p style="color:#eee;font-size:13px"><b style="color:white">WOMEN OF INFLUENCE INTERNATIONAL</b> • PACRA 51848<br>
-Plot 16804 Alick Nkhata, Mass Media • P.O Box 37878 Lusaka<br>
-+260 975826286 / 979221392 • elfridah60@yahoo.com<br>
-<b style="color:#ffdf6b">MAKING EVERY LIFE COUNT!</b> • Est. 1997 • 4000 Women Strong</p>
-<p style="margin-top:12px;font-size:12px">
-<a href="/" style="color:#ff9ec9;text-decoration:none;margin:0 6px">Home</a> •
-<a href="/register" style="color:#ff9ec9;text-decoration:none;margin:0 6px">Join</a> •
-<a href="/history" style="color:#ff9ec9;text-decoration:none;margin:0 6px">History</a> •
-<a href="/transparency" style="color:#ffdf6b;text-decoration:none;margin:0 6px">Transparency</a> •
-<a href="/admin/login" style="color:#ff9ec9;text-decoration:none;margin:0 6px">Admin</a>
-</p>
-<p style="margin-top:10px;font-size:11px;color:#aaa">© 2026 WOI • Barak Ministries Covering</p>
-</footer>
-
-<script>
-function previewProfile(event){
-  const file = event.target.files[0];
-  if(!file) return;
-  const reader = new FileReader();
-  reader.onload = function(e){
-    const img = document.getElementById('profileImg');
-    img.src = e.target.result;
-    img.style.display = 'block';
-    document.getElementById('profileInitial').style.display = 'none';
-    // Save for later - so it shows again next time
-    try{ localStorage.setItem('woi_profile_pic', e.target.result); }catch(err){}
-  };
-  reader.readAsDataURL(file);
-}
-// Show saved picture if they already chose one before
-window.onload = function(){
-  try{
-    const saved = localStorage.getItem('woi_profile_pic');
-    if(saved){
-      const img = document.getElementById('profileImg');
-      img.src = saved;
-      img.style.display = 'block';
-      document.getElementById('profileInitial').style.display = 'none';
-    }
-  }catch(err){}
-}
-</script>
-
 </body>
 </html>
