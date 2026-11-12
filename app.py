@@ -112,44 +112,85 @@ def order_book():
     flash('Book order received!')
     return redirect(url_for('index'))
 
-# --- ADMIN - BUILT-IN, NO TEMPLATE NEEDED ---
+# --- ADMIN - MODERN, BUILT-IN ---
 ADMIN_USER = "admin"
 ADMIN_PASS = "woi2026"
 
 ADMIN_LOGIN_HTML = """
 <!DOCTYPE html><html><head><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>WOI Admin Login</title>
-<style>body{font-family:Arial;background:#f5f0e8;display:flex;justify-content:center;align-items:center;min-height:100vh;margin:0}
-.box{background:white;padding:30px;border-radius:12px;width:90%;max-width:360px;box-shadow:0 4px 20px rgba(0,0,0,.1);text-align:center}
-input{width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:8px;box-sizing:border-box}
-button{width:100%;padding:12px;background:#7a1f3d;color:white;border:none;border-radius:8px;font-weight:bold;cursor:pointer}
-.error{color:red}</style></head>
-<body><div class="box"><h2>WOI Admin Login</h2>
-{% if error %}<p class="error">{{ error }}</p>{% endif %}
+<title>WOI Admin • Login</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;font-family:'Inter',Arial,sans-serif}
+body{margin:0;min-height:100vh;background:linear-gradient(135deg,#2b0a1a 0%,#7a1f3d 45%,#c98a2e 100%);display:flex;align-items:center;justify-content:center;padding:20px}
+.card{background:rgba(255,255,255,.98);width:100%;max-width:400px;border-radius:20px;padding:32px 28px;box-shadow:0 20px 50px rgba(0,0,0,.35);text-align:center}
+.logo{width:64px;height:64px;background:#7a1f3d;color:white;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:30px;margin:0 auto 14px}
+h2{margin:0;font-size:24px;color:#1a1a1a}p.sub{color:#777;margin:6px 0 20px;font-size:14px}
+input{width:100%;padding:14px 16px;margin:8px 0;border:1.5px solid #eee;border-radius:12px;font-size:15px;outline:none;background:#fafafa}
+input:focus{border-color:#7a1f3d;background:white}
+button{width:100%;padding:14px;background:#7a1f3d;color:white;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;margin-top:10px}
+button:hover{background:#5e1730}.error{background:#ffe8e8;color:#c00;padding:10px;border-radius:10px;font-size:14px}
+.back{display:block;margin-top:16px;color:#888;font-size:13px;text-decoration:none}
+</style></head>
+<body><div class="card"><div class="logo">✦</div><h2>Welcome Back</h2><p class="sub">Women of Integrity • Admin Portal</p>
+{% if error %}<div class="error">{{ error }}</div>{% endif %}
 <form method="POST"><input name="username" placeholder="Username" required>
 <input type="password" name="password" placeholder="Password" required>
-<button>Login</button></form>
-<p><a href="/">Back to site</a></p></div></body></html>
+<button>Sign In →</button></form>
+<a class="back" href="/">← Back to website</a></div></body></html>
 """
 
 ADMIN_DASH_HTML = """
 <!DOCTYPE html><html><head><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>WOI Admin Dashboard</title>
-<style>body{font-family:Arial;background:#f5f0e8;margin:0;padding:15px}
-h1{color:#7a1f3d}.card{background:white;padding:15px;border-radius:10px;margin-bottom:15px;overflow-x:auto}
-table{width:100%;border-collapse:collapse}th,td{padding:8px;border-bottom:1px solid #eee;text-align:left;font-size:14px}
-a.btn{background:#7a1f3d;color:white;padding:8px 14px;border-radius:6px;text-decoration:none}</style></head>
-<body><h1>WOI Admin Dashboard</h1><p>Logged in as admin | <a class="btn" href="/admin/logout">Logout</a> <a class="btn" href="/">View Site</a></p>
-<div class="card"><h2>Members ({{ members|length }})</h2>
-<table><tr><th>Name</th><th>Phone</th><th>Location</th><th>Date</th></tr>
-{% for m in members %}<tr><td>{{ m['name'] }}</td><td>{{ m['phone'] }}</td><td>{{ m['location'] }}</td><td>{{ m['created_at'] }}</td></tr>{% endfor %}</table></div>
-<div class="card"><h2>Donations ({{ donations|length }})</h2>
-<table><tr><th>Name</th><th>Project</th><th>Amount</th><th>Date</th></tr>
-{% for d in donations %}<tr><td>{{ d['name'] }}</td><td>{{ d['project'] }}</td><td>{{ d['amount'] }}</td><td>{{ d['created_at'] }}</td></tr>{% endfor %}</table></div>
-<div class="card"><h2>Book Orders ({{ orders|length }})</h2>
-<table><tr><th>Name</th><th>Phone</th><th>Book</th><th>Date</th></tr>
-{% for o in orders %}<tr><td>{{ o['name'] }}</td><td>{{ o['phone'] }}</td><td>{{ o['book'] }}</td><td>{{ o['created_at'] }}</td></tr>{% endfor %}</table></div>
-</body></html>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;font-family:'Inter',Arial,sans-serif}body{margin:0;background:#f6f3f0;color:#1a1a1a}
+.top{background:#1a0a12;color:white;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.top b{font-size:19px}.top span{font-size:13px;opacity:.7}
+.top a{background:white;color:#1a1a1a;padding:8px 14px;border-radius:20px;text-decoration:none;font-size:13px;font-weight:600}
+.top a.red{background:#7a1f3d;color:white}
+.wrap{max-width:1100px;margin:0 auto;padding:20px 16px 40px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}
+@media(max-width:650px){.stats{grid-template-columns:1fr}}
+.stat{background:white;border-radius:16px;padding:18px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.stat small{color:#888;text-transform:uppercase;letter-spacing:.5px;font-size:11px;font-weight:700}
+.stat h3{margin:6px 0 0;font-size:30px}.stat p{margin:4px 0 0;font-size:13px;color:#777}
+.stat.pink{border-top:4px solid #7a1f3d}.stat.gold{border-top:4px solid #c98a2e}.stat.green{border-top:4px solid #1a9a6b}
+.search{width:100%;padding:13px 16px;border:1px solid #e5e0db;border-radius:12px;margin-bottom:20px;font-size:15px;outline:none}
+.card{background:white;border-radius:16px;overflow:hidden;margin-bottom:20px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.card-head{padding:16px 18px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #f0ece8}
+.card-head h2{margin:0;font-size:16px}.badge{background:#fdf0e8;color:#7a1f3d;padding:5px 10px;border-radius:20px;font-size:12px;font-weight:700}
+table{width:100%;border-collapse:collapse}th{font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:#999;padding:12px 18px;text-align:left;background:#faf8f6}
+td{padding:12px 18px;border-top:1px solid #f5f1ed;font-size:14px}tr:hover td{background:#fffaf7}
+.empty{padding:20px;text-align:center;color:#999;font-size:14px}
+.pill{background:#e8f8f0;color:#0a7a52;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:700}
+</style></head>
+<body>
+<div class="top"><div><b>✦ WOI Admin</b><br><span>Women of Integrity • Dashboard</span></div><div><a href="/">View Site</a> <a class="red" href="/admin/logout">Logout</a></div></div>
+<div class="wrap">
+<div class="stats">
+<div class="stat pink"><small>Total Members</small><h3>{{ members|length }}</h3><p>Registered women</p></div>
+<div class="stat gold"><small>Total Donations</small><h3>{{ donations|length }}</h3><p>Donation records</p></div>
+<div class="stat green"><small>Book Orders</small><h3>{{ orders|length }}</h3><p>Books ordered</p></div>
+</div>
+<input class="search" id="search" placeholder="🔍 Search members, donations, orders..." onkeyup="filterAll()">
+<div class="card"><div class="card-head"><h2>👩‍🦰 Members</h2><span class="badge">{{ members|length }} total</span></div>
+<table class="tbl"><tr><th>Name</th><th>Phone</th><th>Location</th><th>Date</th></tr>
+{% for m in members %}<tr><td><b>{{ m['name'] }}</b></td><td>{{ m['phone'] }}</td><td>{{ m['location'] }}</td><td>{{ m['created_at'] }}</td></tr>{% else %}<tr><td colspan="4" class="empty">No members yet</td></tr>{% endfor %}</table></div>
+<div class="card"><div class="card-head"><h2>💛 Donations</h2><span class="badge">{{ donations|length }} total</span></div>
+<table class="tbl"><tr><th>Name</th><th>Project</th><th>Amount</th><th>Date</th></tr>
+{% for d in donations %}<tr><td><b>{{ d['name'] }}</b></td><td>{{ d['project'] }}</td><td><span class="pill">K{{ d['amount'] }}</span></td><td>{{ d['created_at'] }}</td></tr>{% else %}<tr><td colspan="4" class="empty">No donations yet</td></tr>{% endfor %}</table></div>
+<div class="card"><div class="card-head"><h2>📖 Book Orders</h2><span class="badge">{{ orders|length }} total</span></div>
+<table class="tbl"><tr><th>Name</th><th>Phone</th><th>Book</th><th>Date</th></tr>
+{% for o in orders %}<tr><td><b>{{ o['name'] }}</b></td><td>{{ o['phone'] }}</td><td>{{ o['book'] }}</td><td>{{ o['created_at'] }}</td></tr>{% else %}<tr><td colspan="4" class="empty">No book orders yet</td></tr>{% endfor %}</table></div>
+</div>
+<script>
+function filterAll(){
+  let q=document.getElementById('search').value.toLowerCase();
+  document.querySelectorAll('.tbl tr').forEach((r,i)=>{ if(i===0) return; r.style.display=r.textContent.toLowerCase().includes(q)?'':'none'; });
+}
+</script></body></html>
 """
 
 @app.route('/admin/login', methods=['GET', 'POST'])
