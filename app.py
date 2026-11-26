@@ -24,25 +24,36 @@ app.secret_key = 'woi-4000-strong'
 app.config['UPLOAD_FOLDER'] = os.path.join('static', 'uploads')
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
-DB_CONFIG = {'host': 'localhost', 'user': 'root', 'password': '', 'database': 'woi', 'port': 3306}
+# ===== DATABASE - WORKS LOCAL + RENDER + AIVEN =====
+DB_CONFIG = {
+    'host': os.environ.get('DB_HOST', 'localhost'),
+    'user': os.environ.get('DB_USER', 'root'),
+    'password': os.environ.get('DB_PASS', ''),
+    'database': os.environ.get('DB_NAME', 'woi'),
+    'port': int(os.environ.get('DB_PORT', 3306))
+}
 
 def get_db():
     return mysql.connector.connect(**DB_CONFIG)
 
 def ensure_db_exists():
-    conn = mysql.connector.connect(host='localhost', user='root', password='', port=3306)
-    cur = conn.cursor()
-    cur.execute("CREATE DATABASE IF NOT EXISTS woi")
-    conn.commit()
-    cur.close()
-    conn.close()
+    # On Render/Aiven, database already exists - don't try to create it
+    if os.environ.get('DB_HOST'):
+        return
+    try:
+        conn = mysql.connector.connect(host='localhost', user='root', password='', port=3306)
+        cur = conn.cursor()
+        cur.execute("CREATE DATABASE IF NOT EXISTS woi")
+        conn.commit()
+        cur.close()
+        conn.close()
+    except:
+        pass
 
 def add_column_if_missing(cur, table, column, definition):
-    # FIX: Adds missing columns to OLD tables without deleting data
     try:
         cur.execute(f"ALTER TABLE {table} ADD COLUMN IF NOT EXISTS {column} {definition}")
-    except Exception as e:
-        # If MariaDB version doesn't support IF NOT EXISTS, try plain ADD and ignore duplicate error
+    except Exception:
         try:
             cur.execute(f"ALTER TABLE {table} ADD COLUMN {column} {definition}")
         except:
@@ -52,13 +63,11 @@ def init_db():
     ensure_db_exists()
     conn = get_db()
     cur = conn.cursor(dictionary=True)
-    # Create tables if they don't exist
     cur.execute('''CREATE TABLE IF NOT EXISTS members (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), phone VARCHAR(50) UNIQUE, password VARCHAR(255), role VARCHAR(20) DEFAULT 'member', lives VARCHAR(255), past_church VARCHAR(255), nrc VARCHAR(100), pic VARCHAR(255), joined VARCHAR(20), email VARCHAR(255), interest VARCHAR(255), created TIMESTAMP DEFAULT CURRENT_TIMESTAMP)''')
     cur.execute('''CREATE TABLE IF NOT EXISTS donations (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), email VARCHAR(255), project VARCHAR(255), amount VARCHAR(50), phone VARCHAR(50), created TIMESTAMP DEFAULT CURRENT_TIMESTAMP)''')
     cur.execute('''CREATE TABLE IF NOT EXISTS book_orders (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), email VARCHAR(255), phone VARCHAR(50), book VARCHAR(255), total VARCHAR(50) DEFAULT 'K150', status VARCHAR(50) DEFAULT 'Pending', created TIMESTAMP DEFAULT CURRENT_TIMESTAMP)''')
     cur.execute('''CREATE TABLE IF NOT EXISTS logins (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), phone VARCHAR(50), email VARCHAR(255), role VARCHAR(20), login_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP, ip VARCHAR(100))''')
     cur.execute('''CREATE TABLE IF NOT EXISTS messages (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), email VARCHAR(255), message TEXT, created TIMESTAMP DEFAULT CURRENT_TIMESTAMP)''')
-    # ===== AUTO-MIGRATION: Fix OLD tables that were created before email/interest existed =====
     add_column_if_missing(cur, 'members', 'email', 'VARCHAR(255)')
     add_column_if_missing(cur, 'members', 'interest', 'VARCHAR(255)')
     add_column_if_missing(cur, 'members', 'created', 'TIMESTAMP DEFAULT CURRENT_TIMESTAMP')
@@ -74,7 +83,6 @@ def init_db():
     add_column_if_missing(cur, 'logins', 'email', 'VARCHAR(255)')
     add_column_if_missing(cur, 'logins', 'ip', 'VARCHAR(100)')
     conn.commit()
-    # Seed admin
     cur.execute("SELECT * FROM members WHERE phone='0975826286'")
     if not cur.fetchone():
         cur.execute("INSERT INTO members (name, phone, password, role, lives, past_church, nrc, pic, joined, email, interest) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)", ('Prophetess Elfridah Mhusambazi', '0975826286', 'woi1997', 'admin', 'Mass Media, Lusaka', 'Barak Ministries', '', '', '1997', 'admin@woi.com', 'Leadership'))
@@ -320,7 +328,7 @@ def admin_dashboard_new():
     html += "<div class='stat'><span>💬</span><b>" + str(len(messages_list)) + "</b><span>Messages</span></div>"
     html += "</div>"
     html += "<div class='stats' style='margin-top:14px'><div class='stat purple'><span>🔑</span><b>" + str(total_logins) + "</b><span>Total Logins</span></div><div class='stat'><span>📅</span><b>" + str(today_logins) + "</b><span>Logins Today</span></div><div class='stat'><span>📈</span><b>" + str(week_logins) + "</b><span>Last 7 Days</span></div><div class='stat gold'><span>👑</span><b>" + str(my_logins) + "</b><span>Your Logins</span></div><div class='stat'><span>👥</span><b>" + str(len(members_list)) + "</b><span>Members</span></div></div>"
-    html += "<div style='margin-top:14px'><button onclick='window.print()' class='btn'>🖨️ Print Full Report</button><button onclick='window.print()' class='btn btn-gold2'>Clean Printable Report</button><a href='/transparency' class='btn btn-white'>Public Transparency</a></div>"
+    html += "<div style='margin-top:14px'><button onclick='window.print()' class='btn'>🖨️ Print Full Report</button><a href='/transparency' class='btn btn-white'>Public Transparency</a></div>"
     html += "<div class='card'><h3>🔑 Login Activity - How Often People Login</h3><p class='sub'>Who logs in the most? Who was last active?</p>" + exp('logins') + "<table><tr><th>Member</th><th>Email</th><th>Total Logins</th><th>Last Login</th></tr>" + rows_top + "</table></div>"
     html += "<div class='card'><h3>Recent Logins (Last 30)</h3><p class='sub'>Every login, newest first</p><table><tr><th>Type</th><th>Name</th><th>Email</th><th>Time</th></tr>" + rows_recent + "</table></div>"
     html += "<div class='card'><h3>Members (" + str(len(members_list)) + ")</h3><p class='sub'>Everyone who joined WOI</p>" + exp('members')
@@ -378,4 +386,5 @@ def contact():
     data = request.get_json() or {}; conn = get_db(); cur = conn.cursor(); cur.execute("INSERT INTO messages (name, email, message) VALUES (%s,%s,%s)", (str(data.get('name', '')), str(data.get('email', '')), str(data.get('message', '')))); conn.commit(); cur.close(); conn.close(); return jsonify({'msg': "Message received. Thank you!"})
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(debug=False, host='0.0.0.0', port=port)
