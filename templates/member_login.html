@@ -1,6 +1,0 @@
-<!DOCTYPE html><html><head><title>Member Login - WOI</title>
-<style>body{font-family:Arial;background:#fdf6f0;display:flex;justify-content:center;padding-top:100px} .box{background:white;padding:25px;border-radius:15px;width:340px} input{width:100%;padding:11px;margin:7px 0;border:1px solid #ddd;border-radius:10px;box-sizing:border-box} button{background:#2a0a2a;color:white;padding:12px;border:none;width:100%;border-radius:100px}</style>
-</head><body><div class="box"><h2 style="text-align:center">Member Login</h2>
-{% with m=get_flashed_messages() %}{% for x in m %}<p style="color:red;text-align:center">{{x}}</p>{% endfor %}{% endwith %}
-<form method="POST"><input name="email" type="email" placeholder="Email" required><input name="password" type="password" placeholder="Password" required><button>Login</button></form>
-<p style="text-align:center;font-size:13px">No account? <a href="/register">Join WOI</a> | <a href="/">Home</a></p></div></body></html>
