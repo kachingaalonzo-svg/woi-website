@@ -1,0 +1,78 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Admin Dashboard - WOI</title>
+<style>
+*{box-sizing:border-box} body{margin:0;font-family:'Segoe UI',Arial,sans-serif;background:#f6f2f7}
+.top{background:#111;color:white;padding:22px 20px}.top-inner{max-width:1100px;margin:auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}.top h1{margin:0;font-size:24px}.top p{opacity:.7;margin:5px 0 0;font-size:14px}
+.wrap{max-width:1100px;margin:20px auto;padding:0 15px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:15px}
+.card{background:white;border-radius:16px;padding:20px;box-shadow:0 4px 15px rgba(0,0,0,.07)} .card .icon{font-size:26px}.card b{font-size:28px;display:block;margin-top:5px}.card span{color:#888;font-size:13px}
+.card.dark{background:#2a0a2a;color:white}.card.dark span{color:#ddd}.card.gold{background:#c9a227;color:white}.card.gold span{color:#fff}
+.actions{margin:15px 0;display:flex;gap:8px;flex-wrap:wrap;align-items:center;background:white;padding:12px;border-radius:12px;box-shadow:0 4px 15px rgba(0,0,0,.07)}
+.btn{background:#111;color:white;padding:10px 16px;border:none;border-radius:8px;cursor:pointer;text-decoration:none;font-weight:600;font-size:13px}.btn-gold{background:#c9a227}.btn-light{background:white;color:#111;border:1px solid #ddd}
+.section{background:white;border-radius:16px;padding:20px;box-shadow:0 4px 15px rgba(0,0,0,.07);margin-bottom:20px}
+.section h2{margin:0 0 5px;color:#2a0a2a} .section p{color:#888;font-size:13px;margin:0}
+table{width:100%;border-collapse:collapse;margin-top:12px} th{text-align:left;background:#fdf6f0;padding:11px;font-size:13px;color:#666} td{padding:11px;border-top:1px solid #eee;font-size:14px}
+.pill{background:#e8f5e9;color:#2e7d32;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:700}
+input.search{width:100%;padding:12px;border:2px solid #eee;border-radius:10px;margin-top:10px}
+@media print{.no-print{display:none !important}body{background:white}.top{background:#111}}
+</style></head>
+<body>
+<div class="top"><div class="top-inner"><div><h1>👑 WOI Admin Dashboard</h1><p>Logged in: <b>{{ session.get('admin') }}</b> • <span id="today"></span></p></div><div class="no-print"><a href="/" class="btn" style="background:#c9a227">View Site</a> <a href="/admin/logout" class="btn" style="background:#333">Logout</a></div></div></div>
+<div class="wrap">
+<div class="cards">
+<div class="card dark"><div class="icon">👥</div><b>{{ members|length }}</b><span>Total Members</span></div>
+<div class="card gold"><div class="icon">💰</div><b>K{{ total_don }}</b><span>Total Donations</span></div>
+<div class="card"><div class="icon">🧾</div><b>{{ donations|length }}</b><span>Donation Records</span></div>
+<div class="card"><div class="icon">📚</div><b>{{ orders|length }}</b><span>Book Orders</span></div>
+<div class="card"><div class="icon">💬</div><b>{{ contacts|length }}</b><span>Messages</span></div>
+<div class="card dark"><div class="icon">🔑</div><b>{{ total_logins }}</b><span>Total Logins</span></div>
+</div>
+
+<div class="actions no-print">
+<button class="btn" onclick="window.print()">🖨️ Print</button>
+<a href="/admin/export-all-excel" class="btn btn-gold">📊 Download FULL Database (Excel)</a>
+<a href="/admin/print-report" target="_blank" class="btn btn-light">Clean Printable Report</a>
+</div>
+
+<div class="actions no-print">
+<b style="font-size:13px;color:#666;">MEMBERS:</b>
+<a href="/admin/export-members-csv" class="btn" style="background:#2e7d32">CSV</a>
+<a href="/admin/export-members-excel" class="btn" style="background:#1565c0">Excel</a>
+<a href="/admin/export-members-pdf" class="btn" style="background:#c62828">PDF</a>
+<b style="font-size:13px;color:#666;">DONATIONS:</b>
+<a href="/admin/export-donations-csv" class="btn" style="background:#2e7d32">CSV</a>
+<a href="/admin/export-donations-excel" class="btn" style="background:#1565c0">Excel</a>
+<a href="/admin/export-donations-pdf" class="btn" style="background:#c62828">PDF</a>
+</div>
+
+<div class="actions no-print">
+<b style="font-size:13px;color:#666;">BOOK ORDERS:</b>
+<a href="/admin/export-orders-csv" class="btn" style="background:#2e7d32">CSV</a>
+<a href="/admin/export-orders-excel" class="btn" style="background:#1565c0">Excel</a>
+<a href="/admin/export-orders-pdf" class="btn" style="background:#c62828">PDF</a>
+<b style="font-size:13px;color:#666;">LOGINS:</b>
+<a href="/admin/export-logs-csv" class="btn" style="background:#2e7d32">CSV</a>
+<a href="/admin/export-logs-excel" class="btn" style="background:#1565c0">Excel</a>
+<a href="/admin/export-logs-pdf" class="btn" style="background:#c62828">PDF</a>
+<b style="font-size:13px;color:#666;">MESSAGES:</b>
+<a href="/admin/export-contacts-csv" class="btn" style="background:#2e7d32">CSV</a>
+<a href="/admin/export-contacts-excel" class="btn" style="background:#1565c0">Excel</a>
+<a href="/admin/export-contacts-pdf" class="btn" style="background:#c62828">PDF</a>
+</div>
+
+<div class="section"><h2>🔑 Login Activity - How Often People Login</h2><p>Who logs in the most? Who was last active?</p>
+<table><tr><th>Member</th><th>Email</th><th>Total Logins</th><th>Last Login</th></tr>
+{% for s in login_stats %}<tr><td><b>{{s.user_name}}</b></td><td>{{s.user_email}}</td><td><b>{{s.times}}x</b></td><td>{{s.last_login}}</td></tr>{% else %}<tr><td colspan="4">No logins tracked yet - login once to see it here</td></tr>{% endfor %}</table></div>
+<div class="section"><h2>Recent Logins (Last 30)</h2><p>Every login, newest first</p>
+<table><tr><th>Type</th><th>Name</th><th>Email</th><th>Time</th></tr>
+{% for l in logins %}<tr><td><b>{{l.user_type}}</b></td><td>{{l.user_name}}</td><td>{{l.user_email}}</td><td>{{l.login_time}}</td></tr>{% endfor %}</table></div>
+<div class="section"><h2>Members ({{ members|length }})</h2><p>Everyone who joined WOI</p><input class="search no-print" placeholder="🔍 Search members..." onkeyup="filterTable(this,'membersTable')"><table id="membersTable"><tr><th>Name</th><th>Email</th><th>Phone</th><th>Location</th><th>Interest</th><th>Date</th></tr>{% for m in members %}<tr><td><b>{{m.full_name}}</b></td><td>{{m.email}}</td><td>{{m.phone}}</td><td>{{m.location}}</td><td>{{m.interest}}</td><td>{{m.created_at}}</td></tr>{% else %}<tr><td colspan="6">No members yet</td></tr>{% endfor %}</table></div>
+<div class="section"><h2>Donations</h2><p>All donations received</p><table><tr><th>Donor</th><th>Email</th><th>Project</th><th>Amount</th><th>Date</th></tr>{% for d in donations %}<tr><td><b>{{d.donor_name}}</b></td><td>{{d.donor_email}}</td><td>{{d.project}}</td><td><b>K{{d.amount}}</b></td><td>{{d.created_at}}</td></tr>{% else %}<tr><td colspan="5">No donations yet</td></tr>{% endfor %}</table></div>
+<div class="section"><h2>Book Orders</h2><p>Woman of Influence - K150 each</p><table><tr><th>Customer</th><th>Phone</th><th>Book</th><th>Total</th><th>Status</th><th>Date</th></tr>{% for o in orders %}<tr><td><b>{{o.customer_name}}</b></td><td>{{o.customer_phone}}</td><td>{{o.book_title}}</td><td><b>K{{o.total_amount}}</b></td><td><span class="pill">{{o.status}}</span></td><td>{{o.created_at}}</td></tr>{% else %}<tr><td colspan="6">No orders yet</td></tr>{% endfor %}</table></div>
+<div class="section"><h2>Messages</h2><p>Contact form messages</p><table><tr><th>Name</th><th>Message</th></tr>{% for c in contacts %}<tr><td><b>{{c.name}}</b><br><small>{{c.email}}</small></td><td>{{c.message}}</td></tr>{% else %}<tr><td colspan="2">No messages</td></tr>{% endfor %}</table></div>
+<p style="text-align:center;color:#999;font-size:13px">Women of Influence (WOI) - Official Report - Generated from WOI System</p>
+</div>
+<script>
+document.getElementById('today').textContent=new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+function filterTable(input,id){let f=input.value.toLowerCase();let rows=document.getElementById(id).getElementsByTagName('tr');for(let i=1;i<rows.length;i++){rows[i].style.display=rows[i].textContent.toLowerCase().includes(f)?'':'none'}}
+</script>
+</body></html>

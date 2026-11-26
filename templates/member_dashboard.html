@@ -1,0 +1,33 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>My Dashboard - WOI</title>
+<style>
+*{box-sizing:border-box} body{margin:0;font-family:'Segoe UI',Arial,sans-serif;background:#f6f2f7}
+.top{background:linear-gradient(135deg,#2a0a2a,#5a1a5a);color:white;padding:25px 20px 35px}
+.top-inner{max-width:900px;margin:auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.top h1{margin:0;font-size:26px}.top p{opacity:.85;margin:5px 0 0}
+.wrap{max-width:900px;margin:-15px auto 30px;padding:0 15px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px}
+.card{background:white;border-radius:16px;padding:20px;box-shadow:0 4px 15px rgba(0,0,0,.07)}
+.card .icon{font-size:28px}.card b{font-size:26px;display:block;margin-top:5px}.card span{color:#888;font-size:13px}
+.card.gold{background:#c9a227;color:white}.card.gold span{color:#fff}
+.actions{margin:20px 0;display:flex;gap:10px;flex-wrap:wrap}
+.btn{background:#2a0a2a;color:white;padding:12px 20px;border:none;border-radius:10px;cursor:pointer;text-decoration:none;font-weight:600;font-size:14px}
+.btn-gold{background:#c9a227}.btn-light{background:white;color:#2a0a2a;border:1px solid #ddd}
+.section{background:white;border-radius:16px;padding:20px;box-shadow:0 4px 15px rgba(0,0,0,.07)}
+table{width:100%;border-collapse:collapse;margin-top:10px} th{text-align:left;background:#fdf6f0;padding:12px;font-size:13px;color:#666} td{padding:12px;border-top:1px solid #eee;font-size:14px}
+@media print{.no-print{display:none !important}body{background:white}.top{background:#2a0a2a}}
+</style></head>
+<body>
+<div class="top"><div class="top-inner"><div><h1>Hello, {{ session.get('member','Member') }} 👋</h1><p>{{ session.get('member_email','') }} • Member since 2026 • Status: <b>Active</b></p></div><div class="no-print"><a href="/" class="btn btn-gold" style="background:white;color:#2a0a2a">Home</a> <a href="/member/logout" class="btn" style="background:rgba(255,255,255,.2)">Logout</a></div></div></div>
+<div class="wrap">
+<div class="cards">
+<div class="card"><div class="icon">💜</div><b>Active</b><span>Your Membership</span></div>
+<div class="card"><div class="icon">💰</div><b>{{ donations|length }}</b><span>Donations in WOI</span></div>
+<div class="card gold"><div class="icon">👑</div><b>WOI</b><span>Women of Influence</span></div>
+</div>
+<div class="actions no-print"><button class="btn" onclick="window.print()">🖨️ Print Dashboard</button><a href="/transparency" class="btn btn-gold">View Transparency →</a><a href="/print-stats" target="_blank" class="btn btn-light">Public Report</a></div>
+<div class="section"><h2 style="margin:0">Recent Donations in WOI</h2><p style="color:#888;font-size:14px">See how our community is giving</p>
+<table><tr><th>Donor</th><th>Project</th><th>Amount</th><th>Date</th></tr>
+{% for d in donations %}<tr><td><b>{{d.donor_name}}</b></td><td>{{d.project}}</td><td><b>K{{d.amount}}</b></td><td>{{d.created_at}}</td></tr>{% else %}<tr><td colspan="4">No donations yet. Be the first to donate!</td></tr>{% endfor %}</table>
+</div>
+<p style="text-align:center;color:#999;font-size:13px;margin-top:20px">Women of Influence - Empowering Women | Building Leaders | Transforming Communities</p>
+</div></body></html>

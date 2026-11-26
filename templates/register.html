@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Join WOI - Women of Influence</title>
+<style>
+  body{font-family:Arial,sans-serif;margin:0;background:#fdf6f0;padding:20px}
+  .box{max-width:500px;margin:30px auto;background:white;padding:30px;border-radius:12px;box-shadow:0 2px 15px rgba(0,0,0,0.1)}
+  h1{color:#2a0a2a;text-align:center;margin-bottom:5px}
+  p.sub{text-align:center;color:#666;margin-top:0}
+  label{font-weight:bold;font-size:14px;display:block;margin-top:12px}
+  input,select{width:100%;padding:12px;margin-top:5px;border:1px solid #ddd;border-radius:6px;box-sizing:border-box;font-size:15px}
+  button{background:#2a0a2a;color:white;padding:14px;width:100%;border:none;border-radius:6px;font-size:16px;cursor:pointer;margin-top:20px}
+  button:hover{background:#4a1a4a}
+  .msg{padding:12px;margin:10px 0;border-radius:6px;background:#ffcccc;border:1px solid red;color:#900}
+  .success{padding:12px;margin:10px 0;border-radius:6px;background:#d4edda;border:1px solid green}
+  .link{text-align:center;margin-top:15px}
+  a{color:#2a0a2a}
+</style>
+</head>
+<body>
+<div class="box">
+  <h1>Join Women of Influence</h1>
+  <p class="sub">Create your free WOI member account</p>
+
+  <!-- THIS SHOWS THE ERROR - DON'T DELETE THIS PART -->
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      {% for m in messages %}
+        <div class="msg">{{ m }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <form method="POST" action="/register">
+    <label>Full Name</label>
+    <input name="full_name" placeholder="e.g. Kondwani Phiri" required>
+
+    <label>Email Address</label>
+    <input name="email" type="email" placeholder="e.g. you@gmail.com" required>
+
+    <label>Phone Number</label>
+    <input name="phone" placeholder="e.g. 0977000000" required>
+
+    <label>Location</label>
+    <input name="location" placeholder="e.g. Lusaka" required>
+
+    <label>What are you interested in?</label>
+    <select name="interest" required>
+      <option value="">-- Select Interest --</option>
+      <option value="Business">Business</option>
+      <option value="Leadership">Leadership</option>
+      <option value="Education">Education</option>
+      <option value="Health">Health</option>
+      <option value="Other">Other</option>
+    </select>
+
+    <label>Create Password</label>
+    <input name="password" type="password" placeholder="Create a password" required>
+
+    <button type="submit">Create My Account</button>
+  </form>
+
+  <div class="link">
+    Already a member? <a href="/member/login">Login here</a><br><br>
+    <a href="/">← Back to Home</a>
+  </div>
+</div>
+</body>
+</html>

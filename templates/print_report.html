@@ -1,0 +1,12 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>WOI Printable Report</title>
+<style>body{font-family:Arial;max-width:900px;margin:20px auto;padding:20px}h1{text-align:center;color:#2a0a2a}table{width:100%;border-collapse:collapse;margin:15px 0}th,td{border:1px solid #333;padding:8px}th{background:#2a0a2a;color:white}.stats{display:flex;gap:10px;text-align:center}.stats div{flex:1;border:2px solid #2a0a2a;padding:15px;border-radius:8px}.stats b{font-size:24px;display:block}@media print{.no-print{display:none}}</style></head>
+<body>
+<h1>Women of Influence (WOI)<br><span style="font-size:18px">Official Transparency & Stats Report</span></h1>
+<p style="text-align:center">Generated on: <span id="d"></span></p>
+<div class="stats"><div><b>{{ total_members }}</b>Total Members</div><div><b>K{{ total_donations }}</b>Total Donations</div><div><b>{{ donations|length }}</b>Donation Records</div><div><b>{{ orders|length }}</b>Book Orders</div></div>
+<h2>All Donations</h2><table><tr><th>Donor</th><th>Project</th><th>Amount</th><th>Date</th></tr>{% for d in donations %}<tr><td>{{d.donor_name}}</td><td>{{d.project}}</td><td>K{{d.amount}}</td><td>{{d.created_at}}</td></tr>{% endfor %}</table>
+<h2>All Members</h2><table><tr><th>Name</th><th>Location</th><th>Interest</th><th>Date Joined</th></tr>{% for m in members %}<tr><td>{{m.full_name}}</td><td>{{m.location}}</td><td>{{m.interest}}</td><td>{{m.created_at}}</td></tr>{% endfor %}</table>
+<p style="text-align:center">--- End of Report ---<br>WOI - Empowering Women | Building Leaders | Transforming Communities</p>
+<div class="no-print" style="text-align:center"><button onclick="window.print()" style="padding:12px 25px;background:#2a0a2a;color:white;border:none;border-radius:6px;cursor:pointer">🖨️ Print / Save as PDF</button></div>
+<script>document.getElementById('d').textContent=new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});</script>
+</body></html>
